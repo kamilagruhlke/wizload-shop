@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+  gatewayapi:
+    image: ${DOCKER_REGISTRY-}gatewayapi
+    build:
+      context: .
+      dockerfile: src/Services/Gateway/Gateway.Api/Dockerfile
+
+  basketapi:
+    image: ${DOCKER_REGISTRY-}basketapi
+    build:
+      context: .
+      dockerfile: src/Services/Basket/Basket.Api/Dockerfile
+
+  categoriesapi:
+    image: ${DOCKER_REGISTRY-}categoriesapi
+    build:
+      context: .
+      dockerfile: src/Services/Categories/Categories.Api/Dockerfile
+
+  identityapi:
+    image: ${DOCKER_REGISTRY-}identityapi
+    build:
+      context: .
+      dockerfile: src/Services/Identity/Identity.Api/Dockerfile
+
+  notificationsapi:
+    image: ${DOCKER_REGISTRY-}notificationsapi
+    build:
+      context: .
+      dockerfile: src/Services/Notifications/Notifications.Api/Dockerfile
+
+  productsapi:
+    image: ${DOCKER_REGISTRY-}productsapi
+    build:
+      context: .
+      dockerfile: src/Services/Products/Products.Api/Dockerfile
+
+  shopmvc:
+    image: ${DOCKER_REGISTRY-}shopmvc
+    build:
+      context: .
+      dockerfile: src/Mvc/Shop.Mvc/Dockerfile
+

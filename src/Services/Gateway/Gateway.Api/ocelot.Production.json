@@ -1,0 +1,52 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productsapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/products/{rest}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "categoriesapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/categories/{rest}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basketapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/basket/{rest}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notificationsapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/notifications/{rest}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ]
+    }
+  ]
+}
