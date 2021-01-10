@@ -49,3 +49,5 @@ services:
     build:
       context: .
       dockerfile: src/Mvc/Shop.Mvc/Dockerfile
+    depends_on:
+      - gatewayapi
