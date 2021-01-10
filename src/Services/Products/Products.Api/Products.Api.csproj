@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Products.Infrastructure\Products.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Infrastructure\Filters\" />
+  </ItemGroup>
 </Project>

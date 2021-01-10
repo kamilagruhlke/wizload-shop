@@ -1,6 +1,6 @@
-﻿using IdentityServer4;
+﻿using System.Collections.Generic;
+using IdentityServer4;
 using IdentityServer4.Models;
-using System.Collections.Generic;
 
 namespace Identity.Api
 {
@@ -83,6 +83,78 @@ namespace Identity.Api
                     AllowedScopes =
                     {
                         "basket"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "categories",
+                    ClientName = "Categories Swagger UI",
+                    ClientSecrets = {new Secret("secret".Sha256()) },
+
+                    AllowAccessTokensViaBrowser = true,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = false,
+                    RequireClientSecret = true,
+
+                    AllowedCorsOrigins = { "http://localhost:5001" },
+                    RedirectUris = {
+                        $"http://localhost:5001/swagger/oauth2-redirect.html?urls.primaryName=Categories.Api"
+                    },
+                    PostLogoutRedirectUris = {
+                        $"http://localhost:5001/swagger/index.html?urls.primaryName=Categories.Api"
+                    },
+
+                    AllowedScopes =
+                    {
+                        "categories"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "notifications",
+                    ClientName = "Notifications Swagger UI",
+                    ClientSecrets = {new Secret("secret".Sha256()) },
+
+                    AllowAccessTokensViaBrowser = true,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = false,
+                    RequireClientSecret = true,
+
+                    AllowedCorsOrigins = { "http://localhost:5001" },
+                    RedirectUris = {
+                        $"http://localhost:5001/swagger/oauth2-redirect.html?urls.primaryName=Notifications.Api"
+                    },
+                    PostLogoutRedirectUris = {
+                        $"http://localhost:5001/swagger/index.html?urls.primaryName=Notifications.Api"
+                    },
+
+                    AllowedScopes =
+                    {
+                        "notifications"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "products",
+                    ClientName = "Products Swagger UI",
+                    ClientSecrets = {new Secret("secret".Sha256()) },
+
+                    AllowAccessTokensViaBrowser = true,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = false,
+                    RequireClientSecret = true,
+
+                    AllowedCorsOrigins = { "http://localhost:5001" },
+                    RedirectUris = {
+                        $"http://localhost:5001/swagger/oauth2-redirect.html?urls.primaryName=Products.Api"
+                    },
+                    PostLogoutRedirectUris = {
+                        $"http://localhost:5001/swagger/index.html?urls.primaryName=Products.Api"
+                    },
+
+                    AllowedScopes =
+                    {
+                        "products"
                     }
                 }
             };

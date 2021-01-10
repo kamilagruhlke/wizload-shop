@@ -27,18 +27,27 @@ services:
   categoriesapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - CATEGORIESAPI_PATH_BASE=/categories/
+      - CATEGORIESAPI_IdentityApiExternal=http://localhost:5002
+      - CATEGORIESAPI_dentityApi=http://identityapi
     ports:
       - "80"
 
   notificationsapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - NOTIFICATIONSAPI_PATH_BASE=/notifications/
+      - NOTIFICATIONSAPI_IdentityApiExternal=http://localhost:5002
+      - NOTIFICATIONSAPI_dentityApi=http://identityapi
     ports:
       - "80"
 
   productsapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - PRODUCTSAPI_PATH_BASE=/products/
+      - PRODUCTSAPI_IdentityApiExternal=http://localhost:5002
+      - PRODUCTSAPI_dentityApi=http://identityapi
     ports:
       - "80"
 
