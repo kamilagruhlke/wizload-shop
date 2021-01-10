@@ -5,51 +5,54 @@ WizLoad - Shop repository based on DDD microservices
 
 #### Identity.Api
 
-- [ ] Project initialization
-- [ ] Basic Identity EF models/domain
-- [ ] Docker support
-- [ ] Connection with database
-- [ ] Registration controller with basic actions
-- [ ] Login controller with basic actions
+- [x] Project initialization
+- [x] Docker support
+- [x] Basic facebook connection
+- [x] Basic github connection
 
 ---
 
 #### Categories.Api
 
-- [ ] Project initialization
+- [x] Project initialization
 - [ ] Basic Identity EF models/domain
-- [ ] Docker support
+- [x] Docker support
+- [x] Connected with Identity.api (oauth)
 - [ ] Connection with database
 - [ ] Products controller with basic actions
 
 ---
 
 #### Products.Api
-- [ ] Project initialization
+- [x] Project initialization
 - [ ] Basic Products EF models/domain
-- [ ] Docker support
+- [x] Docker support
+- [x] Connected with Identity.api (oauth)
 - [ ] Connection with database
 - [ ] Products controller with basic actions
 
 ---
 
 #### Basket.Api
-- [ ] Project initialization
+- [x] Project initialization
 - [ ] Basic Identity EF models/domain
-- [ ] Docker support
+- [x] Docker support
+- [x] Connected with Identity.api (oauth)
 - [ ] Connection with redis/memcached
 - [ ] Basket controller with basic actions
 
 #### Notification.Api
-- [ ] Project initialization
-- [ ] Docker support
+- [x] Project initialization
+- [x] Docker support
+- [x] Connected with Identity.api (oauth)
 - [ ] SignalR/websockets support
 
 ---
 
 #### Wizload.Mvc or Wizload.SPA
-- [ ] Project initialization
-- [ ] Docker support
+- [x] Project initialization
+- [x] Docker support
+- [x] Connected with Identity.api (oauth)
 - [ ] Connection with Identity.Api
 - [ ] Connection with Categories.Api
 - [ ] Connection with Products.Api
