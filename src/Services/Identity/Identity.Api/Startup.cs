@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -46,15 +45,9 @@ namespace Identity.Api
                 options.EmitStaticAudienceClaim = true;
             })
             .AddTestUsers(TestUsers.Users)
-            .AddConfigurationStore(options =>
-            {
-                options.ConfigureDbContext = builder => builder.UseSqlite(connectionString);
-            })
-            .AddOperationalStore(options =>
-            {
-                options.ConfigureDbContext = builder => builder.UseSqlite(connectionString);
-                options.EnableTokenCleanup = true;
-            });
+            .AddInMemoryClients(Config.Clients)
+            .AddInMemoryApiScopes(Config.ApiScopes)
+            .AddInMemoryIdentityResources(Config.IdentityResources);
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();

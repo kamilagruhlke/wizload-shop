@@ -20,4 +20,7 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove=".DS_Store" />
+  </ItemGroup>
 </Project>

@@ -16,10 +16,11 @@ namespace Identity.Api
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             {
+                new ApiScope("mvc"),
                 new ApiScope("identity"),
                 new ApiScope("basket"),
                 new ApiScope("categories"),
-                new ApiScope("notification"),
+                new ApiScope("notifications"),
                 new ApiScope("products")
             };
 
@@ -35,11 +36,11 @@ namespace Identity.Api
                         new Secret("secret".Sha256())
                     },
                     ClientUri = $"http://localhost:5000",
+                    AllowAccessTokensViaBrowser = true,
                     AllowedGrantTypes = GrantTypes.Hybrid,
-                    AllowAccessTokensViaBrowser = false,
-                    RequireConsent = false,
-                    AllowOfflineAccess = true,
-                    AlwaysIncludeUserClaimsInIdToken = true,
+                    RequirePkce = false,
+                    RequireClientSecret = true,
+                    AllowedCorsOrigins = { "http://localhost:5000" },
                     RedirectUris = new List<string>
                     {
                         $"http://localhost:5000/signin-oidc"
@@ -53,6 +54,7 @@ namespace Identity.Api
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OfflineAccess,
+                        "mvc",
                         "basket",
                         "categories",
                         "notifications",
