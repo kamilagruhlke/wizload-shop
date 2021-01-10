@@ -1,51 +1,61 @@
 version: '3.4'
 
 services:
+  identityapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5002:80"
+
   gatewayapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
     ports:
       - "5001:80"
-    depends_on:
-      - basketapi
-      - categoriesapi
-      - productsapi
-      - notificationsapi
-
-  identityapi:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "5002:80"
 
   basketapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - BASKETAPI_PATH_BASE=/basket/
+      - BASKETAPI_IdentityApiExternal=http://localhost:5002
+      - BASKETAPI_IdentityApi=http://identityapi
     ports:
       - "80"
 
   categoriesapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - CATEGORIESAPI_PATH_BASE=/categories/
+      - CATEGORIESAPI_IdentityApiExternal=http://localhost:5002
+      - CATEGORIESAPI_dentityApi=http://identityapi
     ports:
       - "80"
 
   notificationsapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - NOTIFICATIONSAPI_PATH_BASE=/notifications/
+      - NOTIFICATIONSAPI_IdentityApiExternal=http://localhost:5002
+      - NOTIFICATIONSAPI_dentityApi=http://identityapi
     ports:
       - "80"
 
   productsapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - PRODUCTSAPI_PATH_BASE=/products/
+      - PRODUCTSAPI_IdentityApiExternal=http://localhost:5002
+      - PRODUCTSAPI_dentityApi=http://identityapi
     ports:
       - "80"
 
   shopmvc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - SHOPMVC_IdentityApiExternal=http://localhost:5002
+      - SHOPMVC_IdentityApi=http://identityapi
+      - SHOPMVC_CallBackUrl=http://localhost:5000
     ports:
       - "5000:80"
-

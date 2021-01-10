@@ -1,29 +1,36 @@
 version: '3.4'
 
 services:
+  identityapi:
+    image: ${DOCKER_REGISTRY-}identityapi
+    build:
+      context: .
+      dockerfile: src/Services/Identity/Identity.Api/Dockerfile
+
   gatewayapi:
     image: ${DOCKER_REGISTRY-}gatewayapi
     build:
       context: .
       dockerfile: src/Services/Gateway/Gateway.Api/Dockerfile
+    depends_on:
+      - basketapi
+      - categoriesapi
+      - productsapi
+      - notificationsapi
 
   basketapi:
     image: ${DOCKER_REGISTRY-}basketapi
     build:
       context: .
       dockerfile: src/Services/Basket/Basket.Api/Dockerfile
+    depends_on:
+      - identityapi
 
   categoriesapi:
     image: ${DOCKER_REGISTRY-}categoriesapi
     build:
       context: .
       dockerfile: src/Services/Categories/Categories.Api/Dockerfile
-
-  identityapi:
-    image: ${DOCKER_REGISTRY-}identityapi
-    build:
-      context: .
-      dockerfile: src/Services/Identity/Identity.Api/Dockerfile
 
   notificationsapi:
     image: ${DOCKER_REGISTRY-}notificationsapi
@@ -42,4 +49,5 @@ services:
     build:
       context: .
       dockerfile: src/Mvc/Shop.Mvc/Dockerfile
-
+    depends_on:
+      - gatewayapi
