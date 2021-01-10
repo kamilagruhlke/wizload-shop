@@ -1,27 +1,26 @@
 version: '3.4'
 
 services:
+  identityapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "5002:80"
+
   gatewayapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
     ports:
       - "5001:80"
-    depends_on:
-      - basketapi
-      - categoriesapi
-      - productsapi
-      - notificationsapi
-
-  identityapi:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "5002:80"
 
   basketapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - BASKETAPI_PATH_BASE=/basket/
+      - BASKETAPI_IdentityApiExternal=http://localhost:5002
+      - BASKETAPI_IdentityApi=http://identityapi
     ports:
       - "80"
 
@@ -48,4 +47,3 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "5000:80"
-
