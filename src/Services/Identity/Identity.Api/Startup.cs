@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
+using IdentityServer4;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -56,17 +57,24 @@ namespace Identity.Api
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = "Github";
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
             .AddCookie(options =>
             {
                 options.LoginPath = new PathString("/Account/Login");
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
             })
+            .AddFacebook(options =>
+            {
+                options.AppId = "150067863382703";
+                options.AppSecret = "ba6dc49e0319489c35e50f822656e368";
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+            })
             .AddOAuth("GitHub", "Github", o =>
             {
-                o.ClientId = "cadfb36c4d2a2754bec8";
-                o.ClientSecret = "366634da1eac39c636047b8cfd65b5c28feb64de";
+                o.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                o.ClientId = "a0a57e291b4cf0c73f2a";
+                o.ClientSecret = "aeaea732613b2d19c47b8d7c414b82b2022fd06b";
                 o.CallbackPath = new PathString("/signin-github");
                 o.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
                 o.TokenEndpoint = "https://github.com/login/oauth/access_token";
