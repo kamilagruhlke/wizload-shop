@@ -32,7 +32,6 @@ namespace Products.Domain.AggregateModel.ProducerAggregate
 
         protected Producer()
         {
-
         }
 
         public void UpdateName(string name)

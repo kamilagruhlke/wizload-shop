@@ -3,7 +3,7 @@ using System;
 
 namespace Products.Domain.AggregateModel.ProductAggregate
 {
-    class Product : IAggregateRoot
+    public class Product : IAggregateRoot
     {
         public Guid Id { get; protected set; }
 
