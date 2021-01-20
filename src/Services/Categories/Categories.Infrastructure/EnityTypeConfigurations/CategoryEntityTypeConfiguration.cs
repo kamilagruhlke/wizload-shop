@@ -37,6 +37,9 @@ namespace Categories.Infrastructure.EnityTypeConfigurations
 
             builder.HasIndex(e => e.Id)
                 .HasDatabaseName("idx_categories_categories_id");
+
+            builder.HasIndex(e => e.ParentId)
+                .HasDatabaseName("idx_categories_categories_parent_id");
         }
     }
 }
