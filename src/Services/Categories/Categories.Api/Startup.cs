@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Categories.Api.Application.Queries;
 using Categories.Api.Application.Utils;
 using Categories.Api.Infrastructure.Filters;
 using Categories.Domain.AggregateModel.CategoryAggregate;
@@ -65,6 +66,7 @@ namespace Categories.Api
 
             services.AddScoped<IUserAccessor, UserAccessor>()
                 .AddScoped<ICategoryRepository, CategoryRepository>()
+                .AddScoped<ICategoryQueries, CategoryQueries>()
                 .AddMediatR(Assembly.GetExecutingAssembly())
                 .AddHttpContextAccessor();
 
