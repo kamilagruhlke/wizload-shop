@@ -39,6 +39,7 @@ namespace Categories.Api.Controllers
             return Ok(await _mediator.Send(updateCategoryCommand, cancellationToken));
         }
 
+        [AllowAnonymous]
         [HttpGet("Active")]
         [ProducesResponseType(typeof(IList<CategoryModel>), 200)]
         public async Task<IActionResult> GetActiveCategories(CancellationToken cancellationToken)
