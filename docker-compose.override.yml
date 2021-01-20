@@ -72,5 +72,6 @@ services:
       - SHOPMVC_IdentityApiExternal=http://localhost:5002
       - SHOPMVC_IdentityApi=http://identityapi
       - SHOPMVC_CallBackUrl=http://localhost:5000
+      - SHOPMVC_CategoriesApi=http://categoriesapi
     ports:
       - "5000:80"

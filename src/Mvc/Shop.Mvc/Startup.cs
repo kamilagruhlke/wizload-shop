@@ -1,6 +1,7 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
+using Categories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -26,9 +27,11 @@ namespace Shop.Mvc
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-
             services.AddSession();
+
+            services.AddHttpClient<categoriesClient>((provider, client) => {
+                client.BaseAddress = new Uri(Configuration["CategoriesApi"]);
+            });
 
             services.AddAuthentication(options =>
             {
@@ -76,6 +79,8 @@ namespace Shop.Mvc
                 options.Scope.Add("categories");
                 options.Scope.Add("products");
             });
+
+            services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

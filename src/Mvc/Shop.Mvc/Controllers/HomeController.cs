@@ -1,4 +1,7 @@
 ﻿using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Categories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,14 +13,18 @@ namespace Shop.Mvc.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly categoriesClient _categoriesClient;
+
+        public HomeController(ILogger<HomeController> logger, categoriesClient categoriesClient)
         {
             _logger = logger;
+            _categoriesClient = categoriesClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            return View();
+            var categories = await _categoriesClient.ActiveAsync(cancellationToken);
+            return View(categories);
         }
 
         [Authorize]
