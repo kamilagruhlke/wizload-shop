@@ -1,6 +1,20 @@
 version: '3.4'
 
 services:
+
+  postgres:
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: jduwYykD9NmFAmQf
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
   identityapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -30,6 +44,7 @@ services:
       - CATEGORIESAPI_PATH_BASE=/categories/
       - CATEGORIESAPI_IdentityApiExternal=http://localhost:5002
       - CATEGORIESAPI_dentityApi=http://identityapi
+      - CATEGORIESAPI_ConnectionStrings__CategoriesDb="User ID=postgres;Password=jduwYykD9NmFAmQf;Host=postgres;Port=5432;Database=wizload_categories;Pooling=true;Min Pool Size=0;Max Pool Size=30;Connection Lifetime=0;"
     ports:
       - "80"
 

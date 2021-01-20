@@ -8,4 +8,13 @@
     <ProjectReference Include="..\Categories.Domain\Categories.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EnityTypeConfigurations\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
 </Project>
