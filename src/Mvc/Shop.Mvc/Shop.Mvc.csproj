@@ -8,5 +8,23 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.0.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="OpenAPIs\categories.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\categories.json" Namespace="Categories">
+      <SourceUri>http://localhost:5001/categories/swagger/v1/swagger.json</SourceUri>
+       <Options>/UseBaseUrl:false /GenerateClientInterfaces:true</Options>
+    </OpenApiReference>
   </ItemGroup>
 </Project>

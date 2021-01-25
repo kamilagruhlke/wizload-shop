@@ -1,6 +1,14 @@
 version: '3.4'
 
 services:
+  postgres:
+    image: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+
   identityapi:
     image: ${DOCKER_REGISTRY-}identityapi
     build:
@@ -51,3 +59,6 @@ services:
       dockerfile: src/Mvc/Shop.Mvc/Dockerfile
     depends_on:
       - gatewayapi
+
+volumes:
+  postgres-data:

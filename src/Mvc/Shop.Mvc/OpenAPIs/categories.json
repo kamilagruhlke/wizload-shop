@@ -1,0 +1,262 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Categories.Api",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/api/Categories": {
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "categories"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Categories"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "categories"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/Categories/Active": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryModel"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "categories"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateCategoryCommand": {
+        "type": "object",
+        "properties": {
+          "ParentId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsDeleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateCategoryCommand": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ParentId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsDeleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CategoryModel": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ParentId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "http://localhost:5002/connect/authorize",
+            "tokenUrl": "http://localhost:5002/connect/token",
+            "scopes": {
+              "categories": "Categories.Api access"
+            }
+          }
+        }
+      }
+    }
+  }
+}
