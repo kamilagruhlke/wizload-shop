@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Categories.Api.Migrations
 {
     [DbContext(typeof(CategoriesDbContext))]
-    [Migration("20210120205146_Initialization")]
-    partial class Initialization
+    [Migration("20210128211830_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,8 @@ namespace Categories.Api.Migrations
                         .HasColumnName("created_by");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
