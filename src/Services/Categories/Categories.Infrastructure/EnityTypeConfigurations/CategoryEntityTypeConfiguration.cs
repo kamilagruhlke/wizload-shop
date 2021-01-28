@@ -11,7 +11,7 @@ namespace Categories.Infrastructure.EnityTypeConfigurations
             builder.ToTable("categories", "categories");
 
             builder.HasKey(e => e.Id)
-                .HasName("id");
+                .HasName("pk_categories_category_id");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")

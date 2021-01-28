@@ -26,7 +26,7 @@ namespace Categories.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("id", x => x.id);
+                    table.PrimaryKey("pk_categories_category_id", x => x.id);
                 });
 
             migrationBuilder.CreateIndex(

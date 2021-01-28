@@ -63,7 +63,7 @@ services:
       - PRODUCTSAPI_PATH_BASE=/products/
       - PRODUCTSAPI_IdentityApiExternal=http://localhost:5002
       - PRODUCTSAPI_IdentityApi=http://identityapi
-      - PRODUCTSAPI_ConnectionStrings__CategoriesDb=User ID=postgres;Password=jduwYykD9NmFAmQf;Host=postgres;Port=5432;Database=wizload_products;
+      - PRODUCTSAPI_ConnectionStrings__ProductsDb=User ID=postgres;Password=jduwYykD9NmFAmQf;Host=postgres;Port=5432;Database=wizload_products;
     ports:
       - "80"
 

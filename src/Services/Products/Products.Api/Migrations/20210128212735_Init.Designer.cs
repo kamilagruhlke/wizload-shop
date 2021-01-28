@@ -10,7 +10,7 @@ using Products.Infrastructure;
 namespace Products.Api.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20210128211515_Init")]
+    [Migration("20210128212735_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,12 +53,12 @@ namespace Products.Api.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id")
-                        .HasName("id");
+                        .HasName("pk_producers_producer_id");
 
                     b.HasIndex("Id")
                         .HasDatabaseName("idx_producers_producer_id");
 
-                    b.ToTable("producers", "producers");
+                    b.ToTable("producers", "products");
                 });
 
             modelBuilder.Entity("Products.Domain.AggregateModel.ProductAggregate.Product", b =>
@@ -115,7 +115,7 @@ namespace Products.Api.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id")
-                        .HasName("id");
+                        .HasName("pk_products_product_id");
 
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("idx_products_category_id");

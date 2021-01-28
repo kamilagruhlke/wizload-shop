@@ -32,5 +32,6 @@
     <Folder Include="Application\Utils\" />
     <Folder Include="Application\Commands\" />
     <Folder Include="Application\Models\" />
+    <Folder Include="Application\Validation\" />
   </ItemGroup>
 </Project>

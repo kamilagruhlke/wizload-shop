@@ -11,7 +11,7 @@ namespace Products.Infrastructure.EntityTypeConfigurations
             builder.ToTable("products", "products");
 
             builder.HasKey(e => e.Id)
-                .HasName("id");
+                .HasName("pk_products_product_id");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id") 

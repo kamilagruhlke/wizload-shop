@@ -8,14 +8,11 @@ namespace Products.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "producers");
-
-            migrationBuilder.EnsureSchema(
                 name: "products");
 
             migrationBuilder.CreateTable(
                 name: "producers",
-                schema: "producers",
+                schema: "products",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -28,7 +25,7 @@ namespace Products.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("id", x => x.id);
+                    table.PrimaryKey("pk_producers_producer_id", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,12 +49,12 @@ namespace Products.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("id", x => x.id);
+                    table.PrimaryKey("pk_products_product_id", x => x.id);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "idx_producers_producer_id",
-                schema: "producers",
+                schema: "products",
                 table: "producers",
                 column: "id");
 
@@ -84,7 +81,7 @@ namespace Products.Api.Migrations
         {
             migrationBuilder.DropTable(
                 name: "producers",
-                schema: "producers");
+                schema: "products");
 
             migrationBuilder.DropTable(
                 name: "products",

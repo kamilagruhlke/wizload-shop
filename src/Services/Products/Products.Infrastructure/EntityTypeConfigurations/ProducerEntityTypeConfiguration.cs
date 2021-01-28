@@ -8,10 +8,10 @@ namespace Products.Infrastructure.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<Producer> builder)
         {
-            builder.ToTable("producers", "producers");
+            builder.ToTable("producers", "products");
 
             builder.HasKey(e => e.Id)
-                .HasName("id");
+                .HasName("pk_producers_producer_id");
 
             builder.Property(e => e.Id)
                 .HasColumnName("id")

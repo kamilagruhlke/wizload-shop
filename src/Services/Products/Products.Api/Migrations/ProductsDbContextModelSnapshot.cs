@@ -51,12 +51,12 @@ namespace Products.Api.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id")
-                        .HasName("id");
+                        .HasName("pk_producers_producer_id");
 
                     b.HasIndex("Id")
                         .HasDatabaseName("idx_producers_producer_id");
 
-                    b.ToTable("producers", "producers");
+                    b.ToTable("producers", "products");
                 });
 
             modelBuilder.Entity("Products.Domain.AggregateModel.ProductAggregate.Product", b =>
@@ -113,7 +113,7 @@ namespace Products.Api.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id")
-                        .HasName("id");
+                        .HasName("pk_products_product_id");
 
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("idx_products_category_id");

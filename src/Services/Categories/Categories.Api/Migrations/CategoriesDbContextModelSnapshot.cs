@@ -55,7 +55,7 @@ namespace Categories.Api.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id")
-                        .HasName("id");
+                        .HasName("pk_categories_category_id");
 
                     b.HasIndex("Id")
                         .HasDatabaseName("idx_categories_categories_id");
