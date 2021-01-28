@@ -37,7 +37,7 @@ namespace Products.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ProductsDbContext>(contextOptionsBuilder => {
-                contextOptionsBuilder.UseNpgsql(Configuration.GetConnectionString("ProductsDbContext"), options => {
+                contextOptionsBuilder.UseNpgsql(Configuration.GetConnectionString("ProductsDb"), options => {
                     options.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
                     options.MigrationsHistoryTable("migrations_history", "products");
                 });
