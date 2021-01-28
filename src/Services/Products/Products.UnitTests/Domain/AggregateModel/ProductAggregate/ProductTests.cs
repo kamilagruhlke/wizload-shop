@@ -11,7 +11,8 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         public void Product_Constructor_ProductCreatedCorrectly()
         {
             var producerId = Guid.NewGuid();
-            var product = new Product("Test name", "Test description", "Test specification", "Test url", producerId, "Test code", "test user");
+            var categoryId = Guid.NewGuid();
+            var product = new Product("Test name", "Test description", "Test specification", "Test url", producerId, "Test code", categoryId, "test user");
 
             Assert.Equal("Test name", product.Name);
             Assert.Equal("Test description", product.Description);
@@ -20,6 +21,7 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
             Assert.False(product.IsDeleted);
             Assert.Equal(producerId, product.ProducerId);
             Assert.Equal("Test code", product.ProducerCode);
+            Assert.Equal(categoryId, product.CategoryId);
             Assert.Equal("test user", product.CreatedBy);
             Assert.Equal("test user", product.UpdatedBy);
         }
@@ -27,7 +29,7 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateName_NameIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", "test user");
+            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
 
             product.UpdateName("new test name");
 
@@ -37,7 +39,7 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateSpecification_SpecyficationIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", "test user");
+            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
 
             product.UpdateSpecification("new test specification");
 
@@ -47,7 +49,7 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateDescription_DescriptionIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", "test user");
+            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
 
             product.UpdateDescription("new test description");
 
@@ -57,7 +59,7 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateImage_ImageIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", "test user");
+            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
 
             product.UpdateImage("new url");
 
@@ -67,7 +69,7 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_MarkAsIsDeleted_IsDeletedChangedToTrue()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", "test user");
+            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
 
             product.MarkAsDeleted();
 
@@ -77,7 +79,7 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_MarkAsNotIsDeleted_IsDeletedChangedToFalse()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", "test user");
+            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
 
             product.MarkAsDeleted();
             product.MarkAsNotDeleted();
@@ -88,11 +90,22 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateProducerCode_ProducerCodeIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", "test user");
+            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
 
             product.UpdateProducerCode("new producer code");
 
             Assert.Equal("new producer code", product.ProducerCode);
+        }
+
+        [Fact]
+        public void Product_UpdateCategoryId_CategoryIdUpdated()
+        {
+            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
+            var categoryId = Guid.NewGuid();
+
+            product.UpdateCategoryId(categoryId);
+
+            Assert.Equal(categoryId, product.CategoryId);
         }
     }
 }
