@@ -31,6 +31,12 @@ namespace Products.Infrastructure.Repositories
                 .ConfigureAwait(false);
         }
 
+        public async Task<Product> FindById(Guid id, CancellationToken cancellationToken)
+        {
+            return await _productsDbContext.Products.FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
+                .ConfigureAwait(false);
+        }
+
         public Product Update(Product product)
         {
             _productsDbContext.Products.Update(product);

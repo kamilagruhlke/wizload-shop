@@ -12,6 +12,8 @@ namespace Products.Domain.AggregateModel.ProductAggregate
 
         Product Update(Product product);
 
+        Task<Product> FindById(Guid id, CancellationToken cancellationToken);
+
         Task<IList<Product>> FindByCategoryId(Guid categoryId, CancellationToken cancellationToken);
     }
 }
