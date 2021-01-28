@@ -1,9 +1,12 @@
-﻿using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Products.Api.Application.Commands;
+using Products.Api.Application.Models;
 
 namespace Products.Api.Controllers
 {
@@ -27,7 +30,14 @@ namespace Products.Api.Controllers
 
         [HttpPut]
         [ProducesResponseType(typeof(bool), 200)]
-        public async Task<IActionResult> Post(UpdateProductCommand updateProductCommand, CancellationToken cancellationToken)
+        public async Task<IActionResult> Put(UpdateProductCommand updateProductCommand, CancellationToken cancellationToken)
+        {
+            return Ok(await _mediator.Send(updateProductCommand, cancellationToken));
+        }
+
+        [HttpGet("{categoryId}")]
+        [ProducesResponseType(typeof(IList<ProductModel>), 200)]
+        public async Task<IActionResult> GetByCategoryId(Guid categoryId, CancellationToken cancellationToken)
         {
             return Ok(await _mediator.Send(updateProductCommand, cancellationToken));
         }

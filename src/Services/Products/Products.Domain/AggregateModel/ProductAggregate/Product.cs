@@ -21,6 +21,8 @@ namespace Products.Domain.AggregateModel.ProductAggregate
 
         public string ProducerCode { get; protected set; }
 
+        public Guid CategoryId { get; protected set; }
+
         public DateTime CreatedAt { get; protected set; }
 
         public string CreatedBy { get; protected set; }
@@ -29,7 +31,14 @@ namespace Products.Domain.AggregateModel.ProductAggregate
 
         public string UpdatedBy { get; protected set; }
 
-        public Product(string name, string description, string specification, string image, Guid producerId, string producerCode, string user)
+        public Product(string name,
+            string description,
+            string specification,
+            string image,
+            Guid producerId,
+            string producerCode,
+            Guid categoryId,
+            string user)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -39,6 +48,7 @@ namespace Products.Domain.AggregateModel.ProductAggregate
             IsDeleted = false;
             ProducerId = producerId;
             ProducerCode = producerCode;
+            CategoryId = categoryId;
             CreatedAt = DateTime.UtcNow;
             CreatedBy = user;
             UpdatedAt = DateTime.UtcNow;
@@ -88,6 +98,11 @@ namespace Products.Domain.AggregateModel.ProductAggregate
         public void UpdateProducerId(Guid producerId)
         {
             ProducerId = producerId;
+        }
+
+        public void UpdateCategoryId(Guid categoryId)
+        {
+            CategoryId = categoryId;
         }
     }
 }

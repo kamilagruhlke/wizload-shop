@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -22,9 +24,10 @@ namespace Products.Infrastructure.Repositories
             return product;
         }
 
-        public async Task<Product> FindById(Guid id, CancellationToken cancellationToken)
+        public async Task<IList<Product>> FindByCategoryId(Guid id, CancellationToken cancellationToken)
         {
-            return await _productsDbContext.Products.FirstOrDefaultAsync(e => e.Id == id)
+            return await _productsDbContext.Products.Where(e => e.Id == id)
+                .ToListAsync(cancellationToken)
                 .ConfigureAwait(false);
         }
 

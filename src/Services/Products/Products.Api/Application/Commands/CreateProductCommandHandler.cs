@@ -26,6 +26,7 @@ namespace Products.Api.Application.Commands
                 request.Image,
                 request.ProducerId,
                 request.ProducerCode,
+                request.CategoryId,
                 _userAccessor.GetCurrentUsername());
 
             await _productRepository.Add(product, cancellationToken)

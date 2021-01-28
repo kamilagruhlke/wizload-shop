@@ -23,6 +23,9 @@ namespace Products.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.ProducerId)
                 .HasColumnName("producer_id");
 
+            builder.Property(e => e.CategoryId)
+                .HasColumnName("category_id");
+
             builder.Property(e => e.Specification)
                 .HasColumnName("specification");
 
@@ -49,6 +52,9 @@ namespace Products.Infrastructure.EntityTypeConfigurations
 
             builder.HasIndex(e => e.ProducerId)
                 .HasDatabaseName("idx_products_producer_id");
+
+            builder.HasIndex(e => e.CategoryId)
+                .HasDatabaseName("idx_products_category_id");
         }
     }
 }

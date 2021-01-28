@@ -17,5 +17,7 @@ namespace Products.Api.Application.Models
         public Guid ProducerId { get; set; }
 
         public string ProducerCode { get; set; }
+
+        public Guid CategoryId { get; set; }
     }
 }

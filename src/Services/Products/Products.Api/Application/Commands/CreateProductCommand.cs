@@ -16,5 +16,7 @@ namespace Products.Api.Application.Commands
         public Guid ProducerId { get; set; }
 
         public string ProducerCode { get; set; }
+
+        public Guid CategoryId { get; set; }
     }
 }
