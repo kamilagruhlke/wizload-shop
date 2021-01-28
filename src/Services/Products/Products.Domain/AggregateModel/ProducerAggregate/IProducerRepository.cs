@@ -1,15 +1,16 @@
-﻿using Products.Domain.SeedWork;
-using System;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using Products.Domain.SeedWork;
 
 namespace Products.Domain.AggregateModel.ProducerAggregate
 {
-    interface IProducerRepository : IRepository<Producer>
+    public interface IProducerRepository : IRepository<Producer>
     {
-        Task<Producer> Add(Producer producer);
+        Task<Producer> Add(Producer producer, CancellationToken cancellationToken);
 
         Producer Update(Producer producer);
 
-        Task<Producer> FindById(Guid id);
+        Task<Producer> FindById(Guid id, CancellationToken cancellationToken);
     }
 }

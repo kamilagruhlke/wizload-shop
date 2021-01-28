@@ -1,14 +1,27 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Text.Json.Serialization;
+using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Products.Api.Application.Utils;
 using Products.Api.Infrastructure.Filters;
+using Products.Domain.AggregateModel.ProducerAggregate;
+using Products.Domain.AggregateModel.ProductAggregate;
+using Products.Domain.Utils.Interfaces;
+using Products.Infrastructure;
+using Products.Infrastructure.Repositories;
 
 namespace Products.Api
 {
@@ -23,7 +36,14 @@ namespace Products.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddDbContext<ProductsDbContext>(contextOptionsBuilder => {
+                contextOptionsBuilder.UseNpgsql(Configuration.GetConnectionString("ProductsDbContext"), options => {
+                    options.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                    options.MigrationsHistoryTable("migrations_history", "products");
+                });
+
+                contextOptionsBuilder.ReplaceService<IHistoryRepository, ProductsHistoryRepository>();
+            });
 
             services.AddAuthentication(options =>
             {
@@ -43,6 +63,12 @@ namespace Products.Api
                     $"{Configuration["IdentityApiExternal"]}"
                 };
             });
+
+            services.AddScoped<IUserAccessor, UserAccessor>()
+                .AddScoped<IProductRepository, ProductRepository>()
+                .AddScoped<IProducerRepository, ProducerRepository>()
+                .AddMediatR(Assembly.GetExecutingAssembly())
+                .AddHttpContextAccessor();
 
             services.AddSwaggerGen(options =>
             {
@@ -67,6 +93,17 @@ namespace Products.Api
 
                 options.OperationFilter<AuthorizeCheckOperationFilter>();
             });
+
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                })
+                .AddFluentValidation(validation => validation.RegisterValidatorsFromAssemblyContaining<Startup>());
+
+            services.AddHealthChecks();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -101,12 +138,21 @@ namespace Products.Api
 
             app.UseRouting();
 
+            app.UseCors(x => x
+              .AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                {
+                    AllowCachingResponses = false
+                });
             });
         }
     }

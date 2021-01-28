@@ -84,5 +84,10 @@ namespace Products.Domain.AggregateModel.ProductAggregate
         {
             ProducerCode = producerCode;
         }
+
+        public void UpdateProducerId(Guid producerId)
+        {
+            ProducerId = producerId;
+        }
     }
 }
