@@ -39,7 +39,7 @@ namespace Products.Api.Controllers
         [ProducesResponseType(typeof(IList<ProductModel>), 200)]
         public async Task<IActionResult> GetByCategoryId(Guid categoryId, CancellationToken cancellationToken)
         {
-            return Ok(await _mediator.Send(updateProductCommand, cancellationToken));
+            return Ok(await _mediator.Send(new GetProductByCategoryIdCommand(categoryId), cancellationToken));
         }
     }
 }

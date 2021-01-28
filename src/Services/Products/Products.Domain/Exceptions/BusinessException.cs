@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Categories.Domain.Exceptions
+namespace Products.Domain.Exceptions
 {
     public class BusinessException : Exception
     {

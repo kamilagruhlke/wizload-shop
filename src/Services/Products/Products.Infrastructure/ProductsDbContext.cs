@@ -3,11 +3,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Products.Domain.AggregateModel.ProducerAggregate;
 using Products.Domain.AggregateModel.ProductAggregate;
+using Products.Domain.SeedWork;
 using Products.Infrastructure.EntityTypeConfigurations;
 
 namespace Products.Infrastructure
 {
-    public class ProductsDbContext : DbContext
+    public class ProductsDbContext : DbContext, IUnitOfWork
     {
         public ProductsDbContext(DbContextOptions<ProductsDbContext> options)
                  : base(options)
