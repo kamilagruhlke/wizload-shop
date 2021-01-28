@@ -23,6 +23,9 @@ namespace Categories.Infrastructure.EnityTypeConfigurations
             builder.Property(e => e.Name)
                 .HasColumnName("name");
 
+            builder.Property(e => e.IsDeleted)
+                .HasColumnName("is_deleted");
+
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("created_at");
 

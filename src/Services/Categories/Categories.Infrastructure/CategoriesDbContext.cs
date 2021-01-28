@@ -19,7 +19,7 @@ namespace Categories.Infrastructure
             modelBuilder.ApplyConfiguration(new CategoryEntityTypeConfiguration());
         }
 
-        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
             await base.SaveChangesAsync(cancellationToken);
 
