@@ -10,10 +10,15 @@ services:
       - "5432:5432"
 
   adminer:
-    image: adminer
     restart: always
     ports:
       - "8080:8080"
+
+  redis:
+    environment:
+      - REDIS_PASSWORD=9cRtYehfr2gA52zH
+    ports:
+      - '6379:6379'
 
   identityapi:
     environment:
@@ -35,6 +40,9 @@ services:
       - BASKETAPI_PATH_BASE=/basket/
       - BASKETAPI_IdentityApiExternal=http://localhost:5002
       - BASKETAPI_IdentityApi=http://identityapi
+      - BASKETAPI_Redis__Host=redis
+      - BASKETAPI_Redis__Port=6379
+      - BASKETAPI_Redis__Password=9cRtYehfr2gA52zH
     ports:
       - "80"
 

@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using Basket.Api.Infrastructure.Filters;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,8 +7,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Basket.Api
 {
@@ -25,8 +26,6 @@ namespace Basket.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -45,6 +44,21 @@ namespace Basket.Api
                     $"{Configuration["IdentityApiExternal"]}"
                 };
             });
+
+            services.AddScoped((s) => {
+                var redisOptions = new ConfigurationOptions
+                {
+                    EndPoints = {
+                        { Configuration["Redis:Host"], int.Parse(Configuration["Redis:Port"]) }
+                    },
+                    Password = Configuration["Redis:Password"]
+                };
+
+                var redis = ConnectionMultiplexer.Connect(redisOptions);
+                return redis.GetDatabase(0);
+            });
+            
+            services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddSwaggerGen(options =>
             {
@@ -69,6 +83,8 @@ namespace Basket.Api
 
                 options.OperationFilter<AuthorizeCheckOperationFilter>();
             });
+
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
