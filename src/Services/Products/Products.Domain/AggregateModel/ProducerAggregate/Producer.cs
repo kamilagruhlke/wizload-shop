@@ -5,7 +5,7 @@ namespace Products.Domain.AggregateModel.ProducerAggregate
 {
     public class Producer : IAggregateRoot
     {
-        public Guid IdProducer { get; protected set; }
+        public Guid Id { get; protected set; }
 
         public string Name { get; protected set; }
 
@@ -21,7 +21,7 @@ namespace Products.Domain.AggregateModel.ProducerAggregate
 
         public Producer(string name, string description, string user)
         {
-            IdProducer = Guid.NewGuid();
+            Id = Guid.NewGuid();
             Name = name;
             Description = description;
             CreatedAt = DateTime.UtcNow;

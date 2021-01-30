@@ -35,7 +35,8 @@ namespace Categories.Api.Migrations
                         .HasColumnName("created_by");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
@@ -54,7 +55,7 @@ namespace Categories.Api.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id")
-                        .HasName("id");
+                        .HasName("pk_categories_category_id");
 
                     b.HasIndex("Id")
                         .HasDatabaseName("idx_categories_categories_id");
