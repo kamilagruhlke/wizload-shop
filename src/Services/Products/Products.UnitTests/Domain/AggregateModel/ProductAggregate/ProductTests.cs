@@ -1,6 +1,6 @@
-﻿using Xunit;
+﻿using System;
 using Products.Domain.AggregateModel.ProductAggregate;
-using System;
+using Xunit;
 
 namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
 {
@@ -12,7 +12,16 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         {
             var producerId = Guid.NewGuid();
             var categoryId = Guid.NewGuid();
-            var product = new Product("Test name", "Test description", "Test specification", "Test url", producerId, "Test code", categoryId, "test user");
+            var product = new Product("Test name",
+                "Test description",
+                "Test specification",
+                "Test url",
+                producerId,
+                "Test code",
+                categoryId,
+                100.0m,
+                23.0m,
+                "test user");
 
             Assert.Equal("Test name", product.Name);
             Assert.Equal("Test description", product.Description);
@@ -22,6 +31,9 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
             Assert.Equal(producerId, product.ProducerId);
             Assert.Equal("Test code", product.ProducerCode);
             Assert.Equal(categoryId, product.CategoryId);
+            Assert.Equal(100.0m, product.GrossPrice);
+            Assert.Equal(23, product.Tax);
+            Assert.Equal(123.0m, product.NetPrice());
             Assert.Equal("test user", product.CreatedBy);
             Assert.Equal("test user", product.UpdatedBy);
         }
@@ -29,7 +41,16 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateName_NameIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
+            var product = new Product("Test name",
+                "Test",
+                "Test",
+                "Test url",
+                Guid.NewGuid(),
+                "Test code",
+                Guid.NewGuid(),
+                100.0m,
+                23.0m,
+                "test user");
 
             product.UpdateName("new test name");
 
@@ -39,7 +60,16 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateSpecification_SpecyficationIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
+            var product = new Product("Test name",
+                "Test",
+                "Test",
+                "Test url",
+                Guid.NewGuid(),
+                "Test code",
+                Guid.NewGuid(),
+                100.0m,
+                23.0m,
+                "test user");
 
             product.UpdateSpecification("new test specification");
 
@@ -49,7 +79,16 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateDescription_DescriptionIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
+            var product = new Product("Test name",
+                "Test",
+                "Test",
+                "Test url",
+                Guid.NewGuid(),
+                "Test code",
+                Guid.NewGuid(),
+                100.0m,
+                23.0m,
+                "test user");
 
             product.UpdateDescription("new test description");
 
@@ -59,7 +98,16 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateImage_ImageIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
+            var product = new Product("Test name",
+                  "Test",
+                  "Test",
+                  "Test url",
+                  Guid.NewGuid(),
+                  "Test code",
+                  Guid.NewGuid(),
+                  100.0m,
+                  23.0m,
+                  "test user");
 
             product.UpdateImage("new url");
 
@@ -69,7 +117,16 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_MarkAsIsDeleted_IsDeletedChangedToTrue()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
+            var product = new Product("Test name",
+                  "Test",
+                  "Test",
+                  "Test url",
+                  Guid.NewGuid(),
+                  "Test code",
+                  Guid.NewGuid(),
+                  100.0m,
+                  23.0m,
+                  "test user");
 
             product.MarkAsDeleted();
 
@@ -79,7 +136,16 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_MarkAsNotIsDeleted_IsDeletedChangedToFalse()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
+            var product = new Product("Test name",
+                  "Test",
+                  "Test",
+                  "Test url",
+                  Guid.NewGuid(),
+                  "Test code",
+                  Guid.NewGuid(),
+                  100.0m,
+                  23.0m,
+                  "test user");
 
             product.MarkAsDeleted();
             product.MarkAsNotDeleted();
@@ -90,7 +156,16 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateProducerCode_ProducerCodeIsUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
+            var product = new Product("Test name",
+                  "Test",
+                  "Test",
+                  "Test url",
+                  Guid.NewGuid(),
+                  "Test code",
+                  Guid.NewGuid(),
+                  100.0m,
+                  23.0m,
+                  "test user");
 
             product.UpdateProducerCode("new producer code");
 
@@ -100,12 +175,64 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         [Fact]
         public void Product_UpdateCategoryId_CategoryIdUpdated()
         {
-            var product = new Product("Test name", "Test", "Test", "Test url", Guid.NewGuid(), "Test code", Guid.NewGuid(), "test user");
+            var product = new Product("Test name",
+                  "Test",
+                  "Test",
+                  "Test url",
+                  Guid.NewGuid(),
+                  "Test code",
+                  Guid.NewGuid(),
+                  100.0m,
+                  23.0m,
+                  "test user");
+
             var categoryId = Guid.NewGuid();
 
             product.UpdateCategoryId(categoryId);
 
             Assert.Equal(categoryId, product.CategoryId);
+        }
+
+        [Fact]
+        public void Product_UpdateGrossPrice_GrossPriceUpdated()
+        {
+            var product = new Product("Test name",
+                  "Test",
+                  "Test",
+                  "Test url",
+                  Guid.NewGuid(),
+                  "Test code",
+                  Guid.NewGuid(),
+                  100.0m,
+                  23.0m,
+                  "test user");
+
+            product.UpdateGrossPrice(1000.0m);
+
+            Assert.Equal(1000.0m, product.GrossPrice);
+            Assert.Equal(23.0m, product.Tax);
+            Assert.Equal(1230.0m, product.NetPrice());
+        }
+
+        [Fact]
+        public void Product_UpdateTax_TaxUpdated()
+        {
+            var product = new Product("Test name",
+                  "Test",
+                  "Test",
+                  "Test url",
+                  Guid.NewGuid(),
+                  "Test code",
+                  Guid.NewGuid(),
+                  100.0m,
+                  23.0m,
+                  "test user");
+
+            product.UpdateTax(8.0m);
+
+            Assert.Equal(100.0m, product.GrossPrice);
+            Assert.Equal(8.0m, product.Tax);
+            Assert.Equal(108.0m, product.NetPrice());
         }
     }
 }

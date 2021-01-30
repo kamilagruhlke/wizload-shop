@@ -13,6 +13,10 @@ namespace Products.Api.Application.Commands
 
         public string Image { get; set; }
 
+        public decimal GrossPrice { get; set; }
+
+        public decimal Tax { get; set; }
+
         public Guid ProducerId { get; set; }
 
         public string ProducerCode { get; set; }

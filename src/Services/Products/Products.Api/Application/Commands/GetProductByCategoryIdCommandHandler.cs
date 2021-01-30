@@ -30,7 +30,10 @@ namespace Products.Api.Application.Commands
                 ProducerCode = e.ProducerCode,
                 ProducerId = e.ProducerId,
                 Specification = e.Specification,
-                CategoryId = e.CategoryId
+                CategoryId = e.CategoryId,
+                GrossPrice = e.GrossPrice,
+                Tax = e.Tax,
+                NetPrice = e.NetPrice()
             }).ToList();
         }
     }

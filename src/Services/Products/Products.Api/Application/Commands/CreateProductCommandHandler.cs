@@ -27,6 +27,8 @@ namespace Products.Api.Application.Commands
                 request.ProducerId,
                 request.ProducerCode,
                 request.CategoryId,
+                request.GrossPrice,
+                request.Tax,
                 _userAccessor.GetCurrentUsername());
 
             await _productRepository.Add(product, cancellationToken)

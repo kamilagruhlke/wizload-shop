@@ -19,5 +19,11 @@ namespace Products.Api.Application.Models
         public string ProducerCode { get; set; }
 
         public Guid CategoryId { get; set; }
+
+        public decimal GrossPrice { get; set; }
+
+        public decimal Tax { get; set; }
+
+        public decimal NetPrice { get; set; }
     }
 }

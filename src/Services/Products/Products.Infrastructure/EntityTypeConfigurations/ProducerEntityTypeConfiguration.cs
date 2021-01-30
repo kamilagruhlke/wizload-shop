@@ -37,6 +37,10 @@ namespace Products.Infrastructure.EntityTypeConfigurations
 
             builder.HasIndex(e => e.Id)
                 .HasDatabaseName("idx_producers_producer_id");
+
+            builder.HasIndex(e => e.Name)
+                .HasDatabaseName("idx_producers_producer_name")
+                .IsUnique(true);
         }
     }
 }

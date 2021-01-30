@@ -14,6 +14,8 @@ namespace Products.Api.Application.Validation.CommandValidators
             RuleFor(e => e.ProducerId).NotEmpty();
             RuleFor(e => e.CategoryId).NotEmpty();
             RuleFor(e => e.Specification).NotEmpty();
+            RuleFor(e => e.GrossPrice).NotEmpty();
+            RuleFor(e => e.Tax).NotEmpty();
         }
     }
 }

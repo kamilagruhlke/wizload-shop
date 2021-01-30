@@ -36,6 +36,8 @@ namespace Products.Api.Application.Commands
             product.UpdateProducerCode(request.ProducerCode);
             product.UpdateSpecification(request.Specification);
             product.UpdateCategoryId(request.CategoryId);
+            product.UpdateGrossPrice(request.GrossPrice);
+            product.UpdateTax(request.Tax);
             product.UpdateModificationDates(_userAccessor.GetCurrentUsername());
 
             _productRepository.Update(product);

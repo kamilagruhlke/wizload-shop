@@ -20,5 +20,9 @@ namespace Products.Api.Application.Commands
         public string ProducerCode { get; set; }
 
         public Guid CategoryId { get; set; }
+
+        public decimal GrossPrice { get; set; }
+
+        public decimal Tax { get; set; }
     }
 }
