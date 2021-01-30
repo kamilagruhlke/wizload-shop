@@ -31,9 +31,9 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
             Assert.Equal(producerId, product.ProducerId);
             Assert.Equal("Test code", product.ProducerCode);
             Assert.Equal(categoryId, product.CategoryId);
-            Assert.Equal(100.0m, product.GrossPrice);
+            Assert.Equal(100.0m, product.NetPrice);
             Assert.Equal(23, product.Tax);
-            Assert.Equal(123.0m, product.NetPrice());
+            Assert.Equal(123.0m, product.GrossPrice());
             Assert.Equal("test user", product.CreatedBy);
             Assert.Equal("test user", product.UpdatedBy);
         }
@@ -194,7 +194,7 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
         }
 
         [Fact]
-        public void Product_UpdateGrossPrice_GrossPriceUpdated()
+        public void Product_UpdateNetPrice_NetPriceUpdated()
         {
             var product = new Product("Test name",
                   "Test",
@@ -207,11 +207,11 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
                   23.0m,
                   "test user");
 
-            product.UpdateGrossPrice(1000.0m);
+            product.UpdateNetPrice(1000.0m);
 
-            Assert.Equal(1000.0m, product.GrossPrice);
+            Assert.Equal(1000.0m, product.NetPrice);
             Assert.Equal(23.0m, product.Tax);
-            Assert.Equal(1230.0m, product.NetPrice());
+            Assert.Equal(1230.0m, product.GrossPrice());
         }
 
         [Fact]
@@ -230,9 +230,9 @@ namespace Products.UnitTests.Domain.AggregateModel.ProductAggregate
 
             product.UpdateTax(8.0m);
 
-            Assert.Equal(100.0m, product.GrossPrice);
+            Assert.Equal(100.0m, product.NetPrice);
             Assert.Equal(8.0m, product.Tax);
-            Assert.Equal(108.0m, product.NetPrice());
+            Assert.Equal(108.0m, product.GrossPrice());
         }
     }
 }

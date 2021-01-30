@@ -10,8 +10,8 @@ using Products.Infrastructure;
 namespace Products.Api.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20210130111618_Added_missing_properties_translation")]
-    partial class Added_missing_properties_translation
+    [Migration("20210130112908_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,10 +88,6 @@ namespace Products.Api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<decimal>("GrossPrice")
-                        .HasColumnType("numeric")
-                        .HasColumnName("gross_price");
-
                     b.Property<string>("Image")
                         .HasColumnType("text")
                         .HasColumnName("image");
@@ -103,6 +99,10 @@ namespace Products.Api.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text")
                         .HasColumnName("name");
+
+                    b.Property<decimal>("NetPrice")
+                        .HasColumnType("numeric")
+                        .HasColumnName("net_price");
 
                     b.Property<string>("ProducerCode")
                         .HasColumnType("text")

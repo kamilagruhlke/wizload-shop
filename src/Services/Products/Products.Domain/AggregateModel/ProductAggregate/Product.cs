@@ -21,7 +21,7 @@ namespace Products.Domain.AggregateModel.ProductAggregate
 
         public string ProducerCode { get; protected set; }
 
-        public decimal GrossPrice { get; protected set; }
+        public decimal NetPrice { get; protected set; }
 
         public decimal Tax { get; protected set; }
 
@@ -42,7 +42,7 @@ namespace Products.Domain.AggregateModel.ProductAggregate
             Guid producerId,
             string producerCode,
             Guid categoryId,
-            decimal grossPrice,
+            decimal netPrice,
             decimal tax,
             string user)
         {
@@ -55,7 +55,7 @@ namespace Products.Domain.AggregateModel.ProductAggregate
             ProducerId = producerId;
             ProducerCode = producerCode;
             CategoryId = categoryId;
-            GrossPrice = grossPrice;
+            NetPrice = netPrice;
             Tax = tax;
             CreatedAt = DateTime.UtcNow;
             CreatedBy = user;
@@ -67,9 +67,9 @@ namespace Products.Domain.AggregateModel.ProductAggregate
         {
         }
 
-        public decimal NetPrice() => GrossPrice * (1.0m + (Tax/100.0m));
+        public decimal GrossPrice() => NetPrice * (1.0m + (Tax/100.0m));
 
-        public void UpdateGrossPrice(decimal grossPrice) => GrossPrice = grossPrice;
+        public void UpdateNetPrice(decimal netPrice) => NetPrice = netPrice;
 
         public void UpdateTax(decimal tax) => Tax = tax;
 

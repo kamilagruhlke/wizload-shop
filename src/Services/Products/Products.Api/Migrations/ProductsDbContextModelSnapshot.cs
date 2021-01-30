@@ -86,10 +86,6 @@ namespace Products.Api.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<decimal>("GrossPrice")
-                        .HasColumnType("numeric")
-                        .HasColumnName("gross_price");
-
                     b.Property<string>("Image")
                         .HasColumnType("text")
                         .HasColumnName("image");
@@ -101,6 +97,10 @@ namespace Products.Api.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text")
                         .HasColumnName("name");
+
+                    b.Property<decimal>("NetPrice")
+                        .HasColumnType("numeric")
+                        .HasColumnName("net_price");
 
                     b.Property<string>("ProducerCode")
                         .HasColumnType("text")

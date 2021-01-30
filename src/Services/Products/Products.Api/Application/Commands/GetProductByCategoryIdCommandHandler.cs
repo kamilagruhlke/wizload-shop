@@ -31,9 +31,9 @@ namespace Products.Api.Application.Commands
                 ProducerId = e.ProducerId,
                 Specification = e.Specification,
                 CategoryId = e.CategoryId,
-                GrossPrice = e.GrossPrice,
+                NetPrice = e.NetPrice,
                 Tax = e.Tax,
-                NetPrice = e.NetPrice()
+                GrossPrice = e.GrossPrice()
             }).ToList();
         }
     }

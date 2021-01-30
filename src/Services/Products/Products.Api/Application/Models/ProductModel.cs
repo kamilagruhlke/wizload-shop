@@ -20,10 +20,10 @@ namespace Products.Api.Application.Models
 
         public Guid CategoryId { get; set; }
 
-        public decimal GrossPrice { get; set; }
+        public decimal NetPrice { get; set; }
 
         public decimal Tax { get; set; }
 
-        public decimal NetPrice { get; set; }
+        public decimal GrossPrice { get; set; }
     }
 }

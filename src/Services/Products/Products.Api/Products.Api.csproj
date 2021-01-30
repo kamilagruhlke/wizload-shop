@@ -27,11 +27,6 @@
   <ItemGroup>
     <Folder Include="Infrastructure\" />
     <Folder Include="Infrastructure\Filters\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Application\" />
-    <Folder Include="Application\Utils\" />
-    <Folder Include="Application\Commands\" />
-    <Folder Include="Application\Models\" />
-    <Folder Include="Application\Validation\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

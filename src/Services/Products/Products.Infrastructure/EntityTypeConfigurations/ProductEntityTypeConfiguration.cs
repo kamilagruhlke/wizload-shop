@@ -41,8 +41,8 @@ namespace Products.Infrastructure.EntityTypeConfigurations
             builder.Property(e => e.Name)
                 .HasColumnName("name");
 
-            builder.Property(e => e.GrossPrice)
-                .HasColumnName("gross_price");
+            builder.Property(e => e.NetPrice)
+                .HasColumnName("net_price");
 
             builder.Property(e => e.Tax)
                 .HasColumnName("tax");

@@ -27,7 +27,7 @@ namespace Products.Api.Application.Commands
                 request.ProducerId,
                 request.ProducerCode,
                 request.CategoryId,
-                request.GrossPrice,
+                request.NetPrice,
                 request.Tax,
                 _userAccessor.GetCurrentUsername());
 

@@ -13,7 +13,7 @@ namespace Products.Api.Application.Commands
 
         public string Image { get; set; }
 
-        public decimal GrossPrice { get; set; }
+        public decimal NetPrice { get; set; }
 
         public decimal Tax { get; set; }
 
