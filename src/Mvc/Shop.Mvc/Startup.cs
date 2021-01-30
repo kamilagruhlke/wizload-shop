@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Products;
 
 namespace Shop.Mvc
 {
@@ -31,6 +32,10 @@ namespace Shop.Mvc
 
             services.AddHttpClient<categoriesClient>((provider, client) => {
                 client.BaseAddress = new Uri(Configuration["CategoriesApi"]);
+            });
+
+            services.AddHttpClient<productsClient>((provider, client) => {
+                client.BaseAddress = new Uri(Configuration["ProductsApis"]);
             });
 
             services.AddAuthentication(options =>
@@ -107,7 +112,6 @@ namespace Shop.Mvc
             app.UseStaticFiles();
             app.UseSession();
 
-            // Fix samesite issue when running eShop from docker-compose locally as by default http protocol is being used
             app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
 
             app.UseRouting();
