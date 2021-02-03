@@ -1,0 +1,10 @@
+﻿@model List<WizLoad.ApiClient.CategoryModel>
+
+<div>
+    @foreach (var categoryModel in Model)
+    {
+        <a asp-controller="Home"
+           asp-action="Products"
+           asp-route-categoryId="@categoryModel.Id">@categoryModel.Name</a>
+    }
+</div>

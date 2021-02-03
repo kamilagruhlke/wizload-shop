@@ -1,0 +1,11 @@
+﻿@model List<WizLoad.ApiClient.ProductModel>
+@{
+    ViewData["Title"] = "Products";
+}
+
+@foreach(var product in Model)
+{
+    <div>
+        @product.Name
+    </div>
+}

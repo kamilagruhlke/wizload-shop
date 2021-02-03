@@ -35,6 +35,7 @@ namespace Products.Api.Controllers
             return Ok(await _mediator.Send(updateProductCommand, cancellationToken));
         }
 
+        [AllowAnonymous]
         [HttpGet("{categoryId}")]
         [ProducesResponseType(typeof(IList<ProductModel>), 200)]
         public async Task<IActionResult> GetByCategoryId(Guid categoryId, CancellationToken cancellationToken)

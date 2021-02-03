@@ -1,11 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Categories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shop.Mvc.Models;
+using WizLoad.ApiClient;
 
 namespace Shop.Mvc.Controllers
 {
@@ -13,18 +14,24 @@ namespace Shop.Mvc.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly categoriesClient _categoriesClient;
+        private readonly productsClient _productsClient;
 
-        public HomeController(ILogger<HomeController> logger, categoriesClient categoriesClient)
+        public HomeController(ILogger<HomeController> logger, productsClient productsClient)
         {
             _logger = logger;
-            _categoriesClient = categoriesClient;
+            _productsClient = productsClient;
         }
 
-        public async Task<IActionResult> Index(CancellationToken cancellationToken)
+        public IActionResult Index()
         {
-            var categories = await _categoriesClient.ActiveAsync(cancellationToken);
-            return View(categories);
+            return View();
+        }
+
+        public async Task<IActionResult> Products(Guid categoryId, CancellationToken cancellationToken)
+        {
+            var products = await _productsClient.ProductsAllAsync(categoryId, cancellationToken);
+
+            return View(products);
         }
 
         [Authorize]

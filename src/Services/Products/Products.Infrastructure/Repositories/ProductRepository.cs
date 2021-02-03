@@ -24,9 +24,9 @@ namespace Products.Infrastructure.Repositories
             return product;
         }
 
-        public async Task<IList<Product>> FindByCategoryId(Guid id, CancellationToken cancellationToken)
+        public async Task<IList<Product>> FindByCategoryId(Guid categoryId, CancellationToken cancellationToken)
         {
-            return await _productsDbContext.Products.Where(e => e.Id == id)
+            return await _productsDbContext.Products.Where(e => e.CategoryId == categoryId)
                 .ToListAsync(cancellationToken)
                 .ConfigureAwait(false);
         }

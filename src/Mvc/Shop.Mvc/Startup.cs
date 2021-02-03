@@ -1,7 +1,6 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
-using Categories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -10,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Products;
+using WizLoad.ApiClient;
 
 namespace Shop.Mvc
 {
@@ -35,7 +34,7 @@ namespace Shop.Mvc
             });
 
             services.AddHttpClient<productsClient>((provider, client) => {
-                client.BaseAddress = new Uri(Configuration["ProductsApis"]);
+                client.BaseAddress = new Uri(Configuration["ProductsApi"]);
             });
 
             services.AddAuthentication(options =>

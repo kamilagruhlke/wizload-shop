@@ -23,11 +23,16 @@
     <Content Remove="OpenAPIs\products.json" />
   </ItemGroup>
   <ItemGroup>
-    <OpenApiReference Include="OpenAPIs\categories.json" Namespace="Categories" Options="/UseBaseUrl:false /GenerateClientInterfaces:true">
+    <OpenApiReference Include="OpenAPIs\categories.json" Namespace="WizLoad.ApiClient" Options="/UseBaseUrl:false /GenerateClientInterfaces:true">
       <SourceUri>http://localhost:5001/categories/swagger/v1/swagger.json</SourceUri>
     </OpenApiReference>
-    <OpenApiReference Include="OpenAPIs\products.json" Namespace="Products">
+    <OpenApiReference Include="OpenAPIs\products.json" Namespace="WizLoad.ApiClient">
       <SourceUri>http://localhost:5001/products/swagger/v1/swagger.json</SourceUri>
     </OpenApiReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewComponents\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\Categories\" />
   </ItemGroup>
 </Project>
