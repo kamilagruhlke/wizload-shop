@@ -19,10 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mvc", "Mvc", "{A76D895F-EDB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Api", "src\Services\Basket\Basket.Api\Basket.Api.csproj", "{619EACC8-8D2E-4E6D-B1C1-41B13F83440A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Domain", "src\Services\Basket\Basket.Domain\Basket.Domain.csproj", "{54C7B6DE-CB0F-4313-A4B7-225E5E659B2E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Infrastructure", "src\Services\Basket\Basket.Infrastructure\Basket.Infrastructure.csproj", "{99E7D23E-2B5E-4AD7-B14C-A626AF35905D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Categories.Api", "src\Services\Categories\Categories.Api\Categories.Api.csproj", "{39034246-1387-43CB-9FE6-335C7AFF1C18}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Categories.Domain", "src\Services\Categories\Categories.Domain\Categories.Domain.csproj", "{746278AD-4659-4E96-82F4-6859996AEBF2}"
@@ -47,9 +43,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway.Api", "src\Services
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "src\Services\Identity\Identity.Api\Identity.Api.csproj", "{1B5A1E94-E43B-42CC-8F60-46E1CC5E5774}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Categories.UnitTests", "src\Services\Categories\Categories.UnitTests\Categories.UnitTests.csproj", "{E7868004-28B9-488D-834A-5FA91C5B4E95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Categories.UnitTests", "src\Services\Categories\Categories.UnitTests\Categories.UnitTests.csproj", "{E7868004-28B9-488D-834A-5FA91C5B4E95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Products.UnitTests", "src\Services\Products\Products.UnitTests\Products.UnitTests.csproj", "{17F7FDDC-2A6D-47E1-9165-0D2497BE2DCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Products.UnitTests", "src\Services\Products\Products.UnitTests\Products.UnitTests.csproj", "{17F7FDDC-2A6D-47E1-9165-0D2497BE2DCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,14 +57,6 @@ Global
 		{619EACC8-8D2E-4E6D-B1C1-41B13F83440A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{619EACC8-8D2E-4E6D-B1C1-41B13F83440A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{619EACC8-8D2E-4E6D-B1C1-41B13F83440A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54C7B6DE-CB0F-4313-A4B7-225E5E659B2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54C7B6DE-CB0F-4313-A4B7-225E5E659B2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54C7B6DE-CB0F-4313-A4B7-225E5E659B2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54C7B6DE-CB0F-4313-A4B7-225E5E659B2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99E7D23E-2B5E-4AD7-B14C-A626AF35905D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99E7D23E-2B5E-4AD7-B14C-A626AF35905D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99E7D23E-2B5E-4AD7-B14C-A626AF35905D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99E7D23E-2B5E-4AD7-B14C-A626AF35905D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39034246-1387-43CB-9FE6-335C7AFF1C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39034246-1387-43CB-9FE6-335C7AFF1C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39034246-1387-43CB-9FE6-335C7AFF1C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -132,8 +120,6 @@ Global
 		{A85605CA-5EF5-4AF9-AA7A-608BAF356FE6} = {61C617F1-C225-4163-9F15-39AF76C0BE1F}
 		{5CD7C0E9-E38C-490C-9259-D9E9924C26AD} = {61C617F1-C225-4163-9F15-39AF76C0BE1F}
 		{619EACC8-8D2E-4E6D-B1C1-41B13F83440A} = {A85605CA-5EF5-4AF9-AA7A-608BAF356FE6}
-		{54C7B6DE-CB0F-4313-A4B7-225E5E659B2E} = {A85605CA-5EF5-4AF9-AA7A-608BAF356FE6}
-		{99E7D23E-2B5E-4AD7-B14C-A626AF35905D} = {A85605CA-5EF5-4AF9-AA7A-608BAF356FE6}
 		{39034246-1387-43CB-9FE6-335C7AFF1C18} = {10CD440F-CA1A-43BF-8F66-8E2487B7D1EE}
 		{746278AD-4659-4E96-82F4-6859996AEBF2} = {10CD440F-CA1A-43BF-8F66-8E2487B7D1EE}
 		{2ACF6B69-1E34-46A0-8BE6-91ED440846A1} = {10CD440F-CA1A-43BF-8F66-8E2487B7D1EE}
