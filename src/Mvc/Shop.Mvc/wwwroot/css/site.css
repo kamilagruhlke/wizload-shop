@@ -20,6 +20,7 @@ a {
 
 .nav-pills {
     background: #563d7c !important;
+    padding: 0.2em;
 }
 
 .nav-item > .nav-link {
@@ -75,9 +76,16 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: rgb(234, 234, 234);
 }
+
+.container-box {
+    background: #fff;
+    padding: 1em;
+    margin: 0.5em;
+}
+
 .footer {
   position: absolute;
   bottom: 0;

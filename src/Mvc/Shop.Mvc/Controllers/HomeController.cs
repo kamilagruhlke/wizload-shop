@@ -11,18 +11,16 @@ using WizLoad.ApiClient;
 
 namespace Shop.Mvc.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly productsClient _productsClient;
-
         private readonly categoriesClient _categoriesClient;
 
-        public HomeController(ILogger<HomeController> logger, productsClient productsClient, categoriesClient categoriesClient)
+        public HomeController(ILogger<HomeController> logger, categoriesClient categoriesClient)
         {
             _logger = logger;
-            _productsClient = productsClient;
             _categoriesClient = categoriesClient;
         }
 
@@ -44,7 +42,6 @@ namespace Shop.Mvc.Controllers
             return View(category.Id);
         }
 
-        [Authorize]
         public IActionResult Privacy()
         {
             return View();

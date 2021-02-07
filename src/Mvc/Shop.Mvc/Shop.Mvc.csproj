@@ -39,5 +39,6 @@
     <Folder Include="wwwroot\img\" />
     <Folder Include="wwwroot\img\carousel\" />
     <Folder Include="Views\Shared\Components\Products\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
 </Project>

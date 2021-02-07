@@ -18,12 +18,12 @@ namespace Shop.Mvc.ViewComponents
 
             if (categoryId.HasValue)
             {
-                products = await _productsClient.GetByCategoryIdAsync(categoryId.Value)
+                products = await _productsClient.ProductsGetByCategoryIdAsync(categoryId.Value)
                     .ConfigureAwait(false);
             }
             else
             {
-                products = await _productsClient.GetLastCreatedProductsAsync(20)
+                products = await _productsClient.ProductsGetLastCreatedProductsAsync(20)
                     .ConfigureAwait(false);
             }
 

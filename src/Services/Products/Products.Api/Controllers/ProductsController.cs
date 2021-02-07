@@ -50,5 +50,13 @@ namespace Products.Api.Controllers
         {
             return Ok(await _mediator.Send(new GetLastCreatedProductsCommand(numberOfItems), cancellationToken));
         }
+
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ProductModel), 200)]
+        public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
+        {
+            return Ok(await _mediator.Send(new GetProductByIdCommand(id), cancellationToken));
+        }
     }
 }

@@ -15,7 +15,7 @@
         "tags": [
           "Producers"
         ],
-        "operationId": "Post",
+        "operationId": "ProducersPost",
         "parameters": [
           {
             "name": "Name",
@@ -74,7 +74,7 @@
         "tags": [
           "Producers"
         ],
-        "operationId": "Put",
+        "operationId": "ProducersPut",
         "parameters": [
           {
             "name": "Id",
@@ -143,7 +143,7 @@
         "tags": [
           "Producers"
         ],
-        "operationId": "GetById",
+        "operationId": "ProducersGetById",
         "parameters": [
           {
             "name": "id",
@@ -197,7 +197,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "Post",
+        "operationId": "ProductsPost",
         "parameters": [
           {
             "name": "Name",
@@ -312,7 +312,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "Put",
+        "operationId": "ProductsPut",
         "parameters": [
           {
             "name": "Id",
@@ -437,7 +437,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "GetByCategoryId",
+        "operationId": "ProductsGetByCategoryId",
         "parameters": [
           {
             "name": "categoryId",
@@ -500,7 +500,7 @@
         "tags": [
           "Products"
         ],
-        "operationId": "GetLastCreatedProducts",
+        "operationId": "ProductsGetLastCreatedProducts",
         "parameters": [
           {
             "name": "numberOfItems",
@@ -538,6 +538,60 @@
                   "items": {
                     "$ref": "#/components/schemas/ProductModel"
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "products"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/Products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "ProductsGetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductModel"
                 }
               }
             }

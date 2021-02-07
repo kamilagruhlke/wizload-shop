@@ -75,8 +75,10 @@ namespace Products.Api
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Products.Api", Version = "v1" });
 
-                options.CustomOperationIds(apiDescription =>
-                    (apiDescription.ActionDescriptor as ControllerActionDescriptor)?.ActionName);
+                options.CustomOperationIds(apiDescription => {
+                    var description = (apiDescription.ActionDescriptor as ControllerActionDescriptor);
+                    return $"{description.ControllerName}{description.ActionName}";
+                });
 
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
