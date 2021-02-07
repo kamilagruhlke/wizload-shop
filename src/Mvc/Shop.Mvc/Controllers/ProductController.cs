@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WizLoad.ApiClient;
+using Shop.Mvc.Application.Commands.Products;
 
 namespace Shop.Mvc.Controllers
 {
@@ -11,17 +12,14 @@ namespace Shop.Mvc.Controllers
     [Route("[controller]")]
     public class ProductController : Controller
     {
-        private readonly productsClient _productsClient;
+        private readonly IMediator _mediator;
 
-        public ProductController(productsClient productsClient) => _productsClient = productsClient;
+        public ProductController(IMediator mediator) => _mediator = mediator;
 
         [HttpGet("{productId}")]
         public async Task<IActionResult> Index(Guid productId, CancellationToken cancellationToken)
         {
-            var productModel = await _productsClient.ProductsGetByIdAsync(productId, cancellationToken)
-                .ConfigureAwait(false);
-
-            return View(productModel);
+            return View(await _mediator.Send(new GetProductByIdCommand(productId), cancellationToken));
         }
     }
 }

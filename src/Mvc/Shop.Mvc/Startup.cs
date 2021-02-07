@@ -1,6 +1,8 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +38,8 @@ namespace Shop.Mvc
             services.AddHttpClient<productsClient>((provider, client) => {
                 client.BaseAddress = new Uri(Configuration["ProductsApi"]);
             });
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddAuthentication(options =>
             {

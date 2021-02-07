@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -39,6 +40,13 @@ namespace Products.Api.Controllers
         public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
         {
             return Ok(await _mediator.Send(new GetProducerByIdCommand(id), cancellationToken));
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(List<ProducerModel>), 200)]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        {
+            return Ok(await _mediator.Send(new GetProducersCommand(), cancellationToken));
         }
     }
 }
