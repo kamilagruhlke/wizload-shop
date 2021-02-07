@@ -1,11 +1,10 @@
-﻿@model List<WizLoad.ApiClient.ProductModel>
+﻿@model Guid
 @{
     ViewData["Title"] = "Products";
 }
 
-@foreach(var product in Model)
-{
-    <div>
-        @product.Name
-    </div>
-}
+<vc:categories />
+
+<div class="container">
+    <vc:products category-id="@Model" />
+</div>

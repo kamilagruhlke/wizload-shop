@@ -34,5 +34,10 @@
     <Folder Include="ViewComponents\" />
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\Categories\" />
+    <Folder Include="Application\" />
+    <Folder Include="Application\Helpers\" />
+    <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\img\carousel\" />
+    <Folder Include="Views\Shared\Components\Products\" />
   </ItemGroup>
 </Project>

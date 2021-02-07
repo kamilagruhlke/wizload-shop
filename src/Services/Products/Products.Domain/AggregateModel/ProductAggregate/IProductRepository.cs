@@ -15,5 +15,7 @@ namespace Products.Domain.AggregateModel.ProductAggregate
         Task<Product> FindById(Guid id, CancellationToken cancellationToken);
 
         Task<IList<Product>> FindByCategoryId(Guid categoryId, CancellationToken cancellationToken);
+
+        Task<IList<Product>> GetLast(int numberOfItems, CancellationToken cancellationToken);
     }
 }

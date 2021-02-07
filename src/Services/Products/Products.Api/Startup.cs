@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -73,6 +74,9 @@ namespace Products.Api
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Products.Api", Version = "v1" });
+
+                options.CustomOperationIds(apiDescription =>
+                    (apiDescription.ActionDescriptor as ControllerActionDescriptor)?.ActionName);
 
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {

@@ -1,5 +1,6 @@
 ﻿using WizLoad.ApiClient;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Shop.Mvc.ViewComponents
 {
@@ -9,11 +10,10 @@ namespace Shop.Mvc.ViewComponents
 
         public Categories(categoriesClient categoriesClient) => _categoriesClient = categoriesClient;
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var categories = _categoriesClient.ActiveAsync()
-                .GetAwaiter()
-                .GetResult();
+            var categories = await _categoriesClient.ActiveAsync()
+                .ConfigureAwait(false);
 
             return View("Index", categories);
         }

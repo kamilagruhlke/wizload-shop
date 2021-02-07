@@ -1,10 +1,14 @@
-﻿@model List<WizLoad.ApiClient.CategoryModel>
+﻿@using Shop.Mvc.Application.Helpers 
+@model List<WizLoad.ApiClient.CategoryModel>
 
-<div>
+<ul class="nav nav-pills">
     @foreach (var categoryModel in Model)
     {
-        <a asp-controller="Home"
-           asp-action="Products"
-           asp-route-categoryId="@categoryModel.Id">@categoryModel.Name</a>
+        <li class="nav-item">
+            <a class="nav-link"
+               asp-controller="Home"
+               asp-action="Products"
+               asp-route-categoryName="@CategoryNameHelper.Normalize(categoryModel.Name)">@categoryModel.Name</a>
+        </li>
     }
-</div>
+</ul>

@@ -37,6 +37,14 @@ namespace Products.Infrastructure.Repositories
                 .ConfigureAwait(false);
         }
 
+        public async Task<IList<Product>> GetLast(int numberOfItems, CancellationToken cancellationToken)
+        {
+            return await _productsDbContext.Products.OrderByDescending(e => e.CreatedAt)
+                .Take(numberOfItems)
+                .ToListAsync(cancellationToken)
+                .ConfigureAwait(false);
+        }
+
         public Product Update(Product product)
         {
             _productsDbContext.Products.Update(product);

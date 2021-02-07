@@ -36,11 +36,19 @@ namespace Products.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("{categoryId}")]
+        [HttpGet("ByCategoryId/{categoryId}")]
         [ProducesResponseType(typeof(IList<ProductModel>), 200)]
         public async Task<IActionResult> GetByCategoryId(Guid categoryId, CancellationToken cancellationToken)
         {
             return Ok(await _mediator.Send(new GetProductByCategoryIdCommand(categoryId), cancellationToken));
+        }
+
+        [AllowAnonymous]
+        [HttpGet("Last/{numberOfItems}")]
+        [ProducesResponseType(typeof(IList<ProductModel>), 200)]
+        public async Task<IActionResult> GetLastCreatedProducts(int numberOfItems, CancellationToken cancellationToken)
+        {
+            return Ok(await _mediator.Send(new GetLastCreatedProductsCommand(numberOfItems), cancellationToken));
         }
     }
 }

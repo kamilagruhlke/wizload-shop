@@ -1,10 +1,11 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shop.Mvc.Application.Helpers;
 using Shop.Mvc.Models;
 using WizLoad.ApiClient;
 
@@ -16,10 +17,13 @@ namespace Shop.Mvc.Controllers
 
         private readonly productsClient _productsClient;
 
-        public HomeController(ILogger<HomeController> logger, productsClient productsClient)
+        private readonly categoriesClient _categoriesClient;
+
+        public HomeController(ILogger<HomeController> logger, productsClient productsClient, categoriesClient categoriesClient)
         {
             _logger = logger;
             _productsClient = productsClient;
+            _categoriesClient = categoriesClient;
         }
 
         public IActionResult Index()
@@ -27,11 +31,17 @@ namespace Shop.Mvc.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Products(Guid categoryId, CancellationToken cancellationToken)
+        [HttpGet("Products/{categoryName}")]
+        public async Task<IActionResult> Products(string categoryName, CancellationToken cancellationToken)
         {
-            var products = await _productsClient.ProductsAllAsync(categoryId, cancellationToken);
+            var categories = await _categoriesClient.ActiveAsync(cancellationToken);
+            var category = categories.FirstOrDefault(e => CategoryNameHelper.Normalize(e.Name) == categoryName);
+            if (category is null)
+            {
+                return NotFound();
+            }
 
-            return View(products);
+            return View(category.Id);
         }
 
         [Authorize]
