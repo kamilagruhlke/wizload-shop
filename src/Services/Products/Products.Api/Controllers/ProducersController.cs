@@ -10,7 +10,7 @@ using Products.Api.Application.Models;
 
 namespace Products.Api.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     public class ProducersController : Controller
     {
@@ -35,6 +35,7 @@ namespace Products.Api.Controllers
             return Ok(await _mediator.Send(updateProducerCommand, cancellationToken));
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ProducerModel), 200)]
         public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
@@ -42,6 +43,7 @@ namespace Products.Api.Controllers
             return Ok(await _mediator.Send(new GetProducerByIdCommand(id), cancellationToken));
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(typeof(List<ProducerModel>), 200)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)

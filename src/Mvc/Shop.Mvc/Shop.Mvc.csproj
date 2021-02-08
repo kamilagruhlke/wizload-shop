@@ -49,5 +49,6 @@
     <Folder Include="Application\Commands\Producers\" />
     <Folder Include="Application\Models\" />
     <Folder Include="Application\Handlers\" />
+    <Folder Include="Views\Account\" />
   </ItemGroup>
 </Project>

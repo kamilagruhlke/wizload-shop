@@ -3,8 +3,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -93,6 +93,10 @@ namespace Shop.Mvc
                 options.Scope.Add("notifications");
                 options.Scope.Add("categories");
                 options.Scope.Add("products");
+                options.Scope.Add("roles");
+
+                options.ClaimActions.MapUniqueJsonKey("role", "role");
+                options.TokenValidationParameters.RoleClaimType = "role";
             });
 
             services.AddControllersWithViews();

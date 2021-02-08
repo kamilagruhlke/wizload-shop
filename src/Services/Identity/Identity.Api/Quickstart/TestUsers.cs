@@ -20,14 +20,14 @@ namespace IdentityServerHost.Quickstart.UI
                     postal_code = 31553,
                     country = "Poland"
                 };
-                
+
                 return new List<TestUser>
                 {
                     new TestUser
                     {
                         SubjectId = "1234567890",
-                        Username = "demo",
-                        Password = "demo",
+                        Username = "admin",
+                        Password = "admin",
                         Claims =
                         {
                             new Claim(JwtClaimTypes.Name, "Demo Demo"),
@@ -35,7 +35,8 @@ namespace IdentityServerHost.Quickstart.UI
                             new Claim(JwtClaimTypes.FamilyName, "Demo"),
                             new Claim(JwtClaimTypes.Email, "demo.demo@wizload-shop.com"),
                             new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
-                            new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json)
+                            new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
+                            new Claim(JwtClaimTypes.Role, "Administrator")
                         }
                     }
                 };

@@ -10,7 +10,7 @@ using Products.Api.Application.Models;
 
 namespace Products.Api.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]")]
     public class ProductsController : Controller
     {

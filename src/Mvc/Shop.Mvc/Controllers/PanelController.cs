@@ -10,7 +10,7 @@ using Shop.Mvc.Application.Models;
 
 namespace Shop.Mvc.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     [Route("[controller]")]
     public class PanelController : Controller
     {
