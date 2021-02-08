@@ -5,29 +5,50 @@
 
 <div class="container">
     <div class="container-box">
-
-        Products:
-        @foreach (var producer in Model.Producers)
-        {
-            <p>@producer.Id (@producer.Name)</p>
-        }
-
-        Categories:
-        @foreach (var category in Model.Categories)
-        {
-            <p>@category.Id (@category.Name)</p>
-        }
-
-        <form asp-controller="Panel" asp-action="ProductCreate" method="post">
-            @Html.EditorFor(e => e.CreateProductCommand.Name)
-            @Html.EditorFor(e => e.CreateProductCommand.NetPrice)
-            @Html.EditorFor(e => e.CreateProductCommand.Tax)
-            @Html.EditorFor(e => e.CreateProductCommand.CategoryId)
-            @Html.EditorFor(e => e.CreateProductCommand.ProducerId)
-            @Html.EditorFor(e => e.CreateProductCommand.ProducerCode)
-            @Html.TextAreaFor(e => e.CreateProductCommand.Description)
-            @Html.TextAreaFor(e => e.CreateProductCommand.Specification)
-            <button type="submit">Post</button>
-        </form>
+    <form asp-controller="Panel" asp-action="ProductCreate" method="post">
+        <div class="form-group">
+            <label for="productName">Product name</label>
+            <input asp-for="CreateProductCommand.Name" type="text" class="form-control" id="productName" placeholder="Product name" />
+        </div>
+        <div class="form-group">
+            <label for="netPrice">Price Net</label>
+            <input asp-for="CreateProductCommand.NetPrice" type="number" class="form-control" id="netPrice" placeholder = "Net price" />
+        </div>
+        <div class="form-group">
+            <label for="tax">Tax</label>
+            <input asp-for="CreateProductCommand.Tax" type="number" class="form-control" id="tax" placeholder="23" />
+        </div>
+        <div class="form-group">
+            <label for="categoryId">Category</label>
+            <select asp-for="CreateProductCommand.CategoryId" class="form-control" id="categoryId">
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="producerId">Producer</label>
+            <select asp-for="CreateProductCommand.ProducerId" class="form-control" id="producerId">
+                @foreach (var producer in Model.Producers)
+                {
+                    <option value="@producer.Id">@producer.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="producerCode">Producer code</label>
+            <input asp-for="CreateProductCommand.ProducerCode" type="text" class="form-control" id="producerCode" placeholder="Producer code" />
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            @Html.TextAreaFor(e => e.CreateProductCommand.Description, new { @class = "form-control", @id = "description", placeholder = "Description" })
+        </div>
+        <div class="form-group">
+            <label for="specification">Specification</label>
+            @Html.TextAreaFor(e => e.CreateProductCommand.Specification, new { @class = "form-control", @id = "specification", placeholder = "Specification" })
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
     </div>
 </div>

@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Shop.Mvc.Application.Handlers;
 using WizLoad.ApiClient;
 
 namespace Shop.Mvc
@@ -31,13 +33,18 @@ namespace Shop.Mvc
         {
             services.AddSession();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
+
             services.AddHttpClient<categoriesClient>((provider, client) => {
                 client.BaseAddress = new Uri(Configuration["CategoriesApi"]);
-            });
+            }).SetHandlerLifetime(TimeSpan.FromMinutes(5))
+            .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
             services.AddHttpClient<productsClient>((provider, client) => {
                 client.BaseAddress = new Uri(Configuration["ProductsApi"]);
-            });
+            }).SetHandlerLifetime(TimeSpan.FromMinutes(5))
+            .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
@@ -46,8 +53,8 @@ namespace Shop.Mvc
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
             })
-            .AddCookie(setup => setup.ExpireTimeSpan = TimeSpan.FromMinutes(60))
-            .AddOpenIdConnect(options =>
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, setup => setup.ExpireTimeSpan = TimeSpan.FromMinutes(60))
+            .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
             {
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.Authority = Configuration["IdentityApi"];

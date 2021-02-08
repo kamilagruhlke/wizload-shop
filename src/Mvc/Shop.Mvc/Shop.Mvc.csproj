@@ -48,5 +48,6 @@
     <Folder Include="Application\Commands\Categories\" />
     <Folder Include="Application\Commands\Producers\" />
     <Folder Include="Application\Models\" />
+    <Folder Include="Application\Handlers\" />
   </ItemGroup>
 </Project>

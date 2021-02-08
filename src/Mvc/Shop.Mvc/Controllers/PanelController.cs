@@ -23,6 +23,20 @@ namespace Shop.Mvc.Controllers
             return View();
         }
 
+        [HttpGet("Producer/Create")]
+        public IActionResult ProducerCreate()
+        {
+            return View("ProducerCreate", new CreateProducerCommand());
+        }
+
+        [HttpPost("Producer/Create")]
+        public async Task<IActionResult> ProducerCreate(CreateProducerCommand createProducerCommand, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(createProducerCommand, cancellationToken);
+
+            return View("ProducerCreate", createProducerCommand);
+        }
+
         [HttpGet("Product/Create")]
         public async Task<IActionResult> ProductCreate(CancellationToken cancellationToken)
         {
