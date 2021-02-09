@@ -12,7 +12,7 @@ namespace Shop.Mvc.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var categories = await _categoriesClient.ActiveAsync()
+            var categories = await _categoriesClient.CategoriesGetActiveCategoriesAsync()
                 .ConfigureAwait(false);
 
             return View("Index", categories);

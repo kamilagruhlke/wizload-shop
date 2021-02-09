@@ -27,7 +27,7 @@ namespace Shop.Mvc.Application.Commands.Products
                 throw new ProducerNotFoundValidationException(request.ProducerId);
             }
 
-            var categories = await _categoriesClient.ActiveAsync(cancellationToken);
+            var categories = await _categoriesClient.CategoriesGetActiveCategoriesAsync(cancellationToken);
             if (categories.All(e => e.Id != request.CategoryId))
             {
                 throw new CategoryNotFoundValidationException(request.CategoryId);

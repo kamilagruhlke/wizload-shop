@@ -15,7 +15,7 @@ namespace Shop.Mvc.Application.Commands.Categories
 
         public async Task<CategoryModel> Handle(GetCategoryByNormalizedNameCommand request, CancellationToken cancellationToken)
         {
-            var categories = await _categoriesClient.ActiveAsync(cancellationToken);
+            var categories = await _categoriesClient.CategoriesGetActiveCategoriesAsync(cancellationToken);
             var category = categories.FirstOrDefault(e => CategoryNameHelper.Normalize(e.Name) == request.NormalizedName);
             return category;
         }

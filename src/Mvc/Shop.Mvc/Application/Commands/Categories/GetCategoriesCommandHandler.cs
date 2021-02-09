@@ -14,7 +14,7 @@ namespace Shop.Mvc.Application.Commands.Categories
 
         public async Task<ICollection<CategoryModel>> Handle(GetCategoriesCommand request, CancellationToken cancellationToken)
         {
-            return await _categoriesClient.ActiveAsync(cancellationToken)
+            return await _categoriesClient.CategoriesGetActiveCategoriesAsync(cancellationToken)
                 .ConfigureAwait(false);
         }
     }

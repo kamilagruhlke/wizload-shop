@@ -59,5 +59,27 @@ namespace Shop.Mvc.Controllers
                 CreateProductCommand = createProductCommand
             });
         }
+
+        [HttpGet("Category/Create")]
+        public async Task<IActionResult> CategoryCreate(CancellationToken cancellationToken)
+        {
+            return View("CategoryCreate", new CategoryCreateModel
+            {
+                Categories = await _mediator.Send(new GetCategoriesCommand(), cancellationToken),
+                CreateCategoryCommand = new CreateCategoryCommand()
+            });
+        }
+
+        [HttpPost("Category/Create")]
+        public async Task<IActionResult> CategoryCreate(CreateCategoryCommand createCategoryCommand, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(createCategoryCommand, cancellationToken);
+
+            return View("CategoryCreate", new CategoryCreateModel
+            {
+                Categories = await _mediator.Send(new GetCategoriesCommand(), cancellationToken),
+                CreateCategoryCommand = createCategoryCommand
+            });
+        }
     }
 }
