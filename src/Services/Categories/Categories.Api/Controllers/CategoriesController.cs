@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Categories.Api.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
     [Route("api/[controller]")]
     public class CategoriesController : Controller
     {
