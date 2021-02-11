@@ -23,6 +23,12 @@ namespace Shop.Mvc.Controllers
             return View();
         }
 
+        [HttpGet("Producers")]
+        public async Task<IActionResult> GetProducers(CancellationToken cancellationToken)
+        {
+            return View("Producers", await _mediator.Send(new GetProducersCommand(), cancellationToken));
+        }
+
         [HttpGet("Producer/Create")]
         public IActionResult ProducerCreate()
         {
@@ -35,6 +41,12 @@ namespace Shop.Mvc.Controllers
             await _mediator.Send(createProducerCommand, cancellationToken);
 
             return View("ProducerCreate", createProducerCommand);
+        }
+
+        [HttpGet("Products")]
+        public async Task<IActionResult> GetProducts(CancellationToken cancellationToken)
+        {
+            return View("Products", await _mediator.Send(new GetProductsCommand(), cancellationToken));
         }
 
         [HttpGet("Product/Create")]
@@ -58,6 +70,12 @@ namespace Shop.Mvc.Controllers
                 Producers = await _mediator.Send(new GetProducersCommand(), cancellationToken),
                 CreateProductCommand = createProductCommand
             });
+        }
+
+        [HttpGet("Categories")]
+        public async Task<IActionResult> GetCategories(CancellationToken cancellationToken)
+        {
+            return View("Categories", await _mediator.Send(new GetCategoriesCommand(), cancellationToken));
         }
 
         [HttpGet("Category/Create")]

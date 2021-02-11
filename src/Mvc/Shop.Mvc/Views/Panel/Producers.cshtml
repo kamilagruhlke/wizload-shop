@@ -1,0 +1,46 @@
+﻿@model List<WizLoad.ApiClient.ProducerModel>
+@{
+    ViewData["Title"] = "Producers";
+}
+
+<div class="container">
+    <div class="container-box">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Producers</li>
+            </ol>
+        </nav>
+        <p>
+            <a asp-controller="Panel" asp-action="ProducerCreate" class="btn btn-success">Create producer</a>
+        </p>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producer in Model)
+                {
+                    <tr>
+                        <td>@producer.Id</td>
+                        <td>@producer.Name</td>
+                        <td>
+                            <span class="table-remove">
+                                <a href="#" class="btn btn-info btn-rounded btn-sm my-0">
+                                    Edit
+                                </a>
+                                <a href="#" class="btn btn-danger btn-rounded btn-sm my-0">
+                                    Remove
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

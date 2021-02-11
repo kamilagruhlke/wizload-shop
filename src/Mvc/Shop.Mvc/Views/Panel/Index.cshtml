@@ -7,7 +7,17 @@
     <div class="row">
         <div class="col-sm-9">
             <div class="container-box">
-               
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Panel</li>
+                    </ol>
+                </nav>
+
+                <div class="btn-group-vertical">
+                    <a asp-controller="Panel" asp-action="Categories" class="btn btn-secondary">Categories</a>
+                    <a asp-controller="Panel" asp-action="Products" class="btn btn-secondary">Products</a>
+                    <a asp-controller="Panel" asp-action="Producers" class="btn btn-secondary">Producers</a>
+                </div>
             </div>
         </div>
         <div class="col-sm-3">

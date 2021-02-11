@@ -5,16 +5,23 @@
 
 <div class="container">
     <div class="container-box">
-    <form asp-controller="Panel" asp-action="ProducerCreate" method="post">
-        <div class="form-group">
-            <label for="producerName">Producer name</label>
-            <input asp-for="Name" type="text" class="form-control" id="producerName" placeholder="Producer name" />
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            @Html.TextAreaFor(e => e.Description, new { @class = "form-control", @id = "description", placeholder = "Description" })
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Producers">Producers</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+        <form asp-controller="Panel" asp-action="ProducerCreate" method="post">
+            <div class="form-group">
+                <label for="producerName">Producer name</label>
+                <input asp-for="Name" type="text" class="form-control" id="producerName" placeholder="Producer name" />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                @Html.TextAreaFor(e => e.Description, new { @class = "form-control", @id = "description", placeholder = "Description" })
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
     </div>
 </div>
