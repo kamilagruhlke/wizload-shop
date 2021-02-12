@@ -7,10 +7,16 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
     {
         public Guid Id { get; protected set; }
 
-        public string Name { get; protected set; }
+        public Guid ProductId {get; protected set;}
 
-        public decimal NetPrice { get; protected set; }
+        public OrderedProduct(Guid productId)
+        {
+            Id = Guid.NewGuid();
+            ProductId = productId;
+        }
 
-        public decimal Tax { get; protected set; }
+        protected OrderedProduct()
+        {
+        }
     }
 }

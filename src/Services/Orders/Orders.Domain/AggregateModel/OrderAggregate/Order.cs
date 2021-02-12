@@ -29,11 +29,11 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
 
         public string UpdateBy { get; protected set; }
 
-        public Order(decimal valueNetto, decimal valueTax, Guid userId, string user)
+        public Order(decimal valueNet, decimal valueTax, Guid userId, string user)
         {
             Id = Guid.NewGuid();
             OrderedProducts = new List<OrderedProduct>();
-            ValueNet = valueNetto;
+            ValueNet = valueNet;
             ValueTax = valueTax;
             CreatedAt = DateTime.UtcNow;
             UserId = userId;

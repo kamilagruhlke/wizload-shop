@@ -1,5 +1,6 @@
 ﻿using Orders.Domain.SeedWork;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,5 +15,9 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
         void Delete(Order order);
 
         Task<Order> FindById(Guid id, CancellationToken cancellationToken);
+
+        Task<List<Order>> GetOrdersByStatus(string status, CancellationToken cancellationToken);
+
+        Task<List<Order>> GetCreatedOrders(DateTime date, CancellationToken cancellationToken);
     }
 }
