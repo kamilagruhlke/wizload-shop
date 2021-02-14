@@ -1,41 +1,33 @@
-﻿@model List<WizLoad.ApiClient.ProductModel>
+﻿@model List<WizLoad.ApiClient.ProducerModel>
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "Producers";
 }
 
 <div class="container">
     <div class="container-box">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Products</li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Producers</li>
             </ol>
         </nav>
         <p>
-            <a asp-controller="Panel" asp-action="ProductCreate" class="btn btn-success">Create product</a>
+            <a asp-area="Panel" asp-controller="Producers" asp-action="Create" class="btn btn-success">Create producer</a>
         </p>
         <table class="table table-sm">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Producer code</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Net price</th>
-                    <th scope="col">Tax</th>
-                    <th scope="col">Gross price</th>
                     <th scope="col">Edit</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var product in Model)
+                @foreach (var producer in Model)
                 {
                     <tr>
-                        <td>@product.Id</td>
-                        <td>@product.ProducerCode</td>
-                        <td>@product.Name</td>
-                        <td>@product.NetPrice</td>
-                        <td>@product.Tax</td>
-                        <td>@product.GrossPrice</td>
+                        <td>@producer.Id</td>
+                        <td>@producer.Name</td>
                         <td>
                             <span class="table-remove">
                                 <a href="#" class="btn btn-info btn-rounded btn-sm my-0">

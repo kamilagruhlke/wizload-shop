@@ -7,12 +7,12 @@
     <div class="container-box">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
-                <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Producers">Producers</a></li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Producers" asp-action="Index">Producers</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Create</li>
             </ol>
         </nav>
-        <form asp-controller="Panel" asp-action="ProducerCreate" method="post">
+        <form asp-area="Panel" asp-controller="Producers" asp-action="Create" method="post">
             <div class="form-group">
                 <label for="producerName">Producer name</label>
                 <input asp-for="Name" type="text" class="form-control" id="producerName" placeholder="Producer name" />

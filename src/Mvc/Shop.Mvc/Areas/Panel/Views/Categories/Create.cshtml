@@ -7,12 +7,12 @@
     <div class="container-box">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
-                <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Categories">Categories</a></li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Categories" asp-action="Index">Categories</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Create</li>
             </ol>
         </nav>
-        <form asp-controller="Panel" asp-action="CategoryCreate" method="post">
+        <form asp-area="Panel" asp-controller="Categories" asp-action="Create" method="post">
             <div class="form-group">
                 <label for="categoryId">Parent category</label>
                 <select asp-for="CreateCategoryCommand.ParentId" class="form-control" id="categoryId">

@@ -2,7 +2,7 @@
 @model List<WizLoad.ApiClient.CategoryModel>
 
 <ul class="nav nav-pills">
-    @foreach (var categoryModel in Model)
+    @foreach (var categoryModel in Model.Where(e => string.IsNullOrWhiteSpace(e.Name) == false))
     {
         <li class="nav-item">
             <a class="nav-link"

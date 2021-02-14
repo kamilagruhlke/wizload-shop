@@ -1,33 +1,35 @@
-﻿@model List<WizLoad.ApiClient.ProducerModel>
+﻿@model List<WizLoad.ApiClient.CategoryModel>
 @{
-    ViewData["Title"] = "Producers";
+    ViewData["Title"] = "Categories";
 }
 
 <div class="container">
     <div class="container-box">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-controller="Panel" asp-action="Index">Panel</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Producers</li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Categories</li>
             </ol>
         </nav>
         <p>
-            <a asp-controller="Panel" asp-action="ProducerCreate" class="btn btn-success">Create producer</a>
+            <a asp-area="Panel" asp-controller="Categories" asp-action="Create" class="btn btn-success">Create category</a>
         </p>
         <table class="table table-sm">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">Parent id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Edit</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var producer in Model)
+                @foreach (var category in Model)
                 {
                     <tr>
-                        <td>@producer.Id</td>
-                        <td>@producer.Name</td>
+                        <td>@category.Id</td>
+                        <td>@category.ParentId</td>
+                        <td>@category.Name</td>
                         <td>
                             <span class="table-remove">
                                 <a href="#" class="btn btn-info btn-rounded btn-sm my-0">

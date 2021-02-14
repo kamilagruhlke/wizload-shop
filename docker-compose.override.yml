@@ -42,7 +42,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - CATEGORIESAPI_PATH_BASE=/categories/
-      - CATEGORIESAPI_IdentityApiExternal=http://localhost:5002
+      - CATEGORIESAPI_IdentityApiExternal=http://identityapi
       - CATEGORIESAPI_IdentityApi=http://identityapi
       - CATEGORIESAPI_ConnectionStrings__CategoriesDb=User ID=postgres;Password=jduwYykD9NmFAmQf;Host=postgres;Port=5432;Database=wizload_categories;
     ports:
@@ -61,7 +61,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - PRODUCTSAPI_PATH_BASE=/products/
-      - PRODUCTSAPI_IdentityApiExternal=http://localhost:5002
+      - PRODUCTSAPI_IdentityApiExternal=http://identityapi
       - PRODUCTSAPI_IdentityApi=http://identityapi
       - PRODUCTSAPI_ConnectionStrings__ProductsDb=User ID=postgres;Password=jduwYykD9NmFAmQf;Host=postgres;Port=5432;Database=wizload_products;
     ports:

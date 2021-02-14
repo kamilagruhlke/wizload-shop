@@ -135,6 +135,11 @@ namespace Shop.Mvc
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                     name: "Panel",
+                     areaName: "Panel",
+                     pattern: "Panel/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

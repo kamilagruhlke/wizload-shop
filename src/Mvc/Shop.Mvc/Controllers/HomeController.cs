@@ -10,6 +10,7 @@ using Shop.Mvc.Models;
 namespace Shop.Mvc.Controllers
 {
     [AllowAnonymous]
+    [Route("[controller]")]
     public class HomeController : Controller
     {
         private readonly IMediator _mediator;
@@ -19,6 +20,8 @@ namespace Shop.Mvc.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("~/")]
+        [HttpGet("Index")]
         public IActionResult Index()
         {
             return View();
@@ -36,6 +39,7 @@ namespace Shop.Mvc.Controllers
             return View(category.Id);
         }
 
+        [HttpGet("Privacy")]
         public IActionResult Privacy()
         {
             return View();
