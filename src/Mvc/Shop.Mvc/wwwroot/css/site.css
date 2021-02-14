@@ -132,7 +132,7 @@ body {
 #card-image {
     width: 277px;
     height: 180px;
-    background-color: #eee;
+    background-color: #8563ba;
 }
 
 @keyframes placeHolderShimmer {
@@ -151,8 +151,8 @@ body {
     animation-iteration-count: infinite;
     animation-name: placeHolderShimmer;
     animation-timing-function: linear;
-    background: darkgray;
-    background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+    background: #563d7c;
+    background: linear-gradient(to right, #8563ba 10%, #402b5e 18%, #8563ba 33%);
     background-size: 800px 104px;
     height: 180px;
     position: relative;
