@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Images.Api.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ProductsController : ControllerBase
