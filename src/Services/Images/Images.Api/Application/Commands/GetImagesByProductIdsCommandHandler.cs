@@ -40,13 +40,13 @@ namespace Images.Api.Application.Commands
 
                 await container.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
 
-                var resultSegment = container.GetBlobsAsync().AsPages(default, 100);
+                var resultSegment = container.GetBlobsAsync(cancellationToken: cancellationToken).AsPages(default, 100);
 
                 await foreach (Azure.Page<BlobItem> blobPage in resultSegment)
                 {
                     foreach (BlobItem blobItem in blobPage.Values)
                     {
-                        productImageModel.Urls.Add(blobItem.Name);
+                        productImageModel.Urls.Add($"{container.Uri.AbsoluteUri}/{blobItem.Name}");
                     }
                 }
 
