@@ -69,11 +69,33 @@
             </div>
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
+
+        <div class="images">
+            <!-- IMAGES -->
+        </div>
     </div>
 </div>
 
 @section scripts {
     <script>
+        function loadPhotos() {
+            $(".images").empty();
+
+            let id = document.getElementById("id").value;
+
+            fetch('/Panel/Products/Images/' + id, {
+                method: "GET"
+            }).then(response => response.json()).then(data => {
+                for (var i in data) {
+                    let url = data[i];
+
+                    console.log(url);
+
+                    $(".images").append(`<div class="card"><div id="card-image"><div id="animated-background"><img class="card-img-top" src="${url}" alt="${url}"></div></div></div>`)
+                }
+            });
+        }
+
         function uploadPhoto() {
             let id = document.getElementById("id").value;
             let files = document.getElementById("files").files;
@@ -88,7 +110,12 @@
                 body: formData
             }).then(() => {
                 toastr.info('Image uploaded');
+                loadPhotos();
             });
         }
+
+        $(function () {
+            loadPhotos();
+        });
     </script>
 }

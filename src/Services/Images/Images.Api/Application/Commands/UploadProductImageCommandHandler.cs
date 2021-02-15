@@ -25,10 +25,10 @@ namespace Images.Api.Application.Commands
             var container = blobServiceClient.GetBlobContainerClient(request.ProductId.ToString());
             if (await container.ExistsAsync(cancellationToken) == false)
             {
-                await container.CreateAsync(cancellationToken: cancellationToken);
+                await container.CreateAsync(PublicAccessType.BlobContainer, cancellationToken: cancellationToken);
             }
 
-            await container.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
+            await container.CreateIfNotExistsAsync(PublicAccessType.BlobContainer, cancellationToken: cancellationToken);
 
             var base64EncodedBytes = Convert.FromBase64String(request.FileBody);
             var stream = new MemoryStream(base64EncodedBytes);

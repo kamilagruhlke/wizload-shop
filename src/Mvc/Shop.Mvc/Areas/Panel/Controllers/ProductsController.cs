@@ -112,5 +112,14 @@ namespace Shop.Mvc.Areas.Panel.Controllers
 
             return Ok();
         }
+
+        [HttpGet("Images/{id}")]
+        public async Task<IActionResult> GetImages(Guid id, CancellationToken cancellationToken)
+        {
+            return Ok(await _mediator.Send(new GetProductImagesCommand
+            {
+                Id = id
+            }, cancellationToken));
+        }
     }
 }
