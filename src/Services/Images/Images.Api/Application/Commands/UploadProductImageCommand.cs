@@ -1,12 +1,13 @@
-﻿using System;
-using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using System;
 
 namespace Images.Api.Application.Commands
 {
     public class UploadProductImageCommand : IRequest<bool>
     {
-        public IFormFile File { get; set; }
+        public string FileBody { get; set; }
+
+        public string FileName { get; set; }
 
         public Guid ProductId { get; set; }
     }

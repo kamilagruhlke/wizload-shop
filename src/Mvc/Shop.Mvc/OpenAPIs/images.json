@@ -23,6 +23,14 @@
               "type": "string",
               "format": "uuid"
             }
+          },
+          {
+            "name": "fileName",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
           }
         ],
         "requestBody": {
@@ -30,21 +38,18 @@
             "application/json": {
               "schema": {
                 "type": "string",
-                "format": "binary",
                 "nullable": true
               }
             },
             "text/json": {
               "schema": {
                 "type": "string",
-                "format": "binary",
                 "nullable": true
               }
             },
             "application/*+json": {
               "schema": {
                 "type": "string",
-                "format": "binary",
                 "nullable": true
               }
             }
