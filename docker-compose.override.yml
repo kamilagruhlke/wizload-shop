@@ -79,7 +79,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - IMAGESAPI_PATH_BASE=/images/
-      - IMAGESAPI_IdentityApiExternal=http://localhost:5002
+      - IMAGESAPI_IdentityApiExternal=http://identityapi
       - IMAGESAPI_IdentityApi=http://identityapi
       - "IMAGESAPI_ConnectionStrings__AzureBlobStorage=${AzureBlobStorage}"
     ports:

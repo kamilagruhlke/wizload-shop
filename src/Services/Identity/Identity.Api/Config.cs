@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
-using IdentityModel;
-using IdentityServer4;
+﻿using IdentityServer4;
 using IdentityServer4.Models;
+using System.Collections.Generic;
 
 namespace Identity.Api
 {
@@ -63,7 +61,7 @@ namespace Identity.Api
                         "categories",
                         "notifications",
                         "products",
-                        "images"
+                        "images",
                         "roles"
                     },
                     AccessTokenLifetime = 60*60*2,
@@ -190,7 +188,8 @@ namespace Identity.Api
 
                     AllowedScopes =
                     {
-                        "images"
+                        "images",
+                        "roles"
                     }
                 }
             };

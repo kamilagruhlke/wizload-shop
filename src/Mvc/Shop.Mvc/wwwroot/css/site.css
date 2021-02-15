@@ -130,9 +130,12 @@ body {
 }
 
 #card-image {
-    width: 277px;
-    height: 180px;
     background-color: #8563ba;
+}
+
+.card-img-top {
+    width: 100% !important;
+    height: unset !important;
 }
 
 @keyframes placeHolderShimmer {
@@ -154,6 +157,5 @@ body {
     background: #563d7c;
     background: linear-gradient(to right, #8563ba 10%, #402b5e 18%, #8563ba 33%);
     background-size: 800px 104px;
-    height: 180px;
     position: relative;
 }
