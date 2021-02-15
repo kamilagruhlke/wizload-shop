@@ -34,15 +34,12 @@
                         <td>@product.ProducerCode</td>
                         <td>@product.Name</td>
                         <td>@product.NetPrice</td>
-                        <td>@product.Tax</td>
+                        <td>@product.Tax %</td>
                         <td>@product.GrossPrice</td>
                         <td>
                             <span class="table-remove">
-                                <a href="#" class="btn btn-info btn-rounded btn-sm my-0">
+                                <a asp-area="Panel" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-info btn-rounded btn-sm my-0">
                                     Edit
-                                </a>
-                                <a asp-controller="Panel" asp-action="" class="btn btn-danger btn-rounded btn-sm my-0">
-                                    Remove
                                 </a>
                             </span>
                         </td>

@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -30,11 +32,40 @@ namespace Shop.Mvc.Areas.Panel.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(CreateProducerCommand createProducerCommand, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(EditProducerCommand editeProducerCommand, CancellationToken cancellationToken)
         {
-            await _mediator.Send(createProducerCommand, cancellationToken);
+            await _mediator.Send(editeProducerCommand, cancellationToken);
 
-            return View(createProducerCommand);
+            return View(editeProducerCommand);
+        }
+
+        [HttpGet("Edit/{id}")]
+        public async Task<IActionResult> Edit(Guid id, CancellationToken cancellationToken)
+        {
+            var producers = await _mediator.Send(new GetProducersCommand(), cancellationToken);
+            var producer = producers.FirstOrDefault(e => e.Id == id);
+
+            return View(new EditProducerCommand { 
+                Id = producer.Id,
+                Name = producer.Name,
+                Description = producer.Description
+            });
+        }
+
+        [HttpPost("Edit/{id}")]
+        public async Task<IActionResult> Edit(Guid id, EditProducerCommand editeProducerCommand, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(editeProducerCommand, cancellationToken);
+
+            var producers = await _mediator.Send(new GetProducersCommand(), cancellationToken);
+            var producer = producers.FirstOrDefault(e => e.Id == id);
+
+            return View(new EditProducerCommand
+            {
+                Id = producer.Id,
+                Name = producer.Name,
+                Description = producer.Description
+            });
         }
     }
 }

@@ -28,6 +28,7 @@ services:
       - categoriesapi
       - productsapi
       - notificationsapi
+      - imagesapi
 
   basketapi:
     image: ${DOCKER_REGISTRY-}basketapi

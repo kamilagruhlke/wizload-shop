@@ -1,7 +1,3 @@
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Reflection;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -13,6 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shop.Mvc.Application.Handlers;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
+using System.Threading.Tasks;
 using WizLoad.ApiClient;
 
 namespace Shop.Mvc
@@ -43,6 +43,11 @@ namespace Shop.Mvc
 
             services.AddHttpClient<productsClient>((provider, client) => {
                 client.BaseAddress = new Uri(Configuration["ProductsApi"]);
+            }).SetHandlerLifetime(TimeSpan.FromMinutes(5))
+            .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+            services.AddHttpClient<imagesClient>((provider, client) => {
+                client.BaseAddress = new Uri(Configuration["ImagesApi"]);
             }).SetHandlerLifetime(TimeSpan.FromMinutes(5))
             .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
@@ -93,6 +98,7 @@ namespace Shop.Mvc
                 options.Scope.Add("notifications");
                 options.Scope.Add("categories");
                 options.Scope.Add("products");
+                options.Scope.Add("images");
                 options.Scope.Add("roles");
 
                 options.ClaimActions.MapUniqueJsonKey("role", "role");
