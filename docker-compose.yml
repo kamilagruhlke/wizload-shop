@@ -9,6 +9,9 @@ services:
   adminer:
     image: adminer
 
+  redis:
+    image: 'bitnami/redis'
+
   identityapi:
     image: ${DOCKER_REGISTRY-}identityapi
     build:
@@ -33,6 +36,7 @@ services:
       dockerfile: src/Services/Basket/Basket.Api/Dockerfile
     depends_on:
       - identityapi
+      - redis
 
   categoriesapi:
     image: ${DOCKER_REGISTRY-}categoriesapi
@@ -55,6 +59,12 @@ services:
       dockerfile: src/Services/Products/Products.Api/Dockerfile
     depends_on:
       - postgres
+
+  imagesapi:
+    image: ${DOCKER_REGISTRY-}imagesapi
+    build:
+      context: .
+      dockerfile: src/Services/Images/Images.Api/Dockerfile
 
   shopmvc:
     image: ${DOCKER_REGISTRY-}shopmvc

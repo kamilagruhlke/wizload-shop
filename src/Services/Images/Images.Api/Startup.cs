@@ -1,19 +1,20 @@
-using Basket.Api.Infrastructure.Filters;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text.Json.Serialization;
+using Images.Api.Infrastructure.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 
-namespace Basket.Api
+namespace Images.Api
 {
     public class Startup
     {
@@ -45,24 +46,12 @@ namespace Basket.Api
                 };
             });
 
-            services.AddScoped((s) => {
-                var redisOptions = new ConfigurationOptions
-                {
-                    EndPoints = {
-                        { Configuration["Redis:Host"], int.Parse(Configuration["Redis:Port"]) }
-                    },
-                    Password = Configuration["Redis:Password"]
-                };
-
-                var redis = ConnectionMultiplexer.Connect(redisOptions);
-                return redis.GetDatabase(0);
-            });
-            
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(Assembly.GetExecutingAssembly())
+                .AddHttpContextAccessor();
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.Api", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Images.Api", Version = "v1" });
 
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
@@ -75,7 +64,7 @@ namespace Basket.Api
                             TokenUrl = new Uri($"{Configuration["IdentityApiExternal"]}/connect/token"),
                             Scopes = new Dictionary<string, string>
                             {
-                                {"basket", "Basket.Api access"}
+                                {"images", "Images.Api access"}
                             }
                         }
                     }
@@ -84,7 +73,15 @@ namespace Basket.Api
                 options.OperationFilter<AuthorizeCheckOperationFilter>();
             });
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                });
+
+            services.AddHealthChecks();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -111,13 +108,18 @@ namespace Basket.Api
 
             app.UseSwaggerUI(options => {
                 options.RoutePrefix = "swagger";
-                options.SwaggerEndpoint("./v1/swagger.json", "Basket.Api v1");
+                options.SwaggerEndpoint("./v1/swagger.json", "Images.Api v1");
 
-                options.OAuthClientId("basket");
-                options.OAuthAppName("Basket Swagger UI");
+                options.OAuthClientId("images");
+                options.OAuthAppName("Images Swagger UI");
             });
 
             app.UseRouting();
+
+            app.UseCors(x => x
+              .AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -125,6 +127,10 @@ namespace Basket.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                {
+                    AllowCachingResponses = false
+                });
             });
         }
     }
