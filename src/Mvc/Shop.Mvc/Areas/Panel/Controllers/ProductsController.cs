@@ -1,11 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Mvc.Application.Commands.Categories;
 using Shop.Mvc.Application.Commands.Producers;
 using Shop.Mvc.Application.Commands.Products;
 using Shop.Mvc.Application.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -97,6 +99,18 @@ namespace Shop.Mvc.Areas.Panel.Controllers
                     CategoryId = product.CategoryId
                 }
             });
+        }
+
+        [HttpPost("Image/Upload/{id}")]
+        public async Task<IActionResult> UploadImage(Guid id, [FromForm] IList<IFormFile> files, CancellationToken cancellationToken)
+        {
+            await _mediator.Publish(new UploadProductImageCommand
+            {
+                ProductId = id,
+                Files = files
+            }, cancellationToken);
+
+            return Ok();
         }
     }
 }
