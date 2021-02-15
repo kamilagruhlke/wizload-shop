@@ -60,6 +60,12 @@ services:
     depends_on:
       - postgres
 
+  imagesapi:
+    image: ${DOCKER_REGISTRY-}imagesapi
+    build:
+      context: .
+      dockerfile: src/Services/Images/Images.Api/Dockerfile
+
   shopmvc:
     image: ${DOCKER_REGISTRY-}shopmvc
     build:
