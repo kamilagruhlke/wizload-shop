@@ -75,6 +75,16 @@ services:
     ports:
       - "80"
 
+  imagesapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IMAGESAPI_PATH_BASE=/images/
+      - IMAGESAPI_IdentityApiExternal=http://localhost:5002
+      - IMAGESAPI_IdentityApi=http://identityapi
+      - "IMAGESAPI_ConnectionStrings__AzureBlobStorage=${AzureBlobStorage}"
+    ports:
+      - "80"
+
   shopmvc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development

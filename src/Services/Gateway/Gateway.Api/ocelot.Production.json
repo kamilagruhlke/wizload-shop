@@ -47,6 +47,18 @@
       ],
       "UpstreamPathTemplate": "/notifications/{rest}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "imagesapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/images/{rest}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ]
     }
   ]
 }
