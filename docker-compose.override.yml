@@ -85,6 +85,15 @@ services:
     ports:
       - "80"
 
+  ordersapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ORDERSAPI_PATH_BASE=/orders/
+      - ORDERSAPI_IdentityApiExternal=http://identityapi
+      - ORDERSAPI_IdentityApi=http://identityapi
+    ports:
+      - "80"
+
   shopmvc:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -94,5 +103,6 @@ services:
       - SHOPMVC_CategoriesApi=http://categoriesapi
       - SHOPMVC_ProductsApi=http://productsapi
       - SHOPMVC_ImagesApi=http://imagesapi
+      - SHOPMVC_OrdersApi=http://ordersapi
     ports:
       - "5000:80"

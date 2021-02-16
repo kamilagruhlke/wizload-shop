@@ -59,6 +59,18 @@
       ],
       "UpstreamPathTemplate": "/images/{rest}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordersapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/orders/{rest}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Options", "Delete" ]
     }
   ]
 }

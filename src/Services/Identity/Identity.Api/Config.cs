@@ -23,7 +23,8 @@ namespace Identity.Api
                 new ApiScope("categories"),
                 new ApiScope("notifications"),
                 new ApiScope("products"),
-                new ApiScope("images")
+                new ApiScope("images"),
+                new ApiScope("orders")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -62,6 +63,7 @@ namespace Identity.Api
                         "notifications",
                         "products",
                         "images",
+                        "orders",
                         "roles"
                     },
                     AccessTokenLifetime = 60*60*2,
@@ -184,6 +186,31 @@ namespace Identity.Api
                     },
                     PostLogoutRedirectUris = {
                         $"http://localhost:5001/swagger/index.html?urls.primaryName=Images.Api"
+                    },
+
+                    AllowedScopes =
+                    {
+                        "images",
+                        "roles"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "orders",
+                    ClientName = "Orders Swagger UI",
+                    ClientSecrets = {new Secret("secret".Sha256()) },
+
+                    AllowAccessTokensViaBrowser = true,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = false,
+                    RequireClientSecret = true,
+
+                    AllowedCorsOrigins = { "http://localhost:5001" },
+                    RedirectUris = {
+                        $"http://localhost:5001/swagger/oauth2-redirect.html?urls.primaryName=Orders.Api"
+                    },
+                    PostLogoutRedirectUris = {
+                        $"http://localhost:5001/swagger/index.html?urls.primaryName=Orders.Api"
                     },
 
                     AllowedScopes =
