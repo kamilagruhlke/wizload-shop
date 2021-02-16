@@ -14,7 +14,6 @@ namespace Shop.Mvc.Application.Commands.Products
 
         public GetProductImagesCommandHandler(imagesClient imagesClient) => _imagesClient = imagesClient;
 
-
         public async Task<List<string>> Handle(GetProductImagesCommand request, CancellationToken cancellationToken)
         {
             var result = await _imagesClient.ImagesAsync(new List<Guid> { request.Id }, cancellationToken);
