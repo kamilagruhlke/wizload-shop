@@ -15,6 +15,7 @@
         "tags": [
           "Categories"
         ],
+        "operationId": "CategoriesCreateCategory",
         "requestBody": {
           "content": {
             "application/json": {
@@ -74,6 +75,7 @@
         "tags": [
           "Categories"
         ],
+        "operationId": "CategoriesUpdateCateogory",
         "requestBody": {
           "content": {
             "application/json": {
@@ -135,6 +137,7 @@
         "tags": [
           "Categories"
         ],
+        "operationId": "CategoriesGetActiveCategories",
         "responses": {
           "200": {
             "description": "Success",
@@ -249,8 +252,8 @@
         "type": "oauth2",
         "flows": {
           "authorizationCode": {
-            "authorizationUrl": "http://localhost:5002/connect/authorize",
-            "tokenUrl": "http://localhost:5002/connect/token",
+            "authorizationUrl": "http://identityapi/connect/authorize",
+            "tokenUrl": "http://identityapi/connect/token",
             "scopes": {
               "categories": "Categories.Api access"
             }

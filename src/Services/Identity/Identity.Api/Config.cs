@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using IdentityServer4;
+﻿using IdentityServer4;
 using IdentityServer4.Models;
+using System.Collections.Generic;
 
 namespace Identity.Api
 {
@@ -10,7 +10,8 @@ namespace Identity.Api
             new IdentityResource[]
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResource("roles", "User role(s)", new List<string> { "role" })
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -60,7 +61,8 @@ namespace Identity.Api
                         "categories",
                         "notifications",
                         "products",
-                        "images"
+                        "images",
+                        "roles"
                     },
                     AccessTokenLifetime = 60*60*2,
                     IdentityTokenLifetime= 60*60*2
@@ -86,7 +88,8 @@ namespace Identity.Api
 
                     AllowedScopes =
                     {
-                        "basket"
+                        "basket",
+                        "roles"
                     }
                 },
                 new Client
@@ -110,7 +113,8 @@ namespace Identity.Api
 
                     AllowedScopes =
                     {
-                        "categories"
+                        "categories",
+                        "roles"
                     }
                 },
                 new Client
@@ -134,7 +138,8 @@ namespace Identity.Api
 
                     AllowedScopes =
                     {
-                        "notifications"
+                        "notifications",
+                        "roles"
                     }
                 },
                 new Client
@@ -158,7 +163,8 @@ namespace Identity.Api
 
                     AllowedScopes =
                     {
-                        "products"
+                        "products",
+                        "roles"
                     }
                 },
                 new Client
@@ -182,7 +188,8 @@ namespace Identity.Api
 
                     AllowedScopes =
                     {
-                        "images"
+                        "images",
+                        "roles"
                     }
                 }
             };

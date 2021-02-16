@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using MediatR;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure.Storage.Blobs;
-using MediatR;
-using Microsoft.Extensions.Configuration;
 
 namespace Images.Api.Application.Commands
 {
@@ -24,14 +25,19 @@ namespace Images.Api.Application.Commands
             var container = blobServiceClient.GetBlobContainerClient(request.ProductId.ToString());
             if (await container.ExistsAsync(cancellationToken) == false)
             {
-                await container.CreateAsync(cancellationToken: cancellationToken);
+                await container.CreateAsync(PublicAccessType.BlobContainer, cancellationToken: cancellationToken);
             }
 
-            await container.CreateIfNotExistsAsync(cancellationToken: cancellationToken);
+            await container.CreateIfNotExistsAsync(PublicAccessType.BlobContainer, cancellationToken: cancellationToken);
 
-            await container.UploadBlobAsync($"{Guid.NewGuid()}{Path.GetExtension(request.File.FileName)}",
-                request.File.OpenReadStream(),
-                cancellationToken);
+            var base64EncodedBytes = Convert.FromBase64String(request.FileBody);
+            var stream = new MemoryStream(base64EncodedBytes);
+
+            var blobClient = container.GetBlobClient(request.FileName);
+
+            await blobClient.UploadAsync(stream, new BlobHttpHeaders { 
+                ContentType = MimeMapping.MimeUtility.GetMimeMapping(request.FileName)
+            }, cancellationToken: cancellationToken);
 
             return true;
         }

@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@model Microsoft.AspNetCore.Http.IHttpContextAccessor
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+<div class="container">
+    <div class="container-box">
+        <h1>Tokens:</h1>
+
+        <dt>id token</dt>
+        <dd>@await Model.HttpContext.GetTokenAsync("id_token")</dd>
+
+        <dt>access token</dt>
+        <dd>@await Model.HttpContext.GetTokenAsync("access_token")</dd>
+
+        <dt>refresh token</dt>
+        <dd>@await Model.HttpContext.GetTokenAsync("refresh_token")</dd>
+
+        <br />
+
+        <h1>Claims:</h1>
+        <dl>
+            @foreach (var claim in User.Claims)
+            {
+                <dt>@claim.Type : @claim.Value</dt>
+            }
+        </dl>
+    </div>
+</div>

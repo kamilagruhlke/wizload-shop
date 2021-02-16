@@ -1,0 +1,45 @@
+﻿@model List<WizLoad.ApiClient.CategoryModel>
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="container">
+    <div class="container-box">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Categories</li>
+            </ol>
+        </nav>
+        <p>
+            <a asp-area="Panel" asp-controller="Categories" asp-action="Create" class="btn btn-success">Create category</a>
+        </p>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Parent id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.Id</td>
+                        <td>@category.ParentId</td>
+                        <td>@category.Name</td>
+                        <td>
+                            <span class="table-remove">
+                                <a asp-area="Panel" asp-controller="Categories" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-info btn-rounded btn-sm my-0">
+                                    Edit
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

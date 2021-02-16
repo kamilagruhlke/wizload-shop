@@ -24,9 +24,9 @@ namespace Products.Infrastructure.Repositories
             return product;
         }
 
-        public async Task<IList<Product>> FindByCategoryId(Guid id, CancellationToken cancellationToken)
+        public async Task<IList<Product>> FindByCategoryId(Guid categoryId, CancellationToken cancellationToken)
         {
-            return await _productsDbContext.Products.Where(e => e.Id == id)
+            return await _productsDbContext.Products.Where(e => e.CategoryId == categoryId)
                 .ToListAsync(cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -34,6 +34,14 @@ namespace Products.Infrastructure.Repositories
         public async Task<Product> FindById(Guid id, CancellationToken cancellationToken)
         {
             return await _productsDbContext.Products.FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IList<Product>> GetLast(int numberOfItems, CancellationToken cancellationToken)
+        {
+            return await _productsDbContext.Products.OrderByDescending(e => e.CreatedAt)
+                .Take(numberOfItems)
+                .ToListAsync(cancellationToken)
                 .ConfigureAwait(false);
         }
 

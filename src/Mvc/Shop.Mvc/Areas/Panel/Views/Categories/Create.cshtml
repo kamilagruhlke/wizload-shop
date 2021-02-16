@@ -1,0 +1,33 @@
+﻿@model Shop.Mvc.Application.Models.CategoryCreateModel
+@{
+    ViewData["Title"] = "Create category";
+}
+
+<div class="container">
+    <div class="container-box">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Categories" asp-action="Index">Categories</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+        <form asp-area="Panel" asp-controller="Categories" asp-action="Create" method="post">
+            <div class="form-group">
+                <label for="categoryId">Parent category</label>
+                <select asp-for="CreateCategoryCommand.ParentId" class="form-control" id="categoryId">
+                    <option selected />
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="producerName">Category name</label>
+                <input asp-for="CreateCategoryCommand.Name" type="text" class="form-control" id="categoryName" placeholder="Category name" />
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
