@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,12 @@ namespace Products.Infrastructure.Repositories
             _productsDbContext.Producers.Update(producer);
 
             return producer;
+        }
+
+        public async Task<List<Producer>> GetAll(CancellationToken cancellationToken)
+        {
+            return await _productsDbContext.Producers.ToListAsync(cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

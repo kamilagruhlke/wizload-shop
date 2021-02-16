@@ -28,6 +28,7 @@ services:
       - categoriesapi
       - productsapi
       - notificationsapi
+      - imagesapi
 
   basketapi:
     image: ${DOCKER_REGISTRY-}basketapi
@@ -59,6 +60,12 @@ services:
       dockerfile: src/Services/Products/Products.Api/Dockerfile
     depends_on:
       - postgres
+
+  imagesapi:
+    image: ${DOCKER_REGISTRY-}imagesapi
+    build:
+      context: .
+      dockerfile: src/Services/Images/Images.Api/Dockerfile
 
   shopmvc:
     image: ${DOCKER_REGISTRY-}shopmvc

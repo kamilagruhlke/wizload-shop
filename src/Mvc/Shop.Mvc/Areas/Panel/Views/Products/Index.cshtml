@@ -1,0 +1,51 @@
+﻿@model List<WizLoad.ApiClient.ProductModel>
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="container">
+    <div class="container-box">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Products</li>
+            </ol>
+        </nav>
+        <p>
+            <a asp-area="Panel" asp-controller="Products" asp-action="Create" class="btn btn-success">Create product</a>
+        </p>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Producer code</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Net price</th>
+                    <th scope="col">Tax</th>
+                    <th scope="col">Gross price</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.ProducerCode</td>
+                        <td>@product.Name</td>
+                        <td>@product.NetPrice</td>
+                        <td>@product.Tax %</td>
+                        <td>@product.GrossPrice</td>
+                        <td>
+                            <span class="table-remove">
+                                <a asp-area="Panel" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-info btn-rounded btn-sm my-0">
+                                    Edit
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

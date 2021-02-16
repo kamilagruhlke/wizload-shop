@@ -1,0 +1,61 @@
+﻿@model Shop.Mvc.Application.Models.ProductCreateModel
+@{
+    ViewData["Title"] = "Create product";
+}
+
+<div class="container">
+    <div class="container-box">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Products" asp-action="Index">Products</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+        <form asp-area="Panel" asp-controller="Products" asp-action="Create" method="post">
+            <div class="form-group">
+                <label for="productName">Product name</label>
+                <input asp-for="CreateProductCommand.Name" type="text" class="form-control" id="productName" placeholder="Product name" />
+            </div>
+            <div class="form-group">
+                <label for="netPrice">Price Net</label>
+                <input asp-for="CreateProductCommand.NetPrice" type="number" class="form-control" id="netPrice" placeholder="Net price" />
+            </div>
+            <div class="form-group">
+                <label for="tax">Tax</label>
+                <input asp-for="CreateProductCommand.Tax" type="number" class="form-control" id="tax" placeholder="23" />
+            </div>
+            <div class="form-group">
+                <label for="categoryId">Category</label>
+                <select asp-for="CreateProductCommand.CategoryId" class="form-control" id="categoryId">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="producerId">Producer</label>
+                <select asp-for="CreateProductCommand.ProducerId" class="form-control" id="producerId">
+                    @foreach (var producer in Model.Producers)
+                    {
+                        <option value="@producer.Id">@producer.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="producerCode">Producer code</label>
+                <input asp-for="CreateProductCommand.ProducerCode" type="text" class="form-control" id="producerCode" placeholder="Producer code" />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                @Html.TextAreaFor(e => e.CreateProductCommand.Description, new { @class = "form-control", @id = "description", placeholder = "Description" })
+            </div>
+            <div class="form-group">
+                <label for="specification">Specification</label>
+                @Html.TextAreaFor(e => e.CreateProductCommand.Specification, new { @class = "form-control", @id = "specification", placeholder = "Specification" })
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>

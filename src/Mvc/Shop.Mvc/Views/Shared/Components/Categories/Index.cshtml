@@ -1,0 +1,14 @@
+﻿@using Shop.Mvc.Application.Helpers 
+@model List<WizLoad.ApiClient.CategoryModel>
+
+<ul class="nav nav-pills">
+    @foreach (var categoryModel in Model.Where(e => string.IsNullOrWhiteSpace(e.Name) == false))
+    {
+        <li class="nav-item">
+            <a class="nav-link"
+               asp-controller="Home"
+               asp-action="Products"
+               asp-route-categoryName="@CategoryNameHelper.Normalize(categoryModel.Name)">@categoryModel.Name</a>
+        </li>
+    }
+</ul>

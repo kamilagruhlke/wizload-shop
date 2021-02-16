@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -34,11 +35,20 @@ namespace Products.Api.Controllers
             return Ok(await _mediator.Send(updateProducerCommand, cancellationToken));
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ProducerModel), 200)]
         public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
         {
             return Ok(await _mediator.Send(new GetProducerByIdCommand(id), cancellationToken));
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [ProducesResponseType(typeof(List<ProducerModel>), 200)]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        {
+            return Ok(await _mediator.Send(new GetProducersCommand(), cancellationToken));
         }
     }
 }

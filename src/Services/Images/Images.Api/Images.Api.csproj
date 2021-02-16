@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <DockerComposeProjectPath>../../../../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>33823371-a8e0-46ac-b5ae-b123a0480c7d</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.1" NoWarn="NU1605" />
+    <PackageReference Include="MimeMapping" Version="1.0.1.37" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\" />
+    <Folder Include="Application\Commands\" />
+    <Folder Include="Application\Models\" />
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+</Project>

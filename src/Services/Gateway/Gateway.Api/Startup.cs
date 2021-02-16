@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Gateway.Api.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +23,9 @@ namespace Gateway.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHealthChecks();
+
+            services.AddCustomAuthentication(Configuration);
+
             services.AddOcelot(Configuration);
         }
 

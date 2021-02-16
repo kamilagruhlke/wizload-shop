@@ -1,0 +1,43 @@
+﻿@model WizLoad.ApiClient.ProductModel
+@{
+    ViewData["Title"] = "Product";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="container-box">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <img src="https://fakeimg.pl/400x300/?text=Product" width="400" height="300">
+                    </div>
+                    <div class="col-sm-5">
+                        <h3>@Model.Name</h3>
+                        <small>Product Id: @Model.ProducerCode</small>
+                    </div>
+                </div>
+                <ul class="nav nav-pills mt-2 mb-1">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#description">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#specification">Specification</a>
+                    </li>
+                </ul>
+                <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+                    <h4 id="description">Description</h4>
+                    <p>Description: @Model.Description</p>
+                    <h4 id="specification">Specification</h4>
+                    <p>Specification: @Model.Specification</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="container-box">
+                <h4>@Model.GrossPrice zł</h4>
+                <button type="button" class="btn btn-outline-dark btn-lg btn-block">Add to basket</button>
+            </div>
+        </div>
+    </div>
+</div>

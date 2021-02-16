@@ -1,0 +1,10 @@
+﻿@model Guid
+@{
+    ViewData["Title"] = "Products";
+}
+
+<vc:categories />
+
+<div class="container">
+    <vc:products category-id="@Model" />
+</div>

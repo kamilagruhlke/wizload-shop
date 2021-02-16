@@ -1,0 +1,121 @@
+﻿@model Shop.Mvc.Application.Models.ProductEditModel
+@{
+    ViewData["Title"] = "Edit product";
+}
+
+<div class="container">
+    <div class="container-box">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Products" asp-action="Index">Products</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+        <form asp-area="Panel" asp-controller="Products" asp-action="Edit" method="post">
+            <div class="form-group">
+                <label for="id">Id</label>
+                <input asp-for="EditProductCommand.Id" type="text" class="form-control" id="id" placeholder="Id" readonly />
+            </div>
+            <div class="form-group">
+                <label for="productName">Product name</label>
+                <input asp-for="EditProductCommand.Name" type="text" class="form-control" id="productName" placeholder="Product name" />
+            </div>
+            <div class="form-group">
+                <label for="netPrice">Price Net</label>
+                <input asp-for="EditProductCommand.NetPrice" type="number" class="form-control" id="netPrice" placeholder="Net price" />
+            </div>
+            <div class="form-group">
+                <label for="tax">Tax</label>
+                <input asp-for="EditProductCommand.Tax" type="number" class="form-control" id="tax" placeholder="23" />
+            </div>
+            <div class="form-group">
+                <label for="categoryId">Category</label>
+                <select asp-for="EditProductCommand.CategoryId" class="form-control" id="categoryId">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="producerId">Producer</label>
+                <select asp-for="EditProductCommand.ProducerId" class="form-control" id="producerId">
+                    @foreach (var producer in Model.Producers)
+                    {
+                        <option value="@producer.Id">@producer.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="producerCode">Producer code</label>
+                <input asp-for="EditProductCommand.ProducerCode" type="text" class="form-control" id="producerCode" placeholder="Producer code" />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                @Html.TextAreaFor(e => e.EditProductCommand.Description, new { @class = "form-control", @id = "description", placeholder = "Description" })
+            </div>
+            <div class="form-group">
+                <label for="specification">Specification</label>
+                @Html.TextAreaFor(e => e.EditProductCommand.Specification, new { @class = "form-control", @id = "specification", placeholder = "Specification" })
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    <div class="container-box">
+        <form action="#" onsubmit="uploadPhoto(); return false;">
+            <div class="form-group">
+                <input id="files" name="files" type="file" multiple />
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+
+        <div class="images">
+            <!-- IMAGES -->
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        function loadPhotos() {
+            $(".images").empty();
+
+            let id = document.getElementById("id").value;
+
+            fetch('/Panel/Products/Images/' + id, {
+                method: "GET"
+            }).then(response => response.json()).then(data => {
+                for (var i in data) {
+                    let url = data[i];
+
+                    console.log(url);
+
+                    $(".images").append(`<div class="card"><div id="card-image"><div id="animated-background"><img class="card-img-top" src="${url}" alt="${url}"></div></div></div>`)
+                }
+            });
+        }
+
+        function uploadPhoto() {
+            let id = document.getElementById("id").value;
+            let files = document.getElementById("files").files;
+            let formData = new FormData();
+
+            for (var i = 0; i != files.length; i++) {
+                formData.append("files", files[i]);
+            }
+
+            fetch('/Panel/Products/Image/Upload/' + id, {
+                method: "POST",
+                body: formData
+            }).then(() => {
+                toastr.info('Image uploaded');
+                loadPhotos();
+            });
+        }
+
+        $(function () {
+            loadPhotos();
+        });
+    </script>
+}

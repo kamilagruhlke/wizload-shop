@@ -1,0 +1,24 @@
+﻿@model List<WizLoad.ApiClient.ProductModel>
+
+<div class="card-columns mt-2 mb-2">
+    @foreach (var product in Model)
+    {
+        <div class="card">
+            <a asp-controller="Product"
+               asp-action="Index"
+               asp-route-productId="@product.Id">
+                <div id="card-image">
+                    <div id="animated-background">
+                        <img class="card-img-top lozad"
+                             data-src="/Product/Image/@product.Id" alt="(@product.ProducerCode) @product.Name">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text"></p>
+                    <p class="card-text"><small class="text-muted">@product.ProducerCode</small></p>
+                </div>
+            </a>
+        </div>
+    }
+</div>
