@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Orders.Domain.AggregateModel.OrderAggregate
 {
-    interface IOrderRepository : IRepository<Order>
+    public interface IOrderRepository : IRepository<Order>
     {
         Task<Order> Add(Order order, CancellationToken cancellationToken);
 

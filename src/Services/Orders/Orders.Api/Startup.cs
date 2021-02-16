@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -11,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using Orders.Api.Infrastructure.Filters;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text.Json.Serialization;
 
 namespace Orders.Api
@@ -45,6 +47,8 @@ namespace Orders.Api
                     $"{Configuration["IdentityApiExternal"]}"
                 };
             });
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddSwaggerGen(options =>
             {
