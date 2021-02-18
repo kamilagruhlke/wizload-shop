@@ -91,6 +91,7 @@ services:
       - ORDERSAPI_PATH_BASE=/orders/
       - ORDERSAPI_IdentityApiExternal=http://identityapi
       - ORDERSAPI_IdentityApi=http://identityapi
+      - ORDERSAPI_ConnectionStrings__OrdersDb=User ID=postgres;Password=jduwYykD9NmFAmQf;Host=postgres;Port=5432;Database=wizload_orders;
     ports:
       - "80"
 
