@@ -5,11 +5,18 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Orders.Api.Application.Utils;
 using Orders.Api.Infrastructure.Filters;
+using Orders.Domain.AggregateModel.OrderAggregate;
+using Orders.Domain.Utils.Interfaces;
+using Orders.Infrastructure;
+using Orders.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -29,6 +36,15 @@ namespace Orders.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<OrdersDbContext>(contextOptionsBuilder => {
+                contextOptionsBuilder.UseNpgsql(Configuration.GetConnectionString("OrdersDb"), options => {
+                    options.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                    options.MigrationsHistoryTable("migrations_history", "orders");
+                });
+
+                contextOptionsBuilder.ReplaceService<IHistoryRepository, OrderHistoryRepository>();
+            });
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -48,7 +64,10 @@ namespace Orders.Api
                 };
             });
 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddScoped<IUserAccessor, UserAccessor>()
+                .AddScoped<IOrderRepository, OrderRepository>()
+                .AddMediatR(Assembly.GetExecutingAssembly())
+                .AddHttpContextAccessor();
 
             services.AddSwaggerGen(options =>
             {
@@ -117,8 +136,8 @@ namespace Orders.Api
                 options.RoutePrefix = "swagger";
                 options.SwaggerEndpoint("./v1/swagger.json", "Products.Api v1");
 
-                options.OAuthClientId("products");
-                options.OAuthAppName("Products Swagger UI");
+                options.OAuthClientId("orders");
+                options.OAuthAppName("orders Swagger UI");
             });
 
             app.UseRouting();
