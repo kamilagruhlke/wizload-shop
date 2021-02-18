@@ -38,7 +38,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - BASKETAPI_PATH_BASE=/basket/
-      - BASKETAPI_IdentityApiExternal=http://localhost:5002
+      - BASKETAPI_IdentityApiExternal=http://identityapi
       - BASKETAPI_IdentityApi=http://identityapi
       - BASKETAPI_Redis__Host=redis
       - BASKETAPI_Redis__Port=6379
