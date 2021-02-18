@@ -25,9 +25,9 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
 
         public DateTime CreatedAt { get; protected set; }
 
-        public DateTime? UpdateAt { get; protected set; }
+        public DateTime? UpdatedAt { get; protected set; }
 
-        public string UpdateBy { get; protected set; }
+        public string UpdatedBy { get; protected set; }
 
         public Order(decimal valueNet, decimal valueTax, Guid userId, string user)
         {
@@ -38,8 +38,8 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
             CreatedAt = DateTime.UtcNow;
             UserId = userId;
             CreatedBy = user;
-            UpdateBy = null;
-            UpdateAt = null;
+            UpdatedBy = null;
+            UpdatedAt = null;
             Status = StatusDictionary.Pending;
         }
 
@@ -56,8 +56,8 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
             }
 
             Status = status;
-            UpdateBy = user;
-            UpdateAt = DateTime.UtcNow;
+            UpdatedBy = user;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public decimal ValueGross() => ValueNet * (1.0m + (ValueTax / 100.0m));
@@ -68,8 +68,8 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
 
         public void UpdateModificationDates(string user)
         {
-            UpdateAt = DateTime.Now;
-            UpdateBy = user;
+            UpdatedAt = DateTime.Now;
+            UpdatedBy = user;
         }
 
         public void UpdateAddProductToList(OrderedProduct orderedProduct)
