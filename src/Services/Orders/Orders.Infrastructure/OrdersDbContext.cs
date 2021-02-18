@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Orders.Domain.AggregateModel.OrderAggregate;
 using Orders.Domain.SeedWork;
+using Orders.Infrastructure.EnityTypeConfigurations;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +16,8 @@ namespace Orders.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-         
+            modelBuilder.ApplyConfiguration(new OrdersEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderedProductEntityTypeConfiguration());
         }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
