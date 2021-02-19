@@ -26,8 +26,14 @@ namespace Orders.Infrastructure.EnityTypeConfigurations
             builder.Property(e => e.ValueTax)
                 .HasColumnName("value_tax");
 
-            builder.Property(e => e.UserId)
-                .HasColumnName("user_id");
+            builder.Property(e => e.Address)
+                .HasColumnName("address");
+
+            builder.Property(e => e.City)
+                .HasColumnName("city");
+
+            builder.Property(e => e.PostalCode)
+                .HasColumnName("postal_code");
 
             builder.Property(e => e.CreatedBy)
                 .HasColumnName("created_by");
@@ -43,9 +49,6 @@ namespace Orders.Infrastructure.EnityTypeConfigurations
 
             builder.HasIndex(e => e.Id)
                 .HasDatabaseName("idx_orders_orders_id");
-
-            builder.HasIndex(e => e.UserId)
-                .HasDatabaseName("idx_orders_orders_user_id");
         }
     }
 }

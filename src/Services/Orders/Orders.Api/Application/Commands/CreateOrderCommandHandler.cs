@@ -23,7 +23,9 @@ namespace Orders.Api.Application.Commands
         {
             var order = new Order(request.ValueNet,
                 request.ValueTax,
-                request.UserId,
+                request.Address,
+                request.City,
+                request.PostalCode,
                 _userAccessor.GetCurrentUsername());
 
             foreach(var orderedProduct in request.OrderedProducts)
