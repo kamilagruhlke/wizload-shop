@@ -25,6 +25,12 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
 
         public string PostalCode { get; protected set; }
 
+        public string ClientFullName { get; protected set; }
+
+        public string Email { get; protected set; }
+
+        public string PhoneNumber { get; protected set; }
+
         public string CreatedBy { get; protected set; }
 
         public DateTime CreatedAt { get; protected set; }
@@ -33,7 +39,7 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
 
         public string UpdatedBy { get; protected set; }
 
-        public Order(decimal valueNet, decimal valueTax, string addres, string city, string postalCode, string user)
+        public Order(decimal valueNet, decimal valueTax, string addres, string city, string postalCode, string clientFullName, string email, string phoneNumber, string user)
         {
             Id = Guid.NewGuid();
             OrderedProducts = new List<OrderedProduct>();
@@ -43,6 +49,9 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
             Address = addres;
             City = city;
             PostalCode = postalCode;
+            ClientFullName = clientFullName;
+            Email = email;
+            PhoneNumber = phoneNumber;
             CreatedBy = user;
             UpdatedBy = null;
             UpdatedAt = null;

@@ -35,6 +35,15 @@ namespace Orders.Infrastructure.EnityTypeConfigurations
             builder.Property(e => e.PostalCode)
                 .HasColumnName("postal_code");
 
+            builder.Property(e => e.ClientFullName)
+                .HasColumnName("client_full_name");
+
+            builder.Property(e => e.Email)
+                .HasColumnName("email");
+
+            builder.Property(e => e.PhoneNumber)
+                .HasColumnName("phone_number");
+
             builder.Property(e => e.CreatedBy)
                 .HasColumnName("created_by");
 

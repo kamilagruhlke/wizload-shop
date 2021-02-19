@@ -21,6 +21,12 @@ namespace Orders.Api.Application.Models
 
         public string PostalCode { get; set; }
 
+        public string ClientFullName { get; set; }
+
+        public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
+
         public string CreatedBy { get; set; }
 
         public DateTime CreatedAt { get; set; }

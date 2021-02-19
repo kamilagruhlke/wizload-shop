@@ -26,6 +26,9 @@ namespace Orders.Api.Application.Commands
                 request.Address,
                 request.City,
                 request.PostalCode,
+                request.ClientFullName,
+                request.Email,
+                request.PhoneNumber,
                 _userAccessor.GetCurrentUsername());
 
             foreach(var orderedProduct in request.OrderedProducts)

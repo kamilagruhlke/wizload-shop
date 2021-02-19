@@ -48,7 +48,7 @@ namespace Orders.Api.Controllers
             }, cancellationToken));
         }
 
-        [HttpGet("Status/{id}")]
+        [HttpGet("Status/{status}")]
         [ProducesResponseType(typeof(List<OrderModel>), 200)]
         public async Task<IActionResult> GetOrdersByStatus(string status,
             CancellationToken cancellationToken)
