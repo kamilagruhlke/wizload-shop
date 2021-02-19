@@ -9,7 +9,7 @@
             <div class="container-box">
                 <div class="row">
                     <div class="col-sm-7">
-                        <img src="https://fakeimg.pl/400x300/?text=Product" width="400" height="300">
+                        <img src="/Product/Image/@Model.Id" width="400" height="300">
                     </div>
                     <div class="col-sm-5">
                         <h3>@Model.Name</h3>
@@ -30,13 +30,15 @@
                     <h4 id="specification">Specification</h4>
                     <p>Specification: @Model.Specification</p>
                 </div>
-
             </div>
         </div>
         <div class="col-sm-3">
             <div class="container-box">
                 <h4>@Model.GrossPrice zł</h4>
-                <button type="button" class="btn btn-outline-dark btn-lg btn-block">Add to basket</button>
+                <form asp-controller="Basket" asp-action="Add" method="post">
+                    <input type="hidden" id="productId" name="productId" value="@Model.Id" />
+                    <input type="submit" class="btn btn-outline-dark btn-lg btn-block" value="Add to basket" />
+                </form>
             </div>
         </div>
     </div>

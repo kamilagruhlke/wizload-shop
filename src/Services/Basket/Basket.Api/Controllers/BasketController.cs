@@ -1,11 +1,11 @@
-﻿using Basket.Api.Application.Commands;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Basket.Api.Application.Commands;
 using Basket.Api.Application.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Basket.Api.Controllers
 {
