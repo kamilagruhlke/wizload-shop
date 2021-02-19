@@ -35,7 +35,7 @@
         <div class="col-sm-3">
             <div class="container-box">
                 <h4>@Model.GrossPrice zł</h4>
-                <form asp-controller="Basket" asp-action="Index" method="post">
+                <form asp-controller="Basket" asp-action="Add" method="post">
                     <input type="hidden" id="productId" name="productId" value="@Model.Id" />
                     <input type="submit" class="btn btn-outline-dark btn-lg btn-block" value="Add to basket" />
                 </form>

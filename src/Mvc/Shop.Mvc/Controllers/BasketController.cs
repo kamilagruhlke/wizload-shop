@@ -29,15 +29,16 @@ namespace Shop.Mvc.Controllers
                 Session = HttpContext.Session
             }, cancellationToken);
 
-            var basket = await _mediator.Send(new GetBasketCommand {
+            var basketProducts = await _mediator.Send(new GetBasketProductsCommand
+            {
                 Id = basketId
             }, cancellationToken);
-            
-            return View(basket);
+
+            return View(basketProducts);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index([FromForm] Guid productId, CancellationToken cancellationToken)
+        [HttpPost("Add")]
+        public async Task<IActionResult> Add([FromForm] Guid productId, CancellationToken cancellationToken)
         {
             var basketId = await _mediator.Send(new GenerateBasketSessionIdCommand
             {
@@ -58,12 +59,42 @@ namespace Shop.Mvc.Controllers
                 ProductIds = products
             }, cancellationToken);
 
-            basket = await _mediator.Send(new GetBasketCommand
+            var basketProducts = await _mediator.Send(new GetBasketProductsCommand
             {
                 Id = basketId
             }, cancellationToken);
 
-            return View(basket);
+            return View("Index", basketProducts);
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete([FromForm] Guid productId, CancellationToken cancellationToken)
+        {
+            var basketId = await _mediator.Send(new GenerateBasketSessionIdCommand
+            {
+                Session = HttpContext.Session
+            }, cancellationToken);
+
+            var basket = await _mediator.Send(new GetBasketCommand
+            {
+                Id = basketId
+            }, cancellationToken);
+
+            var products = basket.ProductIds?.ToList() ?? new List<Guid>();
+            products.RemoveAll(e => e == productId);
+
+            await _mediator.Send(new AddBasketProductCommand
+            {
+                BasketId = basketId,
+                ProductIds = products
+            }, cancellationToken);
+
+            var basketProducts = await _mediator.Send(new GetBasketProductsCommand
+            {
+                Id = basketId
+            }, cancellationToken);
+
+            return View("Index", basketProducts);
         }
     }
 }

@@ -1,17 +1,39 @@
-﻿@model WizLoad.ApiClient.BasketModel
+﻿@model Shop.Mvc.Application.Models.BasketProductsModel
 @{
     ViewData["Title"] = "Basket";
 }
 
 <div class="container">
-    <div class="container-box">
-        <h2>Basket</h2>
-        @if(Model.ProductIds?.Count > 0)
-        {
-            @foreach(var product in Model.ProductIds)
-            {
-                <h4>@product.ToString()</h4>
-            }
-        }
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="container-box">
+                <h2>Basket</h2>
+                <ul class="list-group">
+                    @if (Model.Products?.Count > 0)
+                    {
+                        @foreach (var product in Model.Products)
+                        {
+                            <li class="list-group-item">
+                                <div class="clearfix">
+                                    <img src="/Product/Image/@product.Id" width="96" alt="@product.Id" class="rounded float-left mr-2" />
+                                    <p>
+                                        @product.Name
+                                    </p>
+                                    <form asp-controller="Basket" asp-action="Delete" method="post">
+                                        <input type="hidden" id="productId" name="productId" value="@product.Id" />
+                                        <input type="submit" class="btn btn-outline-dark btn-sm" value="Remove" />
+                                    </form>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="container-box">
+                <h5>@Model.GrossSum zł</h5>
+            </div>
+        </div>
     </div>
 </div>
