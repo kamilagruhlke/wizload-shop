@@ -22,6 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="OpenAPIs\categories.json" />
+    <Content Remove="OpenAPIs\orders.json" />
     <Content Remove="OpenAPIs\products.json" />
     <Content Remove="OpenAPIs\images.json" />
     <Content Remove="OpenAPIs\basket.json" />
@@ -29,6 +30,9 @@
   <ItemGroup>
     <OpenApiReference Include="OpenAPIs\categories.json" Namespace="WizLoad.ApiClient" Options="/UseBaseUrl:false /GenerateClientInterfaces:true">
       <SourceUri>http://localhost:5001/categories/swagger/v1/swagger.json</SourceUri>
+    </OpenApiReference>
+    <OpenApiReference Include="OpenAPIs\orders.json" Namespace="WizLoad.ApiClient">
+      <SourceUri>http://localhost:5001/orders/swagger/v1/swagger.json</SourceUri>
     </OpenApiReference>
     <OpenApiReference Include="OpenAPIs\products.json" Namespace="WizLoad.ApiClient">
       <SourceUri>http://localhost:5001/products/swagger/v1/swagger.json</SourceUri>
@@ -41,8 +45,6 @@
     </OpenApiReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewComponents\" />
-    <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\Categories\" />
     <Folder Include="Application\Helpers\" />
     <Folder Include="wwwroot\img\carousel\" />

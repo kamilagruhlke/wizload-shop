@@ -1,0 +1,64 @@
+﻿@model Shop.Mvc.Application.Models.OrderModel
+@{
+    ViewData["Title"] = "Preview order";
+}
+
+<div class="container">
+    <div class="container-box">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Orders" asp-action="Index">Orders</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Preview</li>
+            </ol>
+        </nav>
+        <form asp-area="Panel" asp-controller="Categories" asp-action="Edit" method="post">
+            <div class="form-group">
+                <label for="id">Id</label>
+                <input asp-for="Id" type="text" class="form-control" id="id" placeholder="Id" readonly />
+            </div>
+            <div class="form-group">
+                <label for="fullName">Full name</label>
+                <input asp-for="ClientFullName" type="text" class="form-control" id="fullName" placeholder="Full name" readonly />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input asp-for="Email" type="text" class="form-control" id="email" placeholder="email" readonly />
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone number</label>
+                <input asp-for="PhoneNumber" type="text" class="form-control" id="phoneNumber" placeholder="phoneNumber" readonly />
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input asp-for="Address" type="text" class="form-control" id="address" placeholder="Address" readonly />
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input asp-for="City" type="text" class="form-control" id="address" placeholder="Address" readonly />
+            </div>
+            <div class="form-group">
+                <label for="postalCode">Postal code</label>
+                <input asp-for="PostalCode" type="text" class="form-control" id="postalCode" placeholder="Postal code" readonly />
+            </div>
+            <div class="form-group">
+                <ul class="list-group">
+                    @foreach (var product in Model.OrderedProducts)
+                    {
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <img src="/Product/Image/@product.Id" width="96" alt="@product.Id" class="rounded float-left mr-2" />
+                                <p>
+                                    <a asp-area="" asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id">@product.Name</a>
+                                </p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <a asp-area="Panel" asp-controller="Orders" asp-action="InProgress" asp-route-id="@Model.Id" class="btn btn-outline-dark btn-sm mt-1">In progress</a>
+            <br/>
+            <a asp-area="Panel" asp-controller="Orders" asp-action="Finish" asp-route-id="@Model.Id" class="btn btn-outline-dark btn-sm mt-1">Finish</a>
+        </form>
+    </div>
+</div>
