@@ -48,7 +48,8 @@ namespace Shop.Mvc.Areas.Panel.Controllers
             {
                 Categories = await _mediator.Send(new GetCategoriesCommand(), cancellationToken),
                 Producers = await _mediator.Send(new GetProducersCommand(), cancellationToken),
-                CreateProductCommand = createProductCommand
+                CreateProductCommand = createProductCommand,
+                Saved = true
             });
         }
 
@@ -97,7 +98,8 @@ namespace Shop.Mvc.Areas.Panel.Controllers
                     NetPrice = product.NetPrice,
                     Tax = product.Tax,
                     CategoryId = product.CategoryId
-                }
+                },
+                Saved = true
             });
         }
 

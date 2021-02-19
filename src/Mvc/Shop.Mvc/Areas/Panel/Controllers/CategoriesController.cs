@@ -44,7 +44,8 @@ namespace Shop.Mvc.Areas.Panel.Controllers
             return View(new CategoryCreateModel
             {
                 Categories = await _mediator.Send(new GetCategoriesCommand(), cancellationToken),
-                CreateCategoryCommand = createCategoryCommand
+                CreateCategoryCommand = createCategoryCommand,
+                Saved = true
             });
         }
 
@@ -84,7 +85,8 @@ namespace Shop.Mvc.Areas.Panel.Controllers
                     Name = category.Name,
                     ParentId = category.ParentId,
                     IsDeleted = false
-                }
+                },
+                Saved = true
             });
         }
     }

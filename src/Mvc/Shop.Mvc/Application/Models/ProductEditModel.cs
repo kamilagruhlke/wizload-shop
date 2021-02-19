@@ -11,5 +11,7 @@ namespace Shop.Mvc.Application.Models
         public ICollection<CategoryModel> Categories { get; set; }
 
         public EditProductCommand EditProductCommand { get; set; }
+
+        public bool Saved { get; set; } = false;
     }
 }

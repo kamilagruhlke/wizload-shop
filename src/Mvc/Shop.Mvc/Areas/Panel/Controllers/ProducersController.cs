@@ -32,11 +32,12 @@ namespace Shop.Mvc.Areas.Panel.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(EditProducerCommand editeProducerCommand, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(EditProducerCommand editProducerCommand, CancellationToken cancellationToken)
         {
-            await _mediator.Send(editeProducerCommand, cancellationToken);
+            await _mediator.Send(editProducerCommand, cancellationToken);
+            editProducerCommand.Saved = true;
 
-            return View(editeProducerCommand);
+            return View(editProducerCommand);
         }
 
         [HttpGet("Edit/{id}")]
@@ -64,7 +65,8 @@ namespace Shop.Mvc.Areas.Panel.Controllers
             {
                 Id = producer.Id,
                 Name = producer.Name,
-                Description = producer.Description
+                Description = producer.Description,
+                Saved = true
             });
         }
     }
