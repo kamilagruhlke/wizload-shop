@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using WizLoad.ApiClient;
 
-namespace Orders.Api.Application.Models
+namespace Shop.Mvc.Application.Models
 {
     public class OrderModel
     {
         public Guid Id { get; set; }
 
-        public List<OrderedProductModel> OrderedProducts { get; set; }
+        public List<ProductModel> OrderedProducts { get; set; }
 
         public string Status { get; set; }
 

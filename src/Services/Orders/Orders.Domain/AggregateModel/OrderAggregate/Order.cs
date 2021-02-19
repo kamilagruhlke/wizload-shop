@@ -19,7 +19,17 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
 
         public decimal ValueTax { get; protected set; }
 
-        public Guid UserId { get; protected set; }
+        public string Address { get; protected set; }
+
+        public string City { get; protected set; }
+
+        public string PostalCode { get; protected set; }
+
+        public string ClientFullName { get; protected set; }
+
+        public string Email { get; protected set; }
+
+        public string PhoneNumber { get; protected set; }
 
         public string CreatedBy { get; protected set; }
 
@@ -29,14 +39,19 @@ namespace Orders.Domain.AggregateModel.OrderAggregate
 
         public string UpdatedBy { get; protected set; }
 
-        public Order(decimal valueNet, decimal valueTax, Guid userId, string user)
+        public Order(decimal valueNet, decimal valueTax, string addres, string city, string postalCode, string clientFullName, string email, string phoneNumber, string user)
         {
             Id = Guid.NewGuid();
             OrderedProducts = new List<OrderedProduct>();
             ValueNet = valueNet;
             ValueTax = valueTax;
             CreatedAt = DateTime.UtcNow;
-            UserId = userId;
+            Address = addres;
+            City = city;
+            PostalCode = postalCode;
+            ClientFullName = clientFullName;
+            Email = email;
+            PhoneNumber = phoneNumber;
             CreatedBy = user;
             UpdatedBy = null;
             UpdatedAt = null;

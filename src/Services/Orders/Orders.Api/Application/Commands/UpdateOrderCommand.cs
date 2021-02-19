@@ -16,6 +16,10 @@ namespace Orders.Api.Application.Commands
 
         public decimal ValueTax { get; set; }
 
-        public Guid UserId { get; set; }
+        public string Address { get; set; }
+
+        public string City { get; set; }
+
+        public string PostalCode { get; set; }
     }
 }

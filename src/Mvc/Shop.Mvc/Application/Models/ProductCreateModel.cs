@@ -11,5 +11,7 @@ namespace Shop.Mvc.Application.Models
         public ICollection<CategoryModel> Categories { get; set; }
 
         public CreateProductCommand CreateProductCommand { get; set; }
+
+        public bool Saved { get; set; } = false;
     }
 }

@@ -23,7 +23,12 @@ namespace Orders.Api.Application.Commands
         {
             var order = new Order(request.ValueNet,
                 request.ValueTax,
-                request.UserId,
+                request.Address,
+                request.City,
+                request.PostalCode,
+                request.ClientFullName,
+                request.Email,
+                request.PhoneNumber,
                 _userAccessor.GetCurrentUsername());
 
             foreach(var orderedProduct in request.OrderedProducts)

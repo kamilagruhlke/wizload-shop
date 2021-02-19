@@ -56,6 +56,11 @@ namespace Shop.Mvc
             }).SetHandlerLifetime(TimeSpan.FromMinutes(5))
             .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
+            services.AddHttpClient<ordersClient>((provider, client) => {
+                client.BaseAddress = new Uri(Configuration["OrdersApi"]);
+            }).SetHandlerLifetime(TimeSpan.FromMinutes(5))
+            .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddSession();
@@ -106,7 +111,7 @@ namespace Shop.Mvc
                 options.Scope.Add("categories");
                 options.Scope.Add("products");
                 options.Scope.Add("images");
-                options.Scope.Add("basket");
+                options.Scope.Add("orders");
                 options.Scope.Add("roles");
 
                 options.ClaimActions.MapUniqueJsonKey("role", "role");

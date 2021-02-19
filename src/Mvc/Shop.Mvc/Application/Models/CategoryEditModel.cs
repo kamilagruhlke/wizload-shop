@@ -8,5 +8,7 @@ namespace Shop.Mvc.Application.Models
         public ICollection<CategoryModel> Categories { get; set; }
 
         public Commands.Categories.EditCategoryCommand EditCategoryCommand { get; set; }
+
+        public bool Saved { get; set; } = false;
     }
 }

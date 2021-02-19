@@ -12,6 +12,14 @@
                 <li class="breadcrumb-item active" aria-current="page">Create</li>
             </ol>
         </nav>
+
+        @if (Model.Saved)
+        {
+            <div class="alert alert-success" role="alert">
+                Product updated!
+            </div>
+        }
+
         <form asp-area="Panel" asp-controller="Products" asp-action="Edit" method="post">
             <div class="form-group">
                 <label for="id">Id</label>

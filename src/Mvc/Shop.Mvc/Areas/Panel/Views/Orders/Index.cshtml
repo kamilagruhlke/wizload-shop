@@ -1,0 +1,52 @@
+﻿@model List<Shop.Mvc.Application.Models.OrderModel>
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<div class="container">
+    <div class="container-box">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Panel" asp-controller="Home" asp-action="Index">Panel</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Orders</li>
+            </ol>
+        </nav>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Postal code</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Client name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone number</th>
+                    <th scope="col">Value net</th>
+                    <th scope="col">Preview</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr class="@(order.Status == "IN_PROGRESS" ? "table-info" : @order.Status == "FINISHED" ? "table-success" : "")">
+                        <td>@order.Id</td>
+                        <td>@order.City</td>
+                        <td>@order.PostalCode</td>
+                        <td>@order.Address</td>
+                        <td>@order.ClientFullName</td>
+                        <td>@order.Email</td>
+                        <td>@order.PhoneNumber</td>
+                        <td>@order.ValueNet</td>
+                        <td>
+                            <span class="table-remove">
+                                <a asp-area="Panel" asp-controller="Orders" asp-action="Preview" asp-route-id="@order.Id" class="btn btn-info btn-rounded btn-sm my-0">
+                                    Preview
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

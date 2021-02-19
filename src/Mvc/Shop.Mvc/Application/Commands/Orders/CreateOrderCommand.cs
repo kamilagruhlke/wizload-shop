@@ -1,12 +1,11 @@
 ﻿using MediatR;
 using System;
-using System.Collections.Generic;
 
-namespace Orders.Api.Application.Commands
+namespace Shop.Mvc.Application.Commands.Orders
 {
     public class CreateOrderCommand : IRequest<bool>
     {
-        public List<Guid> OrderedProducts { get; set; }
+        public Guid BaksetId { get; set; }
 
         public decimal ValueNet { get; set; }
 
