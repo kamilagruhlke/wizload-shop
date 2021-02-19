@@ -8,8 +8,6 @@ namespace Orders.Api.Application.Commands
     {
         public List<Guid> OrderedProducts { get; set; }
 
-        public string Status { get; set; }
-
         public decimal ValueNet { get; set; }
 
         public decimal ValueTax { get; set; }
