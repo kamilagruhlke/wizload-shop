@@ -29,6 +29,7 @@ services:
       - productsapi
       - notificationsapi
       - imagesapi
+      - ordersapi
 
   basketapi:
     image: ${DOCKER_REGISTRY-}basketapi
@@ -66,6 +67,12 @@ services:
     build:
       context: .
       dockerfile: src/Services/Images/Images.Api/Dockerfile
+
+  ordersapi:
+    image: ${DOCKER_REGISTRY-}ordersapi
+    build:
+      context: .
+      dockerfile: src/Services/Orders/Orders.Api/Dockerfile
 
   shopmvc:
     image: ${DOCKER_REGISTRY-}shopmvc
