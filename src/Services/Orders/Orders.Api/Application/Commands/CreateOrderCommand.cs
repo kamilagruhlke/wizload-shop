@@ -15,13 +15,5 @@ namespace Orders.Api.Application.Commands
         public decimal ValueTax { get; set; }
 
         public Guid UserId { get; set; }
-
-        public string CreatedBy { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
-
-        public string UpdatedBy { get; set; }
     }
 }
