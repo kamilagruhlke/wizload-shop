@@ -51,7 +51,14 @@ namespace Shop.Mvc
             }).SetHandlerLifetime(TimeSpan.FromMinutes(5))
             .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
+            services.AddHttpClient<basketClient>((provider, client) => {
+                client.BaseAddress = new Uri(Configuration["BasketApi"]);
+            }).SetHandlerLifetime(TimeSpan.FromMinutes(5))
+            .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddSession();
 
             services.AddAuthentication(options =>
             {
@@ -99,6 +106,7 @@ namespace Shop.Mvc
                 options.Scope.Add("categories");
                 options.Scope.Add("products");
                 options.Scope.Add("images");
+                options.Scope.Add("basket");
                 options.Scope.Add("roles");
 
                 options.ClaimActions.MapUniqueJsonKey("role", "role");
@@ -130,6 +138,8 @@ namespace Shop.Mvc
             }
 
             app.UseStaticFiles();
+            app.UseSession();
+
             app.UseSession();
 
             app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
