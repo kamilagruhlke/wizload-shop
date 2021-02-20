@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS build
 WORKDIR /src
 COPY src/Services/Categories/Categories.Api/Categories.Api.csproj src/Services/Categories/Categories.Api/
 COPY src/Services/Categories/Categories.Domain/Categories.Domain.csproj src/Services/Categories/Categories.Domain/

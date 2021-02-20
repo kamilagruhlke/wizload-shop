@@ -3,7 +3,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS build
 WORKDIR /src
 COPY src/Services/Images/Images.Api/Images.Api.csproj src/Services/Images/Images.Api/
 RUN dotnet restore "src/Services/Images/Images.Api/Images.Api.csproj"

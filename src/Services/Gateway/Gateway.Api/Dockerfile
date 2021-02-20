@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS build
 WORKDIR /src
 COPY src/Services/Gateway/Gateway.Api/Gateway.Api.csproj src/Services/Gateway/Gateway.Api/
 RUN dotnet restore "src/Services/Gateway/Gateway.Api/Gateway.Api.csproj"
