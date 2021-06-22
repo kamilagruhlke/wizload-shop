@@ -16,15 +16,22 @@ namespace Shop.Mvc.Application.Commands.Products
 
         public async Task<string> Handle(GetProductRandomImageCommand request, CancellationToken cancellationToken)
         {
-            var result = await _imagesClient.ImagesAsync(new List<Guid> { request.Id }, cancellationToken);
-            var imageUrls = result.FirstOrDefault()?.Urls?.ToList();
+            try
+            {
+                var result = await _imagesClient.ImagesAsync(new List<Guid> { request.Id }, cancellationToken);
+                var imageUrls = result.FirstOrDefault()?.Urls?.ToList();
 
-            if (imageUrls is null || imageUrls.Count <= 0)
+                if (imageUrls is null || imageUrls.Count <= 0)
+                {
+                    return "/img/no-image.png";
+                }
+
+                return imageUrls.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+            }
+            catch
             {
                 return "/img/no-image.png";
             }
-
-            return imageUrls.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
         }
     }
 }
