@@ -65,13 +65,22 @@ WizLoad - Shop repository based on DDD microservices
 
 ---
 
-#### Wizload.Mvc or Wizload.SPA
+#### Wizload.Mvc
 - [x] Project initialization
 - [x] Docker support
 - [x] Connected with Identity.api (oauth)
-- [x] Connection with Identity.Api
 - [x] Connection with Categories.Api
 - [x] Connection with Products.Api
 - [x] Connection with Basket.Api
 - [x] Connection with Images.Api
-- [ ] Connection with Notification.Api
+- [ ] Connection with Notification.Api (?)
+
+#### Wizload.Spa
+- [x] Project initialization
+- [ ] Docker support
+- [ ] Connected with Identity.api (oauth)
+- [ ] Connection with Categories.Api
+- [ ] Connection with Products.Api
+- [ ] Connection with Basket.Api
+- [ ] Connection with Images.Api
+- [ ] Connection with Notification.Api (?)

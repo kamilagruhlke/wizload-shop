@@ -6,7 +6,7 @@
     <ProjectGuid>{F27A33BE-D629-4E79-9400-C7733131DE03}</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/</DockerServiceUrl>
-    <DockerServiceName>shopmvc</DockerServiceName>
+    <DockerServiceName>gatewayapi</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
