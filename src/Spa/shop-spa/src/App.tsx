@@ -3,51 +3,45 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+import { Box, Grommet, Header, Menu, Footer, Text, Avatar } from 'grommet';
+import DarkModeToggle from "react-dark-mode-toggle";
+import { theme } from './theme'
 import Home from './pages/home';
-
+import Product from './pages/product';
+import NotFound from './pages/notFound';
+ 
 function App() {
+  const [darkMode, setDarkMode] = React.useState(false);
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
+      <Grommet full theme={theme as any} themeMode={darkMode ? "dark" : "light"}>
+        <Header>
+          <Box direction="row" gap="small" pad="small">
+            <Avatar src="//s.gravatar.com/avatar/00000000000000000000000000000000?s=80" />   
+            <Menu label="account" items={[{ label: 'logout' }]} />
+          </Box>
+          <Box pad="small">
+            <DarkModeToggle
+              onChange={() => setDarkMode(!darkMode)}
+              checked={darkMode}
+              size={48} />
+          </Box>
+        </Header>
 
         <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route exact path="/product/:id" render={({match}: any) => (<Product id={match.params.id} /> )} />
+          <Route exact path="/" component={Home} />
+          <Route component={NotFound} />
         </Switch>
-      </div>
+        
+        <Footer pad="small">
+          <Text size="small">Copyright - WizLoad</Text>
+        </Footer>
+      </Grommet>
     </Router>
   );
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
 
 export default App;
