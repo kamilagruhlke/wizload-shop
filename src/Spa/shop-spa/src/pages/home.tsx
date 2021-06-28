@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, Carousel, Image, Tab, Tabs, CardFooter, Spinner } from 'grommet';
+import { Box, Card, CardBody, Carousel, Image, Tab, Tabs, CardFooter, Spinner, Nav, Anchor } from 'grommet';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { API_GATEWAY } from '../configuration/url';
@@ -26,22 +26,20 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
     render () {
       return (
         <div>
-          <Box height="large" width="100%" overflow="hidden" background="light-6">
+          <Box height="medium" width="100%" overflow="hidden" background="light-6">
             <Carousel fill controls="arrows">
               <Image fit="cover" src="img/carousel/1.jpg" />
               <Image fit="cover" src="img/carousel/2.jpg" />
               <Image fit="cover" src="img/carousel/3.jpg" />
             </Carousel>
           </Box>
+          <Nav direction="row" background="brand" pad="medium">
+            {this.renderCategories()}
+          </Nav>
           <Box pad="medium">
-            <Tabs>
-              <Tab title="Strona główna">
-                <Box pad="medium" direction="row" gap="medium">
-                  {this.renderProducts()}
-                </Box>
-              </Tab>
-              {this.renderCategories()}
-            </Tabs>
+            <Box pad="medium" direction="row" gap="medium">
+              {this.renderProducts()}
+            </Box>
           </Box>
         </div>
       );
@@ -68,11 +66,7 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
 
     renderCategories = () => {
       return this.state.categories.map((category: any) => {
-        return<Tab key={category.Id} title={category.Name}>
-          <Box pad="medium">
-            {category.Name}
-          </Box>
-        </Tab>;
+        return <Anchor key={category.Id} label={category.Name} href={`products/${category.Name}`} />;
       });
     }
 }
