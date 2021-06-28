@@ -66,7 +66,7 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
 
     renderCategories = () => {
       return this.state.categories.map((category: any) => {
-        return <Anchor key={category.Id} label={category.Name} href={`products/${category.Name}`} />;
+        return <Anchor key={category.Id} label={category.Name} href={`products/${category.Id}`} />;
       });
     }
 }
