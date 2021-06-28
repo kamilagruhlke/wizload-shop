@@ -1,19 +1,6 @@
 version: '3.4'
 
 services:
-
-  postgres:
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: jduwYykD9NmFAmQf
-    ports:
-      - "5432:5432"
-
-  adminer:
-    restart: always
-    ports:
-      - "8080:8080"
-
   redis:
     environment:
       - REDIS_PASSWORD=9cRtYehfr2gA52zH
@@ -52,7 +39,7 @@ services:
       - CATEGORIESAPI_PATH_BASE=/categories/
       - CATEGORIESAPI_IdentityApiExternal=http://identityapi
       - CATEGORIESAPI_IdentityApi=http://identityapi
-      - CATEGORIESAPI_ConnectionStrings__CategoriesDb=User ID=postgres;Password=jduwYykD9NmFAmQf;Host=postgres;Port=5432;Database=wizload_categories;
+      - "CATEGORIESAPI_ConnectionStrings__CategoriesDb=${CategoriesDb}"
     ports:
       - "80"
 
@@ -71,7 +58,7 @@ services:
       - PRODUCTSAPI_PATH_BASE=/products/
       - PRODUCTSAPI_IdentityApiExternal=http://identityapi
       - PRODUCTSAPI_IdentityApi=http://identityapi
-      - PRODUCTSAPI_ConnectionStrings__ProductsDb=User ID=postgres;Password=jduwYykD9NmFAmQf;Host=postgres;Port=5432;Database=wizload_products;
+      - "PRODUCTSAPI_ConnectionStrings__ProductsDb=${ProductsDb}"
     ports:
       - "80"
 
@@ -91,7 +78,7 @@ services:
       - ORDERSAPI_PATH_BASE=/orders/
       - ORDERSAPI_IdentityApiExternal=http://identityapi
       - ORDERSAPI_IdentityApi=http://identityapi
-      - ORDERSAPI_ConnectionStrings__OrdersDb=User ID=postgres;Password=jduwYykD9NmFAmQf;Host=postgres;Port=5432;Database=wizload_orders;
+      - "ORDERSAPI_ConnectionStrings__OrdersDb=${OrdersDb}"
     ports:
       - "80"
 

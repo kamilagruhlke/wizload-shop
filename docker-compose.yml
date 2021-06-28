@@ -1,14 +1,6 @@
 version: '3.4'
 
 services:
-  postgres:
-    image: postgres
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-
-  adminer:
-    image: adminer
-
   redis:
     image: 'bitnami/redis'
 
@@ -45,8 +37,6 @@ services:
     build:
       context: .
       dockerfile: src/Services/Categories/Categories.Api/Dockerfile
-    depends_on:
-      - postgres
 
   notificationsapi:
     image: ${DOCKER_REGISTRY-}notificationsapi
@@ -59,8 +49,6 @@ services:
     build:
       context: .
       dockerfile: src/Services/Products/Products.Api/Dockerfile
-    depends_on:
-      - postgres
 
   imagesapi:
     image: ${DOCKER_REGISTRY-}imagesapi
@@ -81,6 +69,3 @@ services:
       dockerfile: src/Mvc/Shop.Mvc/Dockerfile
     depends_on:
       - gatewayapi
-
-volumes:
-  postgres-data:
