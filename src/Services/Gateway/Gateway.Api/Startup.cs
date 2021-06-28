@@ -26,6 +26,8 @@ namespace Gateway.Api
 
             services.AddCustomAuthentication(Configuration);
 
+            services.AddCors();
+
             services.AddOcelot(Configuration);
         }
 
@@ -57,6 +59,11 @@ namespace Gateway.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthorization();
 
