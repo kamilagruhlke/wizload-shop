@@ -33,11 +33,11 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
               <Image fit="cover" src="img/carousel/3.jpg" />
             </Carousel>
           </Box>
-          <Nav direction="row" background="brand" pad="medium">
+          <Nav direction="row-responsive" background="brand" pad="medium">
             {this.renderCategories()}
           </Nav>
           <Box pad="medium">
-            <Box pad="medium" direction="row" gap="medium">
+            <Box pad="medium" direction="row" gap="medium" wrap={true}>
               {this.renderProducts()}
             </Box>
           </Box>
@@ -54,12 +54,14 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
       
       return this.state.products.map((product: any) => {
         return <Link key={product.Id} to={`product/${product.Id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
-          <Card height="180px" width="180px">
-            <CardBody>
-              <Image src="img/carousel/1.jpg" fit="cover"/>
-            </CardBody>
-            <CardFooter pad="small">Nazwa produktu</CardFooter>
-          </Card>
+          <Box pad='medium' margin='small'>
+            <Card height="300px" width="300px">
+              <CardBody>
+                <Image src="img/carousel/1.jpg" fit="cover"/>
+              </CardBody>
+              <CardFooter pad="small">Nazwa produktu</CardFooter>
+            </Card>
+          </Box>
         </Link>;
       });
     };
