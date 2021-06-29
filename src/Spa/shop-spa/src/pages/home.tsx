@@ -26,7 +26,7 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
     render () {
       return (
         <div>
-          <Box height="medium" width="100%" overflow="hidden" background="light-6">
+          <Box height="512px" width="100%" overflow="hidden" background="light-6">
             <Carousel fill controls="arrows">
               <Image fit="cover" src="img/carousel/1.jpg" />
               <Image fit="cover" src="img/carousel/2.jpg" />
@@ -36,7 +36,7 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
           <Nav direction="row-responsive" background="brand" pad="medium">
             {this.renderCategories()}
           </Nav>
-          <Box pad="medium" direction="row" gap="medium" wrap={true} justify='center'>
+          <Box pad="medium" direction="row" gap="medium" wrap justify='center'>
             {this.renderProducts()}
           </Box>
         </div>
@@ -64,7 +64,7 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
 
     renderCategories = () => {
       return this.state.categories.map((category: any) => {
-        return <Anchor key={category.Id} label={category.Name} href={`products/${category.Id}`} />;
+        return <Anchor key={category.Id} label={category.Name} href={`products/${category.Id}`} color="#cbbde2" />;
       });
     }
 }

@@ -55,7 +55,7 @@ export default class Products extends React.Component<ProductsParameter> {
 
     renderCategories = () => {
         return this.state.categories.map((category: any) => {
-          return <Anchor key={category.Id} label={category.Name} href={`products/${category.Id}`} />;
+          return <Anchor key={category.Id} label={category.Name} href={`products/${category.Id}`} color="#cbbde2" />;
         });
     }
 }
