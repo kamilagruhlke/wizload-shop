@@ -19,7 +19,12 @@ interface IProduct {
     GrossPrice: string
 }
 
-export default class Product extends React.Component<ProductParameter, {product : IProduct}> {
+interface IImage {
+    ProductId: string,
+    Urls: string[]
+}
+
+export default class Product extends React.Component<ProductParameter, {product : IProduct, images: IImage[]}> {
     state = {
         product : {
             Id: "",
@@ -31,13 +36,19 @@ export default class Product extends React.Component<ProductParameter, {product 
             NetPrice: "",
             Tax:"",
             GrossPrice:""
-        } as IProduct
+        } as IProduct,
+        images: []
     }
 
     componentDidMount() {
         axios.get(`${API_GATEWAY}/products/api/Products/${this.props.id}`).then(res => {
             const product = res.data;
             this.setState({product});
+        });
+
+        axios.get(`${API_GATEWAY}/images/Products/Images?productIds=${this.props.id}`).then(res => {
+            const images = res.data;
+            this.setState({images});
         });
     }
 
@@ -46,6 +57,8 @@ export default class Product extends React.Component<ProductParameter, {product 
             <div>
                 <Box pad="medium">
                     {JSON.stringify(this.state.product)}
+
+                    {JSON.stringify(this.state.images)}
                     <Box direction='column'border={{ color: 'transpartent', size:'large'}}
                     width='100%' background='transparent'>
                         <Box 

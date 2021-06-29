@@ -1,17 +1,18 @@
 import axios from 'axios';
-import { Box, Card, Spinner, Image, CardBody, CardFooter } from 'grommet';
+import { Box, Card, Nav, Image, CardBody, CardFooter, Anchor } from 'grommet';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { API_GATEWAY } from '../configuration/url';
 
 interface ProductsParameter {
-    categoryId: string;
+    categoryId: string
 }
 
 export default class Products extends React.Component<ProductsParameter> {
 
     state = {
-        products: []
+        products: [],
+        categories: []
     };
 
     componentDidMount() {
@@ -19,30 +20,42 @@ export default class Products extends React.Component<ProductsParameter> {
             const products = res.data;
             this.setState({products});
         });
+
+        axios.get(`${API_GATEWAY}/categories/api/Categories/Active`).then(res => {
+            const categories = res.data;
+            this.setState({ categories });
+        });
     }
 
     render () {
         return (
-            <Box 
-                pad="large"
-                direction="row-responsive" gap="medium" wrap={true}>
+            <Box>
+                <Nav direction="row-responsive" background="brand" pad="medium">
+                    {this.renderCategories()}
+                </Nav>
+                <Box pad="large" direction="row-responsive" gap="medium" wrap={true} justify='center'>
                     {this.renderProducts()}
+                </Box>
             </Box>
         );
     }
 
     renderProducts = () => {
         return this.state.products.map((product: any) => {
-          return <Link key={product.Id} to={`/product/${product.Id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
-            <Box pad='medium' margin='small'>
-                <Card height="300px" width="300px">
+          return <Link key={product.Id} to={`/product/${product.Id}`} style={{ color: 'inherit', textDecoration: 'inherit', margin:'1em'}}>
+            <Card height="300px" width="300px">
                 <CardBody>
                     <Image src="/img/carousel/2.jpg" fit="cover"/>
                 </CardBody>
                 <CardFooter pad="small">{product.Name}</CardFooter>
-                </Card> 
-            </Box>     
+            </Card>    
           </Link>;
         });
     };
+
+    renderCategories = () => {
+        return this.state.categories.map((category: any) => {
+          return <Anchor key={category.Id} label={category.Name} href={`products/${category.Id}`} />;
+        });
+    }
 }
