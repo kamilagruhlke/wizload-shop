@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { Box } from 'grommet';
+import { Box, Card, Spinner, Image, CardBody, CardFooter } from 'grommet';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { API_GATEWAY } from '../configuration/url';
 
 interface ProductsParameter {
@@ -22,11 +23,26 @@ export default class Products extends React.Component<ProductsParameter> {
 
     render () {
         return (
-            <div>
-                <Box pad="medium">
-                    {JSON.stringify(this.state.products)}
-                </Box>
-            </div>
+            <Box 
+                pad="large"
+                direction="row-responsive" gap="medium" wrap={true}>
+                    {this.renderProducts()}
+            </Box>
         );
     }
+
+    renderProducts = () => {
+        return this.state.products.map((product: any) => {
+          return <Link key={product.Id} to={`/product/${product.Id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
+            <Box pad='medium' margin='small'>
+                <Card height="300px" width="300px">
+                <CardBody>
+                    <Image src="/img/carousel/2.jpg" fit="cover"/>
+                </CardBody>
+                <CardFooter pad="small">{product.Name}</CardFooter>
+                </Card> 
+            </Box>     
+          </Link>;
+        });
+    };
 }
