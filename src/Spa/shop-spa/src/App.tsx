@@ -11,6 +11,7 @@ import { theme } from './theme'
 import Home from './pages/home';
 import Product from './pages/product';
 import NotFound from './pages/notFound';
+import Products from './pages/products';
  
 export default class App extends React.Component<{}, {darkMode: boolean}> {
   constructor(props: any) {
@@ -48,6 +49,7 @@ export default class App extends React.Component<{}, {darkMode: boolean}> {
   
           <Switch>
             <Route exact path="/product/:id" render={({match}: any) => (<Product id={match.params.id} /> )} />
+            <Route exact path="/products/:categoryId" render={({match}: any) => (<Products categoryId={match.params.categoryId} /> )} />
             <Route exact path="/" component={Home} />
             <Route component={NotFound} />
           </Switch>
