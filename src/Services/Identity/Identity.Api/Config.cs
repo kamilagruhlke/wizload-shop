@@ -17,6 +17,7 @@ namespace Identity.Api
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             {
+                new ApiScope("spa"),
                 new ApiScope("mvc"),
                 new ApiScope("identity"),
                 new ApiScope("basket"),
@@ -30,6 +31,41 @@ namespace Identity.Api
         public static IEnumerable<Client> Clients =>
             new Client[]
             {
+                new Client
+                {
+                    ClientId = "spa",
+                    ClientName = "SPA OpenId Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = 
+                    { 
+                        $"http://localhost:3000/signin-oidc" 
+                    },
+                    RequireConsent = false,
+                    PostLogoutRedirectUris = 
+                    { 
+                        $"http://localhost:3000/signout-callback-oidc" 
+                    },
+                    AllowedCorsOrigins =     
+                    { 
+                        $"http://localhost:3000"
+                    },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        "spa",
+                        "basket",
+                        "categories",
+                        "notifications",
+                        "products",
+                        "images",
+                        "orders",
+                        "roles"
+                    },
+                },
+
                 new Client
                 {
                     ClientId = "mvc",

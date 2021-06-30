@@ -9,12 +9,12 @@ export default class Categories extends React.Component <{}, {categories: any}> 
       };
 
     componentDidMount() {
-    axios.get(`${API_GATEWAY}/categories/api/Categories/Active`).then(res => {
-        const categories = res.data;
-        this.setState({ categories });
+        axios.get(`${API_GATEWAY}/categories/api/Categories/Active`).then(res => {
+            const categories = res.data;
+            this.setState({ categories });
         });
     }
-
+    
     render () {
         return (
             <Nav direction="row-responsive" background="brand" pad="medium">
@@ -27,5 +27,5 @@ export default class Categories extends React.Component <{}, {categories: any}> 
         return this.state.categories.map((category: any) => {
           return <Anchor key={category.Id} label={category.Name} href={`/products/${category.Id}`} color="#cbbde2" />;
         });
-      }
+    }
 }
