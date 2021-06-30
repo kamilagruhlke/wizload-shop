@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Box, Card, Nav, Image, CardBody, CardFooter, Anchor } from 'grommet';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Categories from '../components/categories';
 import { API_GATEWAY } from '../configuration/url';
 
 interface ProductsParameter {
@@ -11,8 +12,7 @@ interface ProductsParameter {
 export default class Products extends React.Component<ProductsParameter> {
 
     state = {
-        products: [],
-        categories: []
+        products: []
     };
 
     componentDidMount() {
@@ -20,19 +20,12 @@ export default class Products extends React.Component<ProductsParameter> {
             const products = res.data;
             this.setState({products});
         });
-
-        axios.get(`${API_GATEWAY}/categories/api/Categories/Active`).then(res => {
-            const categories = res.data;
-            this.setState({ categories });
-        });
     }
 
     render () {
         return (
             <Box>
-                <Nav direction="row-responsive" background="brand" pad="medium">
-                    {this.renderCategories()}
-                </Nav>
+                <Categories />
                 <Box pad="large" direction="row-responsive" gap="medium" wrap={true} justify='center'>
                     {this.renderProducts()}
                 </Box>
@@ -52,10 +45,4 @@ export default class Products extends React.Component<ProductsParameter> {
           </Link>;
         });
     };
-
-    renderCategories = () => {
-        return this.state.categories.map((category: any) => {
-          return <Anchor key={category.Id} label={category.Name} href={`products/${category.Id}`} color="#cbbde2" />;
-        });
-    }
 }

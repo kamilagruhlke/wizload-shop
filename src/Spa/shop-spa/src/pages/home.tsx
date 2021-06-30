@@ -1,25 +1,20 @@
-import { Box, Card, CardBody, Carousel, Image, Tab, Tabs, CardFooter, Spinner, Nav, Anchor } from 'grommet';
+import { Box, Card, CardBody, Carousel, Image, CardFooter, Spinner } from 'grommet';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { API_GATEWAY } from '../configuration/url';
 import axios from 'axios';
+import Categories from '../components/categories';
 
-export default class Home extends React.Component<{}, {products: any, homePageIsLoading: boolean, categories: any}> {
+export default class Home extends React.Component<{}, {products: any, homePageIsLoading: boolean}> {
     state = {
       products: [],
       homePageIsLoading: true,
-      categories: []
     };
   
     componentDidMount() {
       axios.get(`${API_GATEWAY}/products/api/Products/Last/20`).then(res => {
         const products = res.data;
         this.setState({ products, homePageIsLoading: false });
-      });
-
-      axios.get(`${API_GATEWAY}/categories/api/Categories/Active`).then(res => {
-        const categories = res.data;
-        this.setState({ categories });
       });
     }
   
@@ -33,9 +28,7 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
               <Image fit="cover" src="img/carousel/3.jpg" />
             </Carousel>
           </Box>
-          <Nav direction="row-responsive" background="brand" pad="medium">
-            {this.renderCategories()}
-          </Nav>
+          <Categories />
           <Box pad="medium" direction="row" gap="medium" wrap justify='center'>
             {this.renderProducts()}
           </Box>
@@ -61,10 +54,4 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
         </Link>;
       });
     };
-
-    renderCategories = () => {
-      return this.state.categories.map((category: any) => {
-        return <Anchor key={category.Id} label={category.Name} href={`products/${category.Id}`} color="#cbbde2" />;
-      });
-    }
 }
