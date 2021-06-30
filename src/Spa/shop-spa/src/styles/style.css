@@ -1,0 +1,25 @@
+.container {
+    display: grid; 
+    grid-template-areas: 
+      "Image Name"
+      "Image Price"
+      "Image Basket"
+      "Description Description"
+      "Specyfication Specyfication"
+      ". ."; 
+  }
+  
+  .description { grid-area: Description; }
+  .specyfication { grid-area: Specyfication; }
+  .image { grid-area: Image; }
+  .name { grid-area: Name; }
+  .price { grid-area: Price; }
+  .basket { grid-area: Basket; }
+
+  @media screen and (max-width: 1500px) {
+    .container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+  }

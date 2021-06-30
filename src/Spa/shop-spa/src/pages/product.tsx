@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { Box, Image, Card} from 'grommet';
+import { Box, Image, Card, Button, Select} from 'grommet';
 import React from 'react';
 import { API_GATEWAY } from '../configuration/url';
+import '../styles/style.css';
 
 interface ProductParameter {
     id: number;
@@ -52,24 +53,56 @@ export default class Product extends React.Component<ProductParameter, {product 
         });
     }
 
+    Select() {
+        return (
+          <Select
+            options={['small', 'medium', 'large']}
+          />
+        );
+      }
+
     render () {
         return (
-            <div>
-                <Box pad="medium">
+            <div className="container">
+                <div className="description">
+                    <div>
                     {JSON.stringify(this.state.product)}
-
-                    {JSON.stringify(this.state.images)}
-                    <Box direction='column'border={{ color: 'transpartent', size:'large'}}
-                    width='100%' background='transparent'>
-                        <Box 
-                        height="small" 
-                        width="small">
-                            <Card height='300px'>
-                                <Image src="/img/carousel/2.jpg" fit="cover"/>
-                            </Card>
+                    </div>
+                </div>
+                <div className="specyfication">
+                    <div>
+                    {JSON.stringify(this.state.product)}
+                    </div>
+                </div>
+                <div className="image">
+                            <Box
+                            pad='large'
+                            height="large" 
+                            width="large">
+                                <Card height='300px'>
+                                    <Image src="/img/carousel/2.jpg" fit="cover"/>
+                                </Card>
+                            </Box>
+                </div>
+                <div className="name">
+                    <div>
+                    {JSON.stringify(this.state.product)}
+                    </div>
+                </div>
+                <div className="price">
+                    <div>
+                    {JSON.stringify(this.state.product)}
+                    </div>
+                </div>
+                <div className="basket">
+                    <div>
+                        <Box>
+                            <Button primary label="label" 
+                            alignSelf="end"/>
+                            {this.Select()}    
                         </Box>
-                    </Box>
-                </Box>
+                    </div>  
+                </div>
             </div>
         );
     }
