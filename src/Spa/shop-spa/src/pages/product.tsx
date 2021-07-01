@@ -3,6 +3,8 @@ import { Box, Image, Card, Button, Select} from 'grommet';
 import React from 'react';
 import { API_GATEWAY } from '../configuration/url';
 import '../styles/style.css';
+import '../styles/box.css';
+import Categories from '../components/categories';
 
 interface ProductParameter {
     id: number;
@@ -12,7 +14,7 @@ interface IProduct {
     Id: string,
     Name: string,
     Description: string,
-    Specyfication: string,
+    Specification: string,
     ProducerId: string,
     CategoryId: string,
     NetPrice: string,
@@ -31,7 +33,7 @@ export default class Product extends React.Component<ProductParameter, {product 
             Id: "",
             Name: "",
             Description: "",
-            Specyfication: "",
+            Specification: "",
             ProducerId:"",
             CategoryId: "",
             NetPrice: "",
@@ -53,57 +55,76 @@ export default class Product extends React.Component<ProductParameter, {product 
         });
     }
 
-    Select() {
+    selecter() {
         return (
           <Select
-            options={['small', 'medium', 'large']}
+            options={['1','2','3','4','5','6','7','8','9','10']}
           />
         );
       }
 
     render () {
         return (
+            <Box>
+                <Categories />
             <div className="container">
-                <div className="description">
+                <div className="name">
                     <div>
-                    {JSON.stringify(this.state.product)}
+                        <div className="boxText">
+                            <Box>
+                                <h1>{this.state.product.Name}</h1>
+                                <h4>{this.state.product.ProducerId}</h4>
+                            </Box>
+                        </div>
                     </div>
                 </div>
-                <div className="specyfication">
+                <div className="description">
                     <div>
-                    {JSON.stringify(this.state.product)}
+                        <div className="boxDescription">
+                            <Box>
+                                <h4>{this.state.product.Description}</h4>
+                            </Box> 
+                        </div>
                     </div>
                 </div>
                 <div className="image">
-                            <Box
-                            pad='large'
-                            height="large" 
-                            width="large">
-                                <Card height='300px'>
-                                    <Image src="/img/carousel/2.jpg" fit="cover"/>
-                                </Card>
-                            </Box>
+                    <div className="boxItem">
+                        <Box height="500px" width="500px">
+                            <Card height='100%'>
+                                <Image src="/img/carousel/3.jpg" fit="cover"/>
+                            </Card>
+                        </Box>
+                    </div>
                 </div>
-                <div className="name">
+                <div className="specification">
                     <div>
-                    {JSON.stringify(this.state.product)}
+                        <div className="boxDescription">
+                            <h4>{this.state.product.Specification}</h4>
+                        </div>
                     </div>
                 </div>
                 <div className="price">
                     <div>
-                    {JSON.stringify(this.state.product)}
+                        <div className="boxText">
+                                <h1>{this.state.product.GrossPrice + ' zł/ szt.'}</h1>
+                        </div>
                     </div>
                 </div>
                 <div className="basket">
                     <div>
-                        <Box>
-                            <Button primary label="label" 
-                            alignSelf="end"/>
-                            {this.Select()}    
-                        </Box>
+                        <div className="boxText">
+                            <Box direction='row'>
+                                <Box>{this.selecter()}</Box>
+                                <Button primary label="Dodaj do koszyka" 
+                                alignSelf="start"
+                                size='medium'
+                                style={{marginLeft: 50}}/>
+                            </Box>
+                        </div>
                     </div>  
                 </div>
             </div>
+            </Box>
         );
     }
 }

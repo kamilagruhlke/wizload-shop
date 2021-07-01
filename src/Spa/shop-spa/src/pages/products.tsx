@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Box, Card, Nav, Image, CardBody, CardFooter, Anchor } from 'grommet';
+import { Box, Card, Image, CardBody, CardFooter } from 'grommet';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Categories from '../components/categories';
