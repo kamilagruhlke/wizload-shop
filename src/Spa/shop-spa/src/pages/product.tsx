@@ -98,7 +98,7 @@ export default class Product extends React.Component<ProductParameter, {product 
                 <div className="price">
                     <div>
                         <div className="boxText">
-                                <h1>{this.state.product.GrossPrice + ' zł/ szt.'}</h1>
+                                <h1>{this.state.product.GrossPrice + ' PLN/szt.'}</h1>
                         </div>
                     </div>
                 </div>

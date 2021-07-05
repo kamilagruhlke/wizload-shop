@@ -3,6 +3,7 @@ import { API_GATEWAY } from '../configuration/url';
 import axios from 'axios';
 import Categories from '../components/categories';
 import ProductBoxs from '../components/productBoxs';
+import Footer from '../components/footer';
 
 export default class Home extends React.Component<{}, {products: any, homePageIsLoading: boolean}> {
     state = {
@@ -34,6 +35,8 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
 
           <h1 style={{textAlign: 'center', marginTop: '2em'}}>Featured products</h1>
           <ProductBoxs products={this.state.products} isLoading={this.state.homePageIsLoading} />
+
+          <Footer />
         </div>
       );
     }
