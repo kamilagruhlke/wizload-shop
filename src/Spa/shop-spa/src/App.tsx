@@ -3,10 +3,9 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  useHistory
+  Route
 } from "react-router-dom";
-import { Box, Grommet, Header, Menu, Footer, Text, Avatar, Button } from 'grommet';
+import { Box, Grommet, Header, Footer, Text, Button } from 'grommet';
 import DarkModeToggle from "react-dark-mode-toggle";
 import { theme } from './theme'
 import Home from './pages/home';

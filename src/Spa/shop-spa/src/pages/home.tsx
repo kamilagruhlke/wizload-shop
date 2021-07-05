@@ -1,9 +1,9 @@
-import { Box, Card, CardBody, Carousel, Image, CardFooter, Spinner } from 'grommet';
+import { Box, Carousel, Image, Nav, Text } from 'grommet';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { API_GATEWAY } from '../configuration/url';
 import axios from 'axios';
 import Categories from '../components/categories';
+import ProductBoxs from '../components/productBoxs';
 
 export default class Home extends React.Component<{}, {products: any, homePageIsLoading: boolean}> {
     state = {
@@ -21,37 +21,21 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
     render () {
       return (
         <div>
-          <Box height="512px" width="100%" overflow="hidden" background="light-6">
+          <Nav direction="row-responsive" background="brand" pad="small">
+            <Text style={{fontWeight:'bold'}}>Get 10% off with promo code #stayhome</Text>
+          </Nav>
+          {/* <Box height="512px" width="100%" overflow="hidden" background="light-6">
             <Carousel fill controls="arrows">
               <Image fit="cover" src="img/carousel/1.jpg" />
               <Image fit="cover" src="img/carousel/2.jpg" />
               <Image fit="cover" src="img/carousel/3.jpg" />
             </Carousel>
-          </Box>
+          </Box> */}
+          <div style={{background:'url("/img/carousel/1.jpg")', minHeight:'512px', backgroundAttachment:'fixed', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
+          </div>
           <Categories />
-          <Box pad="medium" direction="row" gap="medium" wrap justify='center'>
-            {this.renderProducts()}
-          </Box>
+          <ProductBoxs products={this.state.products} isLoading={this.state.homePageIsLoading} />
         </div>
       );
     }
-
-    renderProducts = () => {
-      if (this.state.homePageIsLoading) {
-        return <div style={{margin:"0 auto"}}>
-          <Spinner size="medium" />
-        </div>;
-      }
-      
-      return this.state.products.map((product: any) => {
-        return <Link key={product.Id} to={`product/${product.Id}`} style={{ color: 'inherit', textDecoration: 'inherit', margin:'1em'}}>
-          <Card height="300px" width="300px">
-            <CardBody>
-              <Image src="img/carousel/1.jpg" fit="cover"/>
-            </CardBody>
-            <CardFooter pad="small">Nazwa produktu</CardFooter>
-          </Card>
-        </Link>;
-      });
-    };
 }

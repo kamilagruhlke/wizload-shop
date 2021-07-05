@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { Box, Card, Image, CardBody, CardFooter } from 'grommet';
+import { Box } from 'grommet';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Categories from '../components/categories';
+import ProductBoxs from '../components/productBoxs';
 import { API_GATEWAY } from '../configuration/url';
 
 interface ProductsParameter {
@@ -26,23 +26,8 @@ export default class Products extends React.Component<ProductsParameter> {
         return (
             <Box>
                 <Categories />
-                <Box pad="large" direction="row-responsive" gap="medium" wrap={true} justify='center'>
-                    {this.renderProducts()}
-                </Box>
+                <ProductBoxs products={this.state.products} isLoading={false}/>
             </Box>
         );
     }
-
-    renderProducts = () => {
-        return this.state.products.map((product: any) => {
-          return <Link key={product.Id} to={`/product/${product.Id}`} style={{ color: 'inherit', textDecoration: 'inherit', margin:'1em'}}>
-            <Card height="300px" width="300px">
-                <CardBody>
-                    <Image src="/img/carousel/2.jpg" fit="cover"/>
-                </CardBody>
-                <CardFooter pad="small">{product.Name}</CardFooter>
-            </Card>    
-          </Link>;
-        });
-    };
 }

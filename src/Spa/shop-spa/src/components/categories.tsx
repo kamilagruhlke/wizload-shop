@@ -18,6 +18,7 @@ export default class Categories extends React.Component <{}, {categories: any}> 
     render () {
         return (
             <Nav direction="row-responsive" background="brand" pad="medium">
+                <Anchor label={'Home'} href='/' color="#cbbde2" />
                 {this.renderCategories()}
             </Nav>
         );

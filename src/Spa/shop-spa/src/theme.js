@@ -7,8 +7,8 @@ export const theme = {
   "global": {
     "colors": {
       "brand": {
-        "dark": "#563d7c",
-        "light": "#563d7c"
+        "dark": "rgb(110, 70, 210)",
+        "light": "rgb(110, 70, 210)"
       },
       "background": {
         "dark": "#18191a",
