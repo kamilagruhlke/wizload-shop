@@ -3,6 +3,8 @@ import { Box, Spinner } from 'grommet';
 import React from 'react';
 import { API_GATEWAY } from '../configuration/url';
 import ProductBox from './productBox';
+import Lottie from 'react-lottie';
+import animationData from '../lottie/empty.json'
 
 interface IProduct {
     Id: string,
@@ -57,6 +59,19 @@ export default class ProductBoxs extends React.Component <{products: IProduct[],
     }
 
     renderProducts = () => {
+        if (this.props.products.length <= 0) {
+            const defaultOptions = {
+                loop: true,
+                autoplay: true,
+                animationData: animationData
+            };
+
+            return (<div>
+                <Lottie options={defaultOptions} height={512} />
+                <h2 style={{textAlign:'center'}}>Empty...</h2>
+            </div>);
+        }
+
         return this.props.products.map((product: any) => {
             let images : string[] = [];
             if (this.state.imagesLoaded) {
