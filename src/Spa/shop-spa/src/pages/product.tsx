@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Box, Image, Card, Button, Select} from 'grommet';
+import { Box, Image, Card, Button, FormField, TextInput} from 'grommet';
 import React from 'react';
 import { API_GATEWAY } from '../configuration/url';
 import '../styles/style.css';
@@ -40,7 +40,7 @@ export default class Product extends React.Component<ProductParameter, {product 
             Tax:"",
             GrossPrice:""
         } as IProduct,
-        images: []
+        images: [] as IImage[]
     }
 
     componentDidMount() {
@@ -54,14 +54,6 @@ export default class Product extends React.Component<ProductParameter, {product 
             this.setState({images});
         });
     }
-
-    selecter() {
-        return (
-          <Select
-            options={['1','2','3','4','5','6','7','8','9','10']}
-          />
-        );
-      }
 
     render () {
         return (
@@ -91,7 +83,7 @@ export default class Product extends React.Component<ProductParameter, {product 
                     <div className="boxItem">
                         <Box height="500px" width="500px">
                             <Card height='100%'>
-                                <Image src="/img/carousel/3.jpg" fit="cover"/>
+                                <Image src={this.getImage()} fit="cover"/>
                             </Card>
                         </Box>
                     </div>
@@ -114,11 +106,15 @@ export default class Product extends React.Component<ProductParameter, {product 
                     <div>
                         <div className="boxText">
                             <Box direction='row'>
-                                <Box>{this.selecter()}</Box>
-                                <Button primary label="Dodaj do koszyka" 
-                                alignSelf="start"
-                                size='medium'
-                                style={{marginLeft: 50}}/>
+                                <Box>
+                                    <FormField label="Number of products">
+                                        <TextInput placeholder="Number of products" type='number' defaultValue={1} min="1" max="10" />
+                                    </FormField>
+                                </Box>
+                                <Button primary label="Add to basket" 
+                                    alignSelf="center"
+                                    size='medium'
+                                    style={{marginLeft: 50}}/>
                             </Box>
                         </div>
                     </div>  
@@ -126,5 +122,20 @@ export default class Product extends React.Component<ProductParameter, {product 
             </div>
             </Box>
         );
+    }
+
+    getImage() : string {
+        if (this.state.images.length <= 0) {
+            return "/img/no-image.png";
+        }
+
+        const image = this.state.images[0];
+        const randomImageIndex = Math.floor(Math.random() * image.Urls.length);
+
+        if (image.Urls[randomImageIndex].length <= 0) {
+            return "/img/no-image.png";
+        }
+
+        return image.Urls[randomImageIndex];
     }
 }

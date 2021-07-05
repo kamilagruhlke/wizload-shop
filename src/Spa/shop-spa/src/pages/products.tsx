@@ -12,13 +12,14 @@ interface ProductsParameter {
 export default class Products extends React.Component<ProductsParameter> {
 
     state = {
-        products: []
+        products: [],
+        isLoading: true
     };
 
     componentDidMount() {
         axios.get(`${API_GATEWAY}/products/api/Products/ByCategoryId/${this.props.categoryId}`).then(res => {
             const products = res.data;
-            this.setState({products});
+            this.setState({products, isLoading: false});
         });
     }
 
@@ -26,7 +27,7 @@ export default class Products extends React.Component<ProductsParameter> {
         return (
             <Box>
                 <Categories />
-                <ProductBoxs products={this.state.products} isLoading={false}/>
+                <ProductBoxs products={this.state.products} isLoading={this.state.isLoading}/>
             </Box>
         );
     }
