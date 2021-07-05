@@ -52,7 +52,7 @@ export default class ProductBoxs extends React.Component <{products: IProduct[],
         }
 
         return (
-            <Box pad="large" direction="row-responsive" gap="medium" wrap={true} justify='center'>
+            <Box pad="large" direction="row" gap="medium" wrap={true} justify='center' style={{maxWidth: '1460px', margin:'0 auto'}}>
                 {this.renderProducts()}
             </Box>
         );
@@ -67,8 +67,8 @@ export default class ProductBoxs extends React.Component <{products: IProduct[],
             };
 
             return (<div>
+                <h2 style={{textAlign:'center'}}>Nothing found...</h2>
                 <Lottie options={defaultOptions} height={512} />
-                <h2 style={{textAlign:'center'}}>Empty...</h2>
             </div>);
         }
 
@@ -81,7 +81,7 @@ export default class ProductBoxs extends React.Component <{products: IProduct[],
                 }
             }
 
-            return <ProductBox key={product.Id} id={product.Id} name={product.Name} images={images} imagesLoaded={this.state.imagesLoaded} />;
+            return <ProductBox key={product.Id} id={product.Id} name={product.Name} grossPrice={product.GrossPrice} images={images} imagesLoaded={this.state.imagesLoaded} />;
         });
     };
 }

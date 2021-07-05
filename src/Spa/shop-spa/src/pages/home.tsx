@@ -1,4 +1,3 @@
-import { Nav, Text } from 'grommet';
 import React from 'react';
 import { API_GATEWAY } from '../configuration/url';
 import axios from 'axios';
@@ -21,20 +20,19 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
     render () {
       return (
         <div>
-          <Nav direction="row-responsive" background="brand" pad="small">
-            <Text style={{fontWeight:'bold'}}>Get 10% off with promo code #stayhome</Text>
-          </Nav>
-          <div style={
-            {
-              background:'url("/img/carousel/1.jpg")', 
-              minHeight:'512px', 
-              backgroundAttachment:'fixed', 
-              backgroundPosition:'center', 
-              backgroundRepeat:'no-repeat', 
-              backgroundSize:'cover'
-            }
-          }></div>
+          <div style={{
+            background:'url("/img/carousel/2.jpg")', 
+            minHeight:'820px', 
+            backgroundAttachment:'fixed', 
+            backgroundPosition:'center', 
+            backgroundRepeat:'no-repeat', 
+            backgroundSize:'cover' }}>
+          </div>
+
+          <h1 style={{textAlign: 'center', marginTop:'2em'}}>Categories</h1>
           <Categories />
+
+          <h1 style={{textAlign: 'center', marginTop: '2em'}}>Featured products</h1>
           <ProductBoxs products={this.state.products} isLoading={this.state.homePageIsLoading} />
         </div>
       );

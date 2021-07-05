@@ -117,7 +117,7 @@ export default class Product extends React.Component<ProductParameter, {product 
                                     style={{marginLeft: 50}}/>
                             </Box>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
             </Box>

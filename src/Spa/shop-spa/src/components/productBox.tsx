@@ -1,12 +1,11 @@
-import { Card, CardBody, CardFooter } from 'grommet';
 import React from 'react';
 import Lottie from 'react-lottie';
 import { Link } from 'react-router-dom';
 import animationData from '../lottie/loading-image.json';
 import ProductImage from './productImage';
 
-export default class ProductBox extends React.Component <{id: string, name: string, images: string[], imagesLoaded: boolean}, {images: string[], imagesLoaded: boolean}> {
-    constructor(props: {id: string, name: string, images: string[], imagesLoaded: boolean}) {
+export default class ProductBox extends React.Component <{id: string, name: string, grossPrice: string, images: string[], imagesLoaded: boolean}, {images: string[], imagesLoaded: boolean}> {
+    constructor(props: {id: string, name: string, grossPrice: string, images: string[], imagesLoaded: boolean}) {
         super(props);
 
         this.state = {
@@ -30,12 +29,15 @@ export default class ProductBox extends React.Component <{id: string, name: stri
 
         return (
             <Link key={this.props.id} to={`/product/${this.props.id}`} style={{ color: 'inherit', textDecoration: 'inherit', margin:'1em'}}>
-                <Card height="300px" width="300px">
-                    <CardBody>
-                        {this.state.imagesLoaded === false ? <Lottie options={defaultOptions} /> : <ProductImage images={this.state.images} />}
-                    </CardBody>
-                    <CardFooter pad="small" background="brand">{this.props.name}</CardFooter>
-                </Card>
+                <div style={{width: '277px', height: '350px', background: '#f7f7f7'}}>
+                    {this.state.imagesLoaded === false ? <Lottie options={defaultOptions} /> : <ProductImage images={this.state.images} />}
+                </div>
+                <div style={{width: '277px'}}>
+                    <p style={{fontSize: '12px', textAlign:'center'}}>{(this.props.name === undefined || this.props.name.length <= 0) ? '???' : this.props.name}</p>
+                    <hr style={{borderTop: '0.5px dashed #bbb'}} />
+                    <p style={{textAlign:'center', letterSpacing:'1px', color:'#1E3888'}}>{this.props.grossPrice} PLN</p>
+                    <h2 style={{fontSize:'18px', textAlign:'center', letterSpacing:'4px'}} className={'zoom'}>OPEN</h2>
+                </div>
             </Link>
         );
     }

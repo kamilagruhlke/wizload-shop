@@ -7,20 +7,20 @@ export const theme = {
   "global": {
     "colors": {
       "brand": {
-        "dark": "rgb(110, 70, 210)",
-        "light": "rgb(110, 70, 210)"
+        "dark": "#1E3888",
+        "light": "#1E3888"
       },
       "background": {
         "dark": "#18191a",
-        "light": "#f0f2f5"
+        "light": "#fff"
       },
       "background-back": {
         "dark": "#18191a",
-        "light": "#f0f2f5"
+        "light": "#fff"
       },
       "background-front": {
         "dark": "#222222",
-        "light": "#FFFFFF"
+        "light": "#fff"
       },
       "background-contrast": {
         "dark": "#FFFFFF11",
