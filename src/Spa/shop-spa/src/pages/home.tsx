@@ -33,6 +33,8 @@ export default class Home extends React.Component<{}, {products: any, homePageIs
           <h1 style={{textAlign: 'center', marginTop:'2em'}}>Categories</h1>
           <Categories />
 
+          <hr style={{ border: '1px solid #fafafa' }} />
+
           <h1 style={{textAlign: 'center', marginTop: '2em'}}>Featured products</h1>
           <ProductBoxs products={this.state.products} isLoading={this.state.homePageIsLoading} />
 

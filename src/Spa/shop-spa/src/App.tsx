@@ -3,7 +3,8 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
 import { Box, Grommet, Header, Button } from 'grommet';
 import DarkModeToggle from "react-dark-mode-toggle";
@@ -12,9 +13,11 @@ import Home from './pages/home';
 import Product from './pages/product';
 import NotFound from './pages/notFound';
 import Products from './pages/products';
+import Basket from './pages/basket';
 import SignInOidc from './pages/signInOidc';
 import { Authorization } from './utils/authorization';
 import { UUID } from './utils/uuid';
+import BasketIcon from './components/basketIcon';
  
 export default class App extends React.Component<{}, {darkMode: boolean, isAuthorized: false, user: { name: string | undefined }}> {
   authorization = new Authorization();
@@ -60,7 +63,10 @@ export default class App extends React.Component<{}, {darkMode: boolean, isAutho
                 : <Button label="Login" onClick={() => { window.location.href = this.authorization.loginUrl(); }} />}
             </Box>
             <Box pad="small">
-              <Box direction="row">
+              <Box direction="row" pad="small">
+                {this.authorization.isAuthorized() ? <Link to="/basket" style={{marginRight: "1em"}}>
+                  <BasketIcon />
+                </Link> : null}
                 <DarkModeToggle
                   onChange={() => {
                     localStorage.setItem('template_mode', !this.state.darkMode ? 'dark' : 'light');
@@ -68,9 +74,6 @@ export default class App extends React.Component<{}, {darkMode: boolean, isAutho
                   }}
                   checked={this.state.darkMode}
                   size={48} />
-                <div style={{marginLeft: "1em"}}>
-                  Basket
-                </div>
               </Box>
             </Box>
           </Header>
@@ -78,6 +81,7 @@ export default class App extends React.Component<{}, {darkMode: boolean, isAutho
           <Switch>
             <Route exact path="/product/:id" render={({match}: any) => (<Product id={match.params.id} /> )} />
             <Route exact path="/products/:categoryId" render={({match}: any) => (<Products categoryId={match.params.categoryId} /> )} />
+            <Route exact path="/basket" component={Basket} />
             <Route exact path="/signin-oidc" component={SignInOidc} />
             <Route exact path="/" component={Home} />
             <Route component={NotFound} />

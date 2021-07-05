@@ -25,7 +25,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - BASKETAPI_PATH_BASE=/basket/
-      - BASKETAPI_IdentityApiExternal=http://identityapi
+      - BASKETAPI_IdentityApiExternal=http://localhost:5002
       - BASKETAPI_IdentityApi=http://identityapi
       - BASKETAPI_Redis__Host=redis
       - BASKETAPI_Redis__Port=6379
@@ -37,7 +37,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - CATEGORIESAPI_PATH_BASE=/categories/
-      - CATEGORIESAPI_IdentityApiExternal=http://identityapi
+      - CATEGORIESAPI_IdentityApiExternal=http://localhost:5002
       - CATEGORIESAPI_IdentityApi=http://identityapi
       - "CATEGORIESAPI_ConnectionStrings__CategoriesDb=${CategoriesDb}"
     ports:
@@ -56,7 +56,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - PRODUCTSAPI_PATH_BASE=/products/
-      - PRODUCTSAPI_IdentityApiExternal=http://identityapi
+      - PRODUCTSAPI_IdentityApiExternal=http://localhost:5002
       - PRODUCTSAPI_IdentityApi=http://identityapi
       - "PRODUCTSAPI_ConnectionStrings__ProductsDb=${ProductsDb}"
     ports:
@@ -66,7 +66,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - IMAGESAPI_PATH_BASE=/images/
-      - IMAGESAPI_IdentityApiExternal=http://identityapi
+      - IMAGESAPI_IdentityApiExternal=http://localhost:5002
       - IMAGESAPI_IdentityApi=http://identityapi
       - "IMAGESAPI_ConnectionStrings__AzureBlobStorage=${AzureBlobStorage}"
     ports:
@@ -76,7 +76,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ORDERSAPI_PATH_BASE=/orders/
-      - ORDERSAPI_IdentityApiExternal=http://identityapi
+      - ORDERSAPI_IdentityApiExternal=http://localhost:5002
       - ORDERSAPI_IdentityApi=http://identityapi
       - "ORDERSAPI_ConnectionStrings__OrdersDb=${OrdersDb}"
     ports:
