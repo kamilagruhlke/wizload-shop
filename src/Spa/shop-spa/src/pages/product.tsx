@@ -184,5 +184,7 @@ export default class Product extends React.Component<ProductParameter, {product 
             draggable: true,
             progress: undefined,
         });
+
+        window.location.href = "/basket";
     }
 }

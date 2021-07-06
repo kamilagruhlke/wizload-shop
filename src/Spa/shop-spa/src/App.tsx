@@ -18,6 +18,7 @@ import SignInOidc from './pages/signInOidc';
 import { Authorization } from './utils/authorization';
 import { UUID } from './utils/uuid';
 import BasketIcon from './components/basketIcon';
+import BasketOrder from './pages/basketOrder';
  
 export default class App extends React.Component<{}, {darkMode: boolean, isAuthorized: false, user: { name: string | undefined }}> {
   authorization = new Authorization();
@@ -64,7 +65,7 @@ export default class App extends React.Component<{}, {darkMode: boolean, isAutho
             </Box>
             <Box pad="small">
               <Box direction="row" pad="small">
-                {this.authorization.isAuthorized() ? <Link to="/basket" style={{marginRight: "1em"}}>
+                {this.authorization.isAuthorized() ? <Link to={`/basket/${localStorage.getItem('basket')}`} style={{marginRight: "1em"}}>
                   <BasketIcon />
                 </Link> : null}
                 <DarkModeToggle
@@ -81,7 +82,8 @@ export default class App extends React.Component<{}, {darkMode: boolean, isAutho
           <Switch>
             <Route exact path="/product/:id" render={({match}: any) => (<Product id={match.params.id} /> )} />
             <Route exact path="/products/:categoryId" render={({match}: any) => (<Products categoryId={match.params.categoryId} /> )} />
-            <Route exact path="/basket" component={Basket} />
+            <Route exact path="/basket/:basketId" render={({match}: any) => (<Basket basketId={match.params.basketId} /> )} />
+            <Route exact path="/basket/order/:basketId" render={({match}: any) => (<BasketOrder basketId={match.params.basketId} /> )}/>
             <Route exact path="/signin-oidc" component={SignInOidc} />
             <Route exact path="/" component={Home} />
             <Route component={NotFound} />
