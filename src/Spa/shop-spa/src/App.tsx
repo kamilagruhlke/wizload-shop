@@ -19,6 +19,7 @@ import { Authorization } from './utils/authorization';
 import { UUID } from './utils/uuid';
 import BasketIcon from './components/basketIcon';
 import BasketOrder from './pages/basketOrder';
+import Dashboard from './admin/dashboard';
  
 export default class App extends React.Component<{}, {darkMode: boolean, isAuthorized: false, user: { name: string | undefined }}> {
   authorization = new Authorization();
@@ -85,6 +86,7 @@ export default class App extends React.Component<{}, {darkMode: boolean, isAutho
             <Route exact path="/basket/:basketId" render={({match}: any) => (<Basket basketId={match.params.basketId} /> )} />
             <Route exact path="/basket/order/:basketId" render={({match}: any) => (<BasketOrder basketId={match.params.basketId} /> )}/>
             <Route exact path="/signin-oidc" component={SignInOidc} />
+            <Route exact path="/admin" component={Dashboard} />
             <Route exact path="/" component={Home} />
             <Route component={NotFound} />
           </Switch>

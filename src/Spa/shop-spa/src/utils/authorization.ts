@@ -2,7 +2,8 @@ import axios from "axios";
 import { IDENTITY_SERVER } from "../configuration/url";
 
 interface IUser {
-    name: string
+    name: string,
+    role: string
 }
 
 export class Authorization {
@@ -17,7 +18,7 @@ export class Authorization {
               'Authorization': `Bearer ${accessToken}` 
             }
         });
-
+        
         return result.data;
     }
 
