@@ -185,6 +185,6 @@ export default class Product extends React.Component<ProductParameter, {product 
             progress: undefined,
         });
 
-        window.location.href = "/basket";
+        window.location.href = `/basket/${localStorage.getItem('basket')}`;
     }
 }
