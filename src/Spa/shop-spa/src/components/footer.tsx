@@ -44,7 +44,9 @@ export default class Footer extends React.Component {
                     </div>
                     </div>
                 </div>
-                <div style={{background:'#151616', textAlign:'center', padding: '1em', marginTop: '2px', color: '#fff'}}>©2021-WizLoad by Kamila Gruhlke & Patryk Pasek</div>
+                <div style={{background:'#151616', textAlign:'center', padding: '1em', marginTop: '2px', color: '#fff'}}>
+                    ©2021-WizLoad by Kamila Gruhlke & Patryk Pasek <Link to="/admin" style={{color:'#444444'}}>(Admin panel)</Link>
+                </div>
             </div>
         );
     }
