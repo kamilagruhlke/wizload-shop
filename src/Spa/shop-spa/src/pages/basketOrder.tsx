@@ -120,7 +120,6 @@ export default class BasketOrder extends React.Component<{basketId: string}, ISt
                             <Button type="reset" label="Reset" />
                         </Box>
                     </Form>
-                    {JSON.stringify(this.state)}
                 </div>
             </div>
         );

@@ -17,7 +17,7 @@ interface IProduct {
     GrossPrice: string
 }
 
-export default class ProductListItem extends React.Component<{productId: string, onLoaded:(grossPrice: number) => void, onRemove:(productId: string) => void}, 
+export default class ProductListItem extends React.Component<{productId: string, onLoaded:(grossPrice: number) => void, onRemove:(productId: string) => void, readOnly?: boolean}, 
     {images: string[], isLoading: boolean, product: IProduct}> 
 {
     state = {
@@ -55,19 +55,21 @@ export default class ProductListItem extends React.Component<{productId: string,
 
         return (<div>
             <div style={{display:'flex'}}>
+                {this.props.readOnly !== null && this.props.readOnly !== true ?
                 <div>
                     <FaWindowClose size={24} 
                     color={'#9C3848'} 
                     style={{cursor:'pointer'}} 
                     onClick={() => { this.props.onRemove(this.props.productId) }}/>
-                </div>
+                </div> : null}
                 <div style={{minWidth: '168px', maxWidth:'168px'}}>
                     <ProductImage images={this.state.images} />
                 </div>
                 <div style={{marginLeft: '0.5em'}}>
                     <h3>{this.state.product.Name}</h3>
                     <p style={{fontSize: '12px'}}>{this.state.product.Description}</p>
-                    <p style={{letterSpacing:'1px', color:'#1E3888'}}>{this.state.product.GrossPrice} PLN</p>
+                    <p style={{letterSpacing:'1px', color:'#1E3888'}}>{this.state.product.GrossPrice} PLN </p>
+                    <u style={{color: '#9C3848'}}>{this.props.readOnly !== null && this.props.readOnly === true ? "(CURRENT PRICE - CAN BE DIFFERENT)" : null}</u>
                 </div>
             </div>
         </div>);

@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { Button, DataTable, Spinner, Text, Box } from 'grommet';
+import { Button, DataTable, Spinner, Text, Box, Layer } from 'grommet';
 import React from 'react';
 import { API_GATEWAY } from '../../configuration/url';
+import OrderEdit from './orderEdit';
 
 interface IOrderedProduct {
     Id: string,
@@ -27,10 +28,28 @@ interface IOrder {
 }
 
 
-export default class OrdersDataTable extends React.Component<{status: string}, {orders: IOrder[], isLoading: boolean}> {
+export default class OrdersDataTable extends React.Component<{status: string}, {orders: IOrder[], isLoading: boolean, selectedOrder: IOrder, layerVisible: boolean}> {
     state = {
         orders: [],
-        isLoading: true
+        isLoading: true,
+        selectedOrder: {
+          Id: '',
+          OrderedProducts: [],
+          Status: '',
+          ValueNet: 0,
+          ValueTax: 0,
+          Address: '',
+          City: '',
+          PostalCode: '',
+          ClientFullName: '',
+          Email: '',
+          PhoneNumber: '',
+          CreatedBy: '',
+          CreatedAt: '',
+          UpdatedAt: '',
+          UpdatedBy: ''
+        },
+        layerVisible: false
     }
 
     componentDidMount() {
@@ -66,47 +85,70 @@ export default class OrdersDataTable extends React.Component<{status: string}, {
             </Box>);
         }
 
-        return (<DataTable
-            style={{margin: '0 auto', marginTop: '1em'}}
-            columns={[
-              {
-                property: 'Id',
-                header: <Text>Id</Text>,
-                primary: true,
-              },
-              {
-                property: 'Status',
-                header: <Text>Status</Text>,
-              },
-              {
-                property: 'ValueNet',
-                header: <Text>Net</Text>,
-              },
-              {
-                property: 'ValueTax',
-                header: <Text>Tax</Text>,
-              },
-              {
-                property: 'ClientFullName',
-                header: <Text>Full name</Text>,
-              },
-              {
-                property: 'Email',
-                header: <Text>Email</Text>,
-              },
-              {
-                property: 'CreatedAt',
-                header: <Text>Created</Text>,
-              },
-              {
-                property: 'Edit',
-                header: <Text>Edit</Text>,
-                render: data => (
-                    <Button label={'Edit'} size={'small'} />
-                ),
-              }
-            ]}
-            data={this.state.orders}
-        />);
+        return (<div>
+          <DataTable
+              style={{margin: '0 auto', marginTop: '1em'}}
+              columns={[
+                {
+                  property: 'Id',
+                  header: <Text>Id</Text>,
+                  primary: true,
+                },
+                {
+                  property: 'Status',
+                  header: <Text>Status</Text>,
+                },
+                {
+                  property: 'ValueNet',
+                  header: <Text>Net</Text>,
+                },
+                {
+                  property: 'ValueTax',
+                  header: <Text>Tax</Text>,
+                },
+                {
+                  property: 'ClientFullName',
+                  header: <Text>Full name</Text>,
+                },
+                {
+                  property: 'Email',
+                  header: <Text>Email</Text>,
+                },
+                {
+                  property: 'CreatedAt',
+                  header: <Text>Created</Text>,
+                },
+                {
+                  property: 'Edit',
+                  header: <Text>Edit</Text>,
+                  render: (data : IOrder) => (<Button label={'Edit'} size={'small'} onClick={() => {
+                      this.setState({ selectedOrder: data, layerVisible: true })
+                  }}/>),
+                }
+              ]}
+              data={this.state.orders}
+          />
+
+          {this.state.layerVisible ?
+            <Layer modal={true} onEsc={() => this.setState({layerVisible: false})} onClickOutside={() => this.setState({layerVisible: false})}>
+                <OrderEdit id={this.state.selectedOrder.Id} 
+                  status={this.props.status}
+                  valueNet={this.state.selectedOrder.ValueNet}
+                  valueTax={this.state.selectedOrder.ValueTax}
+                  address={this.state.selectedOrder.Address}
+                  city={this.state.selectedOrder.City}
+                  postalCode={this.state.selectedOrder.PostalCode}
+                  orderedProducts={this.state.selectedOrder.OrderedProducts.map((e:IOrderedProduct) => e.ProductId)}
+                  onSubmit={() => {
+                     this.setState({layerVisible: false});
+                     this.loadOrders();
+                }} />
+                <div style={{background:'#9C3848', color:'#fff', letterSpacing:'2px', textAlign:'center', padding:'1em', cursor:'pointer'}}
+                    onClick={() => this.setState({layerVisible: false})}>
+                    <b>CLOSE</b>
+                </div>
+            </Layer> : null}
+
+        </div>);
     }
 }
