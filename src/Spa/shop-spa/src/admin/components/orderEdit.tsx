@@ -102,7 +102,9 @@ export default class OrderEdit extends React.Component<IProps, IState> {
                 </Box>
             </Form>
 
-            {this.renderProducts()}
+            <div style={{overflowY: 'scroll', height: '200px'}}>
+                {this.renderProducts()}
+            </div>
         </div>);
     }
 
