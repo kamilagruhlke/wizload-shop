@@ -17,6 +17,16 @@ export default class Products extends React.Component<ProductsParameter> {
     };
 
     componentDidMount() {
+        this.loadProducts();
+    }
+
+    componentDidUpdate(prevProps: ProductsParameter) {
+        if (prevProps.categoryId !== this.props.categoryId) {
+            this.loadProducts();
+        }
+    }
+
+    loadProducts = () => {
         this.setState({products: [], isLoading: true});
 
         axios.get(`${API_GATEWAY}/products/api/Products/ByCategoryId/${this.props.categoryId}`).then(res => {
@@ -26,11 +36,9 @@ export default class Products extends React.Component<ProductsParameter> {
     }
 
     render () {
-        return (
-            <Box>
-                <Categories />
-                <ProductBoxs products={this.state.products} isLoading={this.state.isLoading}/>
-            </Box>
-        );
+        return (<Box>
+            <Categories />
+            <ProductBoxs products={this.state.products} isLoading={this.state.isLoading}/>
+        </Box>);
     }
 }

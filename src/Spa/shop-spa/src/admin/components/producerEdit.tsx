@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Button, Box, FormField, Form, TextInput, CheckBox } from 'grommet';
+import { Button, Box, FormField, Form, TextInput } from 'grommet';
 import React from 'react';
 import { API_GATEWAY } from '../../configuration/url';
 

@@ -26,12 +26,10 @@ export default class ProductBoxs extends React.Component <{products: IProduct[],
         }
     }
 
-    componentDidUpdate(prevProps: {products: IProduct[], isLoading: boolean}) : void {
+    async componentDidUpdate(prevProps: {products: IProduct[], isLoading: boolean}) {
         if(this.props.isLoading === false && this.props.products.length > 0 && prevProps.products.length !== this.props.products.length) {
-            axios.get(`${API_GATEWAY}/images/Products/Images?${this.queryString('productIds', this.props.products.map(e => e.Id))}`).then(res => {
-                const images = res.data;
-                this.setState({ images, imagesLoaded: true });
-            });
+            let res = await axios.get(`${API_GATEWAY}/images/Products/Images?${this.queryString('productIds', this.props.products.map(e => e.Id))}`);
+            this.setState({ images: res.data, imagesLoaded: true });
         }
     }
 
@@ -81,7 +79,12 @@ export default class ProductBoxs extends React.Component <{products: IProduct[],
                 }
             }
 
-            return <ProductBox key={product.Id} id={product.Id} name={product.Name} grossPrice={product.GrossPrice} images={images} imagesLoaded={this.state.imagesLoaded} />;
+            return <ProductBox key={product.Id} 
+                id={product.Id}
+                name={product.Name} 
+                grossPrice={product.GrossPrice} 
+                images={images} 
+                imagesLoaded={this.state.imagesLoaded} />;
         });
     };
 }
