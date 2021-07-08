@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -48,6 +49,14 @@ namespace Images.Api
 
             services.AddMediatR(Assembly.GetExecutingAssembly())
                 .AddHttpContextAccessor();
+
+            services.Configure<FormOptions>(options =>
+            {
+                options.KeyLengthLimit = int.MaxValue;
+                options.ValueLengthLimit = int.MaxValue;
+                options.MultipartBodyLengthLimit = int.MaxValue;
+                options.MultipartHeadersLengthLimit = int.MaxValue;
+            });
 
             services.AddSwaggerGen(options =>
             {
