@@ -67,7 +67,7 @@ export default class ProductBoxs extends React.Component <{products: IProduct[],
 
             return (<div>
                 <h2 style={{textAlign:'center'}}>Nothing found...</h2>
-                <Lottie options={defaultOptions} height={512} />
+                <Lottie options={defaultOptions} />
             </div>);
         }
 
