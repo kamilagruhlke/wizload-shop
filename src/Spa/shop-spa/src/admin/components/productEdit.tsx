@@ -202,8 +202,8 @@ export default class ProductEdit extends React.Component<IProps, IState> {
                         }
                     }}/>
 
-                    <div style={{textAlign: 'center', overflowY: 'scroll'}}>
-                        <h1>Images</h1>
+                    <h1 style={{textAlign:'center'}}>Images ({this.state.images.length})</h1>
+                    <div style={{textAlign: 'center', overflowY: 'scroll', height:'512px'}}>
                         {this.renderImages()}
                     </div>
                 </div>
