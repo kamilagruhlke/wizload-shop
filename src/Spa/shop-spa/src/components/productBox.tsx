@@ -15,7 +15,7 @@ export default class ProductBox extends React.Component <{id: string, name: stri
     }
 
     componentDidUpdate(prevProps: {id: string, name: string, images: string[], imagesLoaded: boolean}) {
-        if (this.props.imagesLoaded !== prevProps.imagesLoaded) {
+        if (this.props.imagesLoaded !== false && this.props.imagesLoaded !== prevProps.imagesLoaded && this.props.images.length !== prevProps.images.length) {
             this.setState({ images: this.props.images, imagesLoaded: this.props.imagesLoaded });
         }
     }

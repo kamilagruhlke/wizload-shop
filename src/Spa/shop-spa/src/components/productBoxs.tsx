@@ -28,6 +28,7 @@ export default class ProductBoxs extends React.Component <{products: IProduct[],
 
     async componentDidUpdate(prevProps: {products: IProduct[], isLoading: boolean}) {
         if(this.props.isLoading === false && this.props.products.length > 0 && prevProps.products.length !== this.props.products.length) {
+            this.setState({ images: [], imagesLoaded: false });
             let res = await axios.get(`${API_GATEWAY}/images/Products/Images?${this.queryString('productIds', this.props.products.map(e => e.Id))}`);
             this.setState({ images: res.data, imagesLoaded: true });
         }
@@ -44,7 +45,7 @@ export default class ProductBoxs extends React.Component <{products: IProduct[],
 
     render () {
         if (this.props.isLoading) {
-            return <div style={{width: '100%', textAlign: 'center'}}>
+            return <div style={{margin: '0 auto'}}>
               <Spinner size="medium" />
             </div>;
         }
